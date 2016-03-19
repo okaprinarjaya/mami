@@ -22,7 +22,8 @@
         <td>
             <?php
             echo $this->Form->input('AGT_CD', array(
-                'options' => array(),
+                'options' => $agt_codes,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'

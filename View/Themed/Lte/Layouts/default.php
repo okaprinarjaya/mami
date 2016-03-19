@@ -89,7 +89,6 @@
                 <section class="content-header">
                     <h1>
                         <?php echo $__module_title__; ?> 
-                        <small><?php echo $__action_title__; ?></small>
                     </h1>
                 </section>
 
@@ -100,6 +99,9 @@
                         
                         <!-- START -->
                         <?php
+                        echo $this->Session->flash('flash');
+                        echo $this->Session->flash('auth');
+
                         echo $this->fetch('content');
                         ?>
                         <!-- END -->
