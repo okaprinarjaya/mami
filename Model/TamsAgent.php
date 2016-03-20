@@ -9,10 +9,7 @@ class TamsAgent extends AppModel {
 
     public function getAGTCodes()
     {
-        $agt_codes_fetch = $this->find('all');
-        $agt_codes = Hash::combine($agt_codes_fetch, '{n}.TamsAgent.AGT_CODE', '{n}.TamsAgent.AGT_NM');
-
-        return $agt_codes;
+        return $this->find('all');
     }
 
 }

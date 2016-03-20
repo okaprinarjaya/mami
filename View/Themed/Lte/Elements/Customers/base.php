@@ -41,7 +41,8 @@
         <td>
             <?php
             echo $this->Form->input('CLI_TYP', array(
-                'options' => array(),
+                'options' => $client_types,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -53,7 +54,8 @@
         <td>
             <?php
             echo $this->Form->input('CLI_SUB_TYP', array(
-                'options' => array(),
+                'options' => $sub_client_types,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'

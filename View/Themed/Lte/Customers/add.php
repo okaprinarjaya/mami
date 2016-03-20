@@ -194,9 +194,17 @@
 </div>
 
 <?php
+echo $this->Html->css(
+    array('/plugins/parsley/parsley.css'),
+    array('inline' => false)
+);
+?>
+
+<?php
 echo $this->Html->script(
     array(
         '/bootstrap/js/tab.js',
+        '/plugins/parsley/parsley.min.js',
         'app/customers/customers_add'
     ),
     array('block' => 'scriptBottom')
