@@ -1,4 +1,4 @@
-<div class="box">
+<div class="box box-mami-green1">
                             
     <div class="box-header with-border">
         <h3 class="box-title"><span class="glyphicon glyphicon-plus"></span> New Customer</h3>
@@ -10,9 +10,9 @@
             <?php
             echo $this->Html->link(
                 '<span class="glyphicon glyphicon-th-large"></span> List Customers',
-                '/customers',
+                array('controller' => 'customers', 'action' => 'index'),
                 array(
-                    'class' => 'btn btn-warning btn-sm',
+                    'class' => 'btn btn-mami-green1',
                     'escape' => false
                 )
             );
@@ -167,7 +167,7 @@
         <!-- // END TAB NAVIGATION -->
 
         <div class="form-group" style="border: none; margin-left: 1%;">
-            <button type="submit" class="btn btn-success">
+            <button type="submit" class="btn btn-mami-green1">
                 <span class="glyphicon glyphicon-floppy-saved"></span> Save
             </button>
 
@@ -176,9 +176,9 @@
             <?php
             echo $this->Html->link(
                 '<span class="glyphicon glyphicon-remove"></span> Cancel',
-                '/customers',
+                array('controller' => 'customers', 'action' => 'index'),
                 array(
-                    'class' => 'btn btn-default',
+                    'class' => 'btn btn-mami-brown',
                     'escape' => false
                 )
             );

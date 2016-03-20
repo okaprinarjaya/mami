@@ -26,7 +26,7 @@ $(document).ready(function () {
         var name = $('#bank_type').val();
         $.ajax({
             method: 'GET',
-            url: '/mami/customers/get_bank_code?name='+name,
+            url: __base_url+'customers/get_bank_code?name='+name,
             dataType: 'json'
         }).done(function (data) {
             var acc ='<option value="">--CHOOSE--</option>';
@@ -49,7 +49,7 @@ $(document).ready(function () {
         var code = $('#bank_code').val();
         $.ajax({
             method: 'GET',
-            url: '/mami/customers/get_bank_name?code='+code,
+            url: __base_url+'customers/get_bank_name?code='+code,
             dataType: 'json'
         }).done(function (data) {
             acc = '<input type="text" value="'+data.name+'" readonly="readonly" id="CustomerBRANCHNAME" class="form-control input-sm" name="data[Customer][BRANCH_NAME]">';

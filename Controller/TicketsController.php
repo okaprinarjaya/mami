@@ -4,7 +4,7 @@ App::uses('AppController', 'Controller');
 class TicketsController extends AppController {
 
 	public $components = array('Paginator');
-    public $uses = array('Ticket', 'TicketStatus', 'Department', 'Interaction');
+    public $uses = array('Ticket', 'TicketStatus', 'Department', 'Interaction', 'Customer');
 
     public function beforeRender()
     {
@@ -48,6 +48,7 @@ class TicketsController extends AppController {
                 array(
                     'table' => 'interactions',
                     'alias' => 'InteractionLevel3',
+                    'type' => 'LEFT',
                     'conditions' => array('Ticket.interaction_code3 = InteractionLevel3.id')
                 )
             ),
@@ -83,6 +84,10 @@ class TicketsController extends AppController {
 
         $interactions_root = $this->Interaction->getInteractions();
         $ticket_statuses = $this->TicketStatus->getTicketStatuses();
+        $customer = $this->Customer->find('first', array(
+            'fields' => array('Customer.CLI_NM', 'Customer.MID_NM', 'Customer.EMAIL_ADD'),
+            'conditions' => array('Customer.CUSTOMER_ID' => $customer_id)
+        ));
 
         $channel_types = array(
             'W' => 'Walk In',
@@ -98,8 +103,22 @@ class TicketsController extends AppController {
             'depts',
             'ticket_statuses',
             'interactions_root',
-            'channel_types'
+            'channel_types',
+            'customer'
         ));
+    }
+
+    public function edit($ticket_id)
+    {
+        if ($this->request->is(array('post', 'put'))) {
+            if ($this->Ticket->save($this->request->data)) {
+                $this->Session->setFlash('Ticket Updated Successfuly!', 'Flash/success');
+                return $this->redirect('/tickets');
+            } else {
+                $this->Session->setFlash('Failed to update the ticket', 'Flash/error');
+                return $this->redirect('/tickets');
+            }
+        }
     }
 
     public function ajax_modal_get_ticket_detail($ticket_id)
@@ -109,9 +128,11 @@ class TicketsController extends AppController {
 
         if ($this->request->is('ajax')) {
             $ticket = $this->Ticket->getTicket($ticket_id);
+            $ticket_statuses = $this->TicketStatus->getTicketStatuses();
             
             $this->set(compact(
-                'ticket'
+                'ticket',
+                'ticket_statuses'
             ));
 
             $this->response->type('text');

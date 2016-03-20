@@ -1,4 +1,4 @@
-<div class="box">
+<div class="box box-mami-green1">
                             
     <div class="box-header with-border">
         <h3 class="box-title"><i class="fa fa-ticket"></i> &nbsp; List Tickets</h3>
@@ -62,7 +62,7 @@
                             <input class="form-control input-sm" type="text" name="kwd" value="<?php echo isset($this->request->query['kwd']) ? $this->request->query['kwd'] : ''; ?>">
                         </label>
 
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-mami-brown1">
                             <span class="glyphicon glyphicon-zoom-in"></span> Search
                         </button>
                     </div>
@@ -94,12 +94,15 @@
 
             <tbody>
                 <?php
-                $i = 1;
+                $page = $this->Paginator->params['paging']['Ticket']['page'];
+                $limit = $this->Paginator->params['paging']['Ticket']['limit'];
+                $rows_num = (($limit * $page) - $limit) + 1;
+
                 foreach ($tickets as $item):
                 ?>
 
                 <tr>
-                    <td><?php echo $i; ?></td>
+                    <td><?php echo $rows_num; ?></td>
 
                     <td>
                         <?php
@@ -156,18 +159,39 @@
                     </td>
 
                     <td>
-                        <a data-toggle="modal" href="/tickets/ajax_modal_get_ticket_detail/<?php echo $item['Ticket']['id']; ?>" data-target="#myModal" title="View ticket detail">
-                            Detail
-                        </a>
+                        <?php
+                        echo $this->Html->link(
+                            '<span class="glyphicon glyphicon-search"></span> Detail',
+                            array(
+                                'controller' => 'tickets',
+                                'action' => 'ajax_modal_get_ticket_detail',
+                                $item['Ticket']['id']
+                            ),
+                            array(
+                                'escape' => false,
+                                'data-toggle' => 'modal',
+                                'data-target' => '#myModal',
+                                'title' => 'View ticket detail'
+                            )
+                        );
+                        ?>
                     </td>
                 </tr>
 
                 <?php
-                $i++;
+                $rows_num++;
                 endforeach;
                 ?>
             </tbody>
         </table>
+
+        <ul class="pagination">
+            <?php
+            echo $this->Paginator->prev('&laquo;', array('tag' => 'li', 'escape' => false), '<a href="#">&laquo;</a>', array('class' => 'prev disabled', 'tag' => 'li', 'escape' => false));
+            echo $this->Paginator->numbers(array('separator' => '', 'tag' => 'li', 'currentLink' => true, 'currentClass' => 'active', 'currentTag' => 'a'));
+            echo $this->Paginator->next('&raquo;', array('tag' => 'li', 'escape' => false), '<a href="#">&raquo;</a>', array('class' => 'prev disabled', 'tag' => 'li', 'escape' => false));
+            ?>
+        </ul>
 
     </div>
 

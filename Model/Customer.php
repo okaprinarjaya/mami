@@ -13,17 +13,20 @@ class Customer extends AppModel {
     public function saveDataCustomer($data)
     {
         $this->create();
-        if($this->save($data))
-            return true;
-        
+        if ($this->save($data)) {
+            return $this->getLastInsertId();
+        }
+
         return false;
     }
     
     public function editDataCustomer($data)
     {
         $this->id = $data['CUSTOMER_ID'];
-        if($this->save($data))
+        
+        if ($this->save($data)) {
             return true;
+        }
         
         return false;
     }

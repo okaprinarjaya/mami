@@ -1,4 +1,4 @@
-<div class="box">
+<div class="box box-mami-green1">
                             
     <div class="box-header with-border">
         <h3 class="box-title"><i class="fa fa-users"></i> &nbsp; List Customers</h3>
@@ -10,9 +10,9 @@
             <?php
             echo $this->Html->link(
                 '<span class="glyphicon glyphicon-plus"></span> Add New Customer',
-                '/customers/add',
+                array('controller' => 'customers', 'action' => 'add'),
                 array(
-                    'class' => 'btn btn-warning btn-sm',
+                    'class' => 'btn btn-mami-green1',
                     'escape' => false
                 )
             );
@@ -83,7 +83,7 @@
                             <input class="form-control input-sm" type="text" name="kwd" value="<?php echo isset($this->request->query['kwd']) ? $this->request->query['kwd'] : ''; ?>">
                         </label>
 
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-mami-brown1">
                             <span class="glyphicon glyphicon-zoom-in"></span> Search
                         </button>
                     </div>
@@ -115,27 +115,47 @@
 
             <tbody>
                 <?php
-                    foreach($cust as $key => $val)
-                    {
-                        ?>
-                        <tr>
-                            <td><?php echo $val['Customer']['CUSTOMER_ID']?></td>
-                            <td><?php echo $val['Customer']['CLI_NM']?></td>
-                            <td><?php echo $val['Customer']['MID_NM']?></td>
-                            <td><?php echo $val['Customer']['SEX_CODE']?></td>
-                            <td><?php echo $val['Customer']['EMAIL_ADD']?></td>
-                            <td><?php echo $val['Customer']['CLI_TYP']?></td>
-                            <td><?php echo $val['Customer']['PRIM_PHON_NUM']?></td>
-                            <td><?php echo $val['Customer']['MOBILE_NUM']?></td>
-                            <td><?php echo $val['Customer']['OTHER_PHON_NUM']?></td>
-                            <td><?php echo $val['Customer']['OFFICE_PHON_NUM']?></td>
-                            <td><a href="/mami/customers/edit?cid=<?php echo $val['Customer']['CUSTOMER_ID'];?>"class="btn btn-default">EDIT</a></td>
-                        </tr>
-                        <?php
-                    }
+                foreach($cust as $key => $val):
                 ?>
+                <tr>
+                    <td><?php echo $val['Customer']['CUSTOMER_ID']; ?></td>
+                    <td><?php echo ucwords($val['Customer']['CLI_NM']); ?></td>
+                    <td><?php echo ucwords($val['Customer']['MID_NM']); ?></td>
+                    <td><?php echo $val['Customer']['SEX_CODE']; ?></td>
+                    <td><?php echo $val['Customer']['EMAIL_ADD']; ?></td>
+                    <td><?php echo $val['Customer']['CLI_TYP']; ?></td>
+                    <td><?php echo $val['Customer']['PRIM_PHON_NUM']; ?></td>
+                    <td><?php echo $val['Customer']['MOBILE_NUM']; ?></td>
+                    <td><?php echo $val['Customer']['OTHER_PHON_NUM']; ?></td>
+                    <td><?php echo $val['Customer']['OFFICE_PHON_NUM']; ?></td>
+                    <td>
+                        <?php
+                        echo $this->Html->link(
+                            '<span class="glyphicon glyphicon-search"></span> Detail',
+                            array('controller' => 'customers', 'action' => 'edit', $val['Customer']['CUSTOMER_ID']),
+                            array('escape' => false)
+                        )
+                        ?>
+
+                        <br />
+                        
+                        <?php
+                        echo $this->Html->link(
+                            '<i class="fa fa-ticket"></i> Create Ticket',
+                            array('controller' => 'tickets', 'action' => 'add', $val['Customer']['CUSTOMER_ID']),
+                            array('escape' => false)
+                        )
+                        ?>
+                    </td>
+                </tr>
+                
+                <?php
+                endforeach;
+                ?>
+                
             </tbody>
         </table>
+
         <ul class="pagination">
             <?php
             echo $this->Paginator->prev('&laquo;', array('tag' => 'li', 'escape' => false), '<a href="#">&laquo;</a>', array('class' => 'prev disabled', 'tag' => 'li', 'escape' => false));

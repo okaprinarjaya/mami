@@ -47,6 +47,7 @@ class Ticket extends AppModel {
                 ),
                 array(
                     'table' => 'interactions',
+                    'type' => 'LEFT',
                     'alias' => 'InteractionLevel3',
                     'conditions' => array('Ticket.interaction_code3 = InteractionLevel3.id')
                 )

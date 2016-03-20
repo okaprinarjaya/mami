@@ -29,8 +29,7 @@ class CustomersController extends AppController {
         
         $this->Paginator->settings = array(
             'conditions' => $conditions,
-            //'order' => array('AAH.created_date' => 'DESC'),
-            'limit' => isset($this->request->query['rpp']) ? $this->request->query['rpp'] : 10,
+            'limit' => isset($this->request->query['rpp']) ? $this->request->query['rpp'] : 50,
         );
 
         $cust = array();
@@ -46,35 +45,33 @@ class CustomersController extends AppController {
     public function add()
     {
         if ($this->request->is('post')) {
-            if($this->Customer->saveDataCustomer($this->request->data['Customer']))
-            {
-                $this->Session->setFlash('Berhasil Simpan Data', 'Flash/success');
-                return $this->redirect('/customers');
+            $save = $this->Customer->saveDataCustomer($this->request->data);
+            if ($save) {
+                $this->Session->setFlash('New Customer Successfuly Added!', 'Flash/success');
+                return $this->redirect(array('controller' => 'tickets', 'action' => 'add', $save));
+            } else {
+                $this->Session->setFlash('There is an error', 'Flash/error');
             }
-            else
-                $this->Session->setFlash('Gagal Simpan Data', 'Flash/error');
         }
+
         $this->getTabDataForm();
     }
     
-    public function edit()
+    public function edit($cid)
     {
         if ($this->request->is(array('post', 'put'))) {
-            if($this->Customer->editDataCustomer($this->request->data['Customer']))
-            {
-                $this->Session->setFlash('Berhasil Simpan Data', 'Flash/success');
-                return $this->redirect('/customers');
-            }
-            else
-            {
-                $this->Session->setFlash('Gagal Simpan Data', 'Flash/error');
-                return $this->redirect('/customers');
+            if ($this->Customer->editDataCustomer($this->request->data)) {
+                $this->Session->setFlash('Customer Data Successfuly Updated!', 'Flash/success');
+                return $this->redirect(array('controller' => 'customers', 'action' => 'index'));
+            } else {
+                $this->Session->setFlash('There is an error', 'Flash/error');
             }
         }
-        $cid = $this->request->query['cid'];
+
         $customer = $this->Customer->find('first', array(
             'conditions' => array('Customer.CUSTOMER_ID' => $cid)
         ));
+        
         $this->getTabDataForm();
         $this->request->data = $customer;
         

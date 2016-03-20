@@ -15,7 +15,7 @@
         '/bootstrap/css/bootstrap.min.css',
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
         'AdminLTE.min',
-        'skins/skin-green.min',
+        'skin-mami',
         'app'
     ));
 
@@ -31,7 +31,7 @@
 
 </head>
 
-<body class="hold-transition skin-green layout-top-nav">
+<body class="hold-transition skin-mami layout-top-nav">
 
     <div class="wrapper">
         
@@ -40,7 +40,10 @@
                 <div class="container">
                     
                     <div class="navbar-header">
-                        <a href="../../index2.html" class="navbar-brand">MAMI</a>
+                        <a href="<?php echo Router::url('/').'customers'; ?>" class="navbar-brand">
+                            <?php echo $this->Html->image('logo.png'); ?>
+                        </a>
+
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                             <i class="fa fa-bars"></i>
                         </button>
@@ -49,16 +52,24 @@
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         
                         <ul class="nav navbar-nav">
-                            <li class="active">
-                                <a href="#">
-                                    <i class="fa fa-users"></i> &nbsp; Customers <span class="sr-only">(current)</span>
-                                </a>
+                            <li>
+                                <?php
+                                echo $this->Html->link(
+                                    '<i class="fa fa-users"></i> &nbsp; Customers',
+                                    array('controller' => 'customers', 'action' => 'index'),
+                                    array('escape' => false)
+                                );
+                                ?>
                             </li>
 
                             <li>
-                                <a href="#">
-                                    <i class="fa fa-ticket"></i> &nbsp; Tickets
-                                </a>
+                                <?php
+                                echo $this->Html->link(
+                                    '<i class="fa fa-ticket"></i> &nbsp; Tickets',
+                                    array('controller' => 'tickets', 'action' => 'index'),
+                                    array('escape' => false)
+                                );
+                                ?>
                             </li>
                         </ul>
 
@@ -131,6 +142,13 @@
         </div>
 
     </div>
+
+<script type="text/javascript">
+<?php
+echo 'var __base_url = "'.Router::url('/').'";';
+echo "\n";
+?>
+</script>
 
 <?php
 echo $this->Html->script(array(
