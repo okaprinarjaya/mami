@@ -26,7 +26,7 @@
             'data-parsley-validate' => true ,
         ));
         ?>
-
+        
         <!-- START TAB NAVIGATION -->
         <ul id="customer-tabs" class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">

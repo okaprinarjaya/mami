@@ -62,12 +62,13 @@
                         <?php
                         echo $this->Form->input('filter_field', array(
                             'options' => array(
-                                'cif' => 'CIF',
-                                'name' => 'Name',
-                                'mobile_phone' => 'Mobile Phone',
-                                'email' => 'Email',
-                                'mailing' => 'Mailing Address',
-                                'birthdate' => 'Date of Birth'
+                                'CUSTOMER_ID' => 'ID Customer',
+                                'CLI_NM' => 'First Name',
+                                'MOBILE_NUM' => 'Mobile Phone',
+                                'OTHER_PHON_NUM' => 'Mobile Phone 2',
+                                'PRIM_PHON_NUM' => 'Home Phone',
+                                'CLI_TYP' => 'Client Type' ,
+                                'SEX_CODE' => 'Gender' ,
                             ),
                             'empty' => '-NO FILTER-',
                             'default' => isset($this->request->query['filter_field']) ? $this->request->query['filter_field'] : '',
@@ -98,49 +99,50 @@
         <table id="pbs-index" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Field A</th>
-                    <th>Field B</th>
-                    <th>Field C</th>
-                    <th>Field D</th>
-                    <th>Field E</th>
-                    <th>Field F</th>
-                    <th>&nbsp;</th>
+                    <th>ID Customer</th>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Sex</th>
+                    <th>Email</th>
+                    <th>Client Type</th>
+                    <th>Home Phone No.</th>
+                    <th>Mobile Phone No.</th>
+                    <th>Mobile Phone 2 No. </th>
+                    <th>Office No. </th>
+                    <th>Action</th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr>
-                    <td>Field A</td>
-                    <td>Field B</td>
-                    <td>Field C</td>
-                    <td>Field D</td>
-                    <td>Field E</td>
-                    <td>Field F</td>
-                    <td>&nbsp;</td>
-                </tr>
-
-                <tr>
-                    <td>Field A</td>
-                    <td>Field B</td>
-                    <td>Field C</td>
-                    <td>Field D</td>
-                    <td>Field E</td>
-                    <td>Field F</td>
-                    <td>&nbsp;</td>
-                </tr>
-
-                <tr>
-                    <td>Field A</td>
-                    <td>Field B</td>
-                    <td>Field C</td>
-                    <td>Field D</td>
-                    <td>Field E</td>
-                    <td>Field F</td>
-                    <td>&nbsp;</td>
-                </tr>
+                <?php
+                    foreach($cust as $key => $val)
+                    {
+                        ?>
+                        <tr>
+                            <td><?php echo $val['Customer']['CUSTOMER_ID']?></td>
+                            <td><?php echo $val['Customer']['CLI_NM']?></td>
+                            <td><?php echo $val['Customer']['MID_NM']?></td>
+                            <td><?php echo $val['Customer']['SEX_CODE']?></td>
+                            <td><?php echo $val['Customer']['EMAIL_ADD']?></td>
+                            <td><?php echo $val['Customer']['CLI_TYP']?></td>
+                            <td><?php echo $val['Customer']['PRIM_PHON_NUM']?></td>
+                            <td><?php echo $val['Customer']['MOBILE_NUM']?></td>
+                            <td><?php echo $val['Customer']['OTHER_PHON_NUM']?></td>
+                            <td><?php echo $val['Customer']['OFFICE_PHON_NUM']?></td>
+                            <td><a href="/mami/customers/edit?cid=<?php echo $val['Customer']['CUSTOMER_ID'];?>"class="btn btn-default">EDIT</a></td>
+                        </tr>
+                        <?php
+                    }
+                ?>
             </tbody>
         </table>
-
+        <ul class="pagination">
+            <?php
+            echo $this->Paginator->prev('&laquo;', array('tag' => 'li', 'escape' => false), '<a href="#">&laquo;</a>', array('class' => 'prev disabled', 'tag' => 'li', 'escape' => false));
+            echo $this->Paginator->numbers(array('separator' => '', 'tag' => 'li', 'currentLink' => true, 'currentClass' => 'active', 'currentTag' => 'a'));
+            echo $this->Paginator->next('&raquo;', array('tag' => 'li', 'escape' => false), '<a href="#">&raquo;</a>', array('class' => 'prev disabled', 'tag' => 'li', 'escape' => false));
+            ?>
+        </ul>
     </div>
 
 </div>

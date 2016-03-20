@@ -4,7 +4,8 @@
         <td>
             <?php
             echo $this->Form->input('SOURCE_FUND', array(
-                'type' => 'text',
+                'options' => $source_of_fund ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -32,7 +33,8 @@
         <td>
             <?php
             echo $this->Form->input('RED_FLAG', array(
-                'type' => 'text',
+                'options' => $red_flag ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'

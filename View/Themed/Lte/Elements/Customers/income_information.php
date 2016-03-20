@@ -4,7 +4,8 @@
         <td>
             <?php
             echo $this->Form->input('OCCP_TYP', array(
-                'type' => 'text',
+                'options' => $occupation_type ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -32,7 +33,8 @@
         <td>
             <?php
             echo $this->Form->input('BUS_NATURE', array(
-                'type' => 'text',
+                'options' => $owner_occupation ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -75,6 +77,7 @@
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
+                'id' => 'tax' ,
                 'class' => 'form-control input-sm'
             ));
             ?>
@@ -88,7 +91,8 @@
         <td>
             <?php
             echo $this->Form->input('ANNUAL_INCOME', array(
-                'type' => 'text',
+                'options' => $annual_income ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
