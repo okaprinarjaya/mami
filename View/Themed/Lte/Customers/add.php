@@ -205,6 +205,7 @@ echo $this->Html->css(
 echo $this->Html->script(
     array(
         '/bootstrap/js/tab.js',
+        '/plugins/moment.js',
         '/plugins/daterangepicker/daterangepicker.js',
         '/plugins/parsley/parsley.min.js',
         'app/customers/customers_add'
