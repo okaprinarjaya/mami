@@ -22,6 +22,37 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+    
     public $theme = 'Lte';
     public $ext = '.php';
+
+    public $components = array(
+        'Auth' => array(
+            'loginRedirect' => array(
+                'controller' => 'customers',
+                'action' => 'index'
+            ),
+            'logoutRedirect' => array(
+                'controller' => 'home',
+                'action' => 'index'
+            ),
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Blowfish'
+                )
+            ),
+            'authorize' => array('Controller')
+        )
+    );
+
+    public function beforeRender() {
+        if ($this->name == 'CakeError') {
+            $this->layout = 'error';
+        }
+    }
+
+    public function isAuthorized($user)
+    {
+        return true;
+    }
 }

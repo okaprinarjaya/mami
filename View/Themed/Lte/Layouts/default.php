@@ -81,15 +81,16 @@
                         <ul class="nav navbar-nav">
                             
                             <li class="dropdown user user-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                                     <span class="hidden-xs">
-                                        <span class="glyphicon glyphicon-user"></span> &nbsp; Alexander Pierce
+                                        <span class="glyphicon glyphicon-user"></span> &nbsp; 
+                                        <?php echo AuthComponent::user('complete_name'); ?>
                                     </span>
                                 </a>
                             </li>
 
                             <li class="dropdown user user-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="<?php echo Router::url('/').'users/logout'; ?>">
                                     <span class="hidden-xs">
                                         <span class="glyphicon glyphicon-off"></span> &nbsp; Logout
                                     </span>
