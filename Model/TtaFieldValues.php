@@ -15,4 +15,31 @@ class TtaFieldValues extends AppModel {
         ));
     }
 
+    public function getReligion()
+    {
+        return $this->find('all', array(
+            'conditions' => array(
+                'TtaFieldValues.FLD_NM' => 'RELIGION'
+            )
+        ));
+    }
+    
+    public function getW8()
+    {
+        return $this->find('all', array(
+            'conditions' => array(
+                'TtaFieldValues.FLD_NM' => 'W8_FORM'
+            )
+        ));
+    }
+    
+    public function getEntity()
+    {
+        return $this->find('all', array(
+            'conditions' => array(
+                'TtaFieldValues.FLD_NM' => 'ENTITY_TYP'
+            )
+        ));
+    }
+    
 }

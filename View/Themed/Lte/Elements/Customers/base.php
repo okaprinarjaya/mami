@@ -1,4 +1,5 @@
 <table class="table table-condensed table-striped form-custom-hack">
+    <input type="hidden" name="data[Customer][CUSTOMER_ID]" value="<?php echo isset($this->request->data['Customer']['CUSTOMER_ID']) ? $this->request->data['Customer']['CUSTOMER_ID'] : '';?>">
     <tr>
         <td class="hack-col-label">CIF</td>
         <td>
@@ -45,7 +46,8 @@
                 'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm' ,
+                'required' => true
             ));
             ?>
         </td>
@@ -71,7 +73,8 @@
         <td>
             <?php
             echo $this->Form->input('STATUS', array(
-                'options' => array(),
+                'options' => $status,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -102,7 +105,8 @@
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm' ,
+                'required' => true
             ));
             ?>
         </td>
@@ -114,7 +118,8 @@
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm' ,
+                'required' => true
             ));
             ?>
         </td>
@@ -127,10 +132,12 @@
         <td>
             <?php
             echo $this->Form->input('SEX_CODE', array(
-                'type' => 'text',
+                'options' => $sex,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm' ,
+                'required' => true
             ));
             ?>
         </td>
@@ -155,7 +162,8 @@
         <td>
             <?php
             echo $this->Form->input('NATION', array(
-                'type' => 'text',
+                'options' => $nationality,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -167,7 +175,8 @@
         <td>
             <?php
             echo $this->Form->input('COUNTRY_CD', array(
-                'type' => 'text',
+                'options' => $country,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -183,7 +192,8 @@
         <td>
             <?php
             echo $this->Form->input('ID_TYP', array(
-                'type' => 'text',
+                'options' => $id_type,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -214,6 +224,7 @@
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
+                'id' => 'expire' ,
                 'class' => 'form-control input-sm'
             ));
             ?>
@@ -226,6 +237,7 @@
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
+                'id' => 'birth' ,
                 'class' => 'form-control input-sm'
             ));
             ?>
@@ -239,7 +251,8 @@
         <td>
             <?php
             echo $this->Form->input('BIRTH_COUNTRY_CD', array(
-                'type' => 'text',
+                'options' => $country,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -267,7 +280,8 @@
         <td>
             <?php
             echo $this->Form->input('PRIM_PHON_COUNTRY_CD', array(
-                'type' => 'text',
+                'options' => $home_country,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -282,7 +296,9 @@
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm' ,
+                'required' => true ,
+                'data-parsley-type' => 'number'
             ));
             ?>
         </td>
@@ -295,10 +311,12 @@
         <td>
             <?php
             echo $this->Form->input('MOBILE_COUNTRY_CD', array(
-                'type' => 'text',
+                'options' => $mobile_country,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm' ,
+                'data-parsley-type' => 'number'
             ));
             ?>
         </td>
@@ -307,10 +325,12 @@
         <td>
             <?php
             echo $this->Form->input('MOBILE_NUM', array(
-                'type' => 'text',
+                'type' => 'text' ,
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm' ,
+                'required' => true ,
+                'data-parsley-type' => 'number'
             ));
             ?>
         </td>
@@ -323,10 +343,12 @@
         <td>
             <?php
             echo $this->Form->input('OTHR_PHON_COUNTRY_CD', array(
-                'type' => 'text',
+                'options' => $mobile2_country,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm' ,
+                'data-parsley-type' => 'number'
             ));
             ?>
         </td>
@@ -334,11 +356,13 @@
         <td class="hack-col-label">Mobile Phone Number 2</td>
         <td>
             <?php
-            echo $this->Form->input('OTHR_PHON_NUM', array(
+            echo $this->Form->input('OTHER_PHON_NUM', array(
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm' ,
+                'required' => true ,
+                'data-parsley-type' => 'number'
             ));
             ?>
         </td>
@@ -351,10 +375,12 @@
         <td>
             <?php
             echo $this->Form->input('FAX_COUNTRY_CD', array(
-                'type' => 'text',
+                'options' => $fax_country,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm' ,
+                'data-parsley-type' => 'number'
             ));
             ?>
         </td>
@@ -366,7 +392,8 @@
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm' ,
+                'data-parsley-type' => 'number'
             ));
             ?>
         </td>
@@ -379,10 +406,12 @@
         <td>
             <?php
             echo $this->Form->input('OFFICE_PHON_COUNTRY_CD', array(
-                'type' => 'text',
+                'options' => $fax_country,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm' ,
+                'data-parsley-type' => 'number'
             ));
             ?>
         </td>
@@ -394,7 +423,9 @@
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm' ,
+                'required' => true ,
+                'data-parsley-type' => 'number'
             ));
             ?>
         </td>
@@ -410,7 +441,9 @@
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm' ,
+                'required' => true ,
+                'data-parsley-type' => 'email'
             ));
             ?>
         </td>
@@ -419,7 +452,8 @@
         <td>
             <?php
             echo $this->Form->input('RELIGION', array(
-                'type' => 'text',
+                'options' => $religion,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -435,7 +469,8 @@
         <td>
             <?php
             echo $this->Form->input('MARITAL_STATUS', array(
-                'type' => 'text',
+                'options' => $marital_status,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'

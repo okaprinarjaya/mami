@@ -16,7 +16,8 @@
         <td>
             <?php
             echo $this->Form->input('SPOUSE_OCCP_CODE', array(
-                'type' => 'text',
+                'options' => $spouse_occupation ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -32,7 +33,8 @@
         <td>
             <?php
             echo $this->Form->input('SPOUSE_ID_TYP', array(
-                'type' => 'text',
+                'options' => $spouse_type ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'

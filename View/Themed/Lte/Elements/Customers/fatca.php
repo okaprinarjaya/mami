@@ -4,7 +4,8 @@
         <td>
             <?php
             echo $this->Form->input('CLI_FATCA_STAT', array(
-                'type' => 'text',
+                'options' => $owner_facta_status ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -32,7 +33,8 @@
         <td>
             <?php
             echo $this->Form->input('PRI_WAIVER', array(
-                'type' => 'text',
+                'options' => $privacy_waifer ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -60,7 +62,8 @@
         <td>
             <?php
             echo $this->Form->input('FATCA_SELF_CERT', array(
-                'type' => 'text',
+                'options' => $self_certification ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -88,7 +91,8 @@
         <td>
             <?php
             echo $this->Form->input('W8_FORM', array(
-                'type' => 'text',
+                'options' => $w8 ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -116,7 +120,8 @@
         <td>
             <?php
             echo $this->Form->input('W9_FORM', array(
-                'type' => 'text',
+                'options' => $w9 ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -128,7 +133,8 @@
         <td>
             <?php
             echo $this->Form->input('ENTITY_TYP', array(
-                'type' => 'text',
+                'options' => $entity ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
