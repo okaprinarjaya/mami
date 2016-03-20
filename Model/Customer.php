@@ -25,9 +25,7 @@ class Customer extends AppModel {
     }
     
     public function editCustomer(array $data)
-    {
-        $this->id = $data['CUSTOMER_ID'];
-        
+    {       
         if ($this->save($data)) {
             return true;
         }

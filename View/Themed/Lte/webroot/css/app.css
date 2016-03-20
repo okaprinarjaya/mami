@@ -1,6 +1,7 @@
 .form-custom-hack td {
     font-weight: bold;
     font-size: 0.9em;
+    vertical-align: middle;
 }
 
 .hack-col-label {

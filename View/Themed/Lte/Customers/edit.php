@@ -25,6 +25,8 @@
             'class' => 'form-horizontal',
             'data-parsley-validate' => true ,
         ));
+
+        echo $this->Form->input('CUSTOMER_ID', array('type' => 'hidden'));
         ?>
         
         <!-- START TAB NAVIGATION -->
