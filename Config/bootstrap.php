@@ -93,3 +93,31 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+
+function getWDays($startDate, $holidays = array(), $wDays) {
+    
+    // using + weekdays excludes weekends
+    $new_date = date('Y-m-d', strtotime("{$startDate} +{$wDays} weekdays"));
+
+    $extra_days = 0;
+    foreach ($holidays as $holiday) {
+        $holiday_ts = strtotime($holiday);
+        
+        // if holiday falls between start date and new date, then account for it
+        if ($holiday_ts >= strtotime($startDate) && $holiday_ts <= strtotime($new_date)) {
+        
+            // check if the holiday falls on a working day
+            $h = date('w', $holiday_ts);
+            if ($h != 0 && $h != 6 ) {
+                // holiday falls on a working day, add an extra working day
+                $extra_days = $extra_days + 1;
+            }
+        }
+    }
+    
+    if ($extra_days > 0) {
+        $new_date = date('Y-m-d', strtotime("{$new_date} +{$extra_days} weekdays"));
+    }
+
+    return $new_date;
+}

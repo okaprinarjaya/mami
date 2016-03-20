@@ -50,7 +50,15 @@
                         
                         <ul class="nav navbar-nav">
                             <li class="active">
-                                <a href="#"><i class="fa fa-users"></i> &nbsp; Customers <span class="sr-only">(current)</span></a>
+                                <a href="#">
+                                    <i class="fa fa-users"></i> &nbsp; Customers <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-ticket"></i> &nbsp; Tickets
+                                </a>
                             </li>
                         </ul>
 
@@ -90,7 +98,13 @@
                 
                 <section class="content-header">
                     <h1>
-                        <?php echo $__module_title__; ?> 
+                        <?php
+                        if (isset($__module_title__)):
+                            echo $__module_title__;
+                        else:
+                            echo "Untitled";
+                        endif;
+                        ?> 
                     </h1>
                 </section>
 
