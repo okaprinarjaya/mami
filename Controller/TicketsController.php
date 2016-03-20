@@ -71,7 +71,11 @@ class TicketsController extends AppController {
     public function add($customer_id)
     {
         if ($this->request->is('post')) {
-            if ($this->Ticket->createTicket($this->request->data, 0, '0')) {
+            if ($this->Ticket->createTicket(
+                $this->request->data,
+                $this->Auth->user('id'),
+                $this->Auth->user('agt_code')
+            )) {
                 $this->Session->setFlash('New ticket created successfuly!', 'Flash/success');
                 return $this->redirect('/tickets');
             } else {

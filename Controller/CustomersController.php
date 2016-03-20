@@ -45,7 +45,12 @@ class CustomersController extends AppController {
     public function add()
     {
         if ($this->request->is('post')) {
-            $save = $this->Customer->saveDataCustomer($this->request->data);
+            $save = $this->Customer->createCustomer(
+                $this->request->data,
+                $this->Auth->user('id'),
+                $this->Auth->user('agt_code')
+            );
+
             if ($save) {
                 $this->Session->setFlash('New Customer Successfuly Added!', 'Flash/success');
                 return $this->redirect(array('controller' => 'tickets', 'action' => 'add', $save));
@@ -60,7 +65,7 @@ class CustomersController extends AppController {
     public function edit($cid)
     {
         if ($this->request->is(array('post', 'put'))) {
-            if ($this->Customer->editDataCustomer($this->request->data)) {
+            if ($this->Customer->editCustomer($this->request->data)) {
                 $this->Session->setFlash('Customer Data Successfuly Updated!', 'Flash/success');
                 return $this->redirect(array('controller' => 'customers', 'action' => 'index'));
             } else {

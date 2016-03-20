@@ -27,6 +27,7 @@ class AppController extends Controller {
     public $ext = '.php';
 
     public $components = array(
+        'Session',
         'Auth' => array(
             'loginRedirect' => array(
                 'controller' => 'customers',
