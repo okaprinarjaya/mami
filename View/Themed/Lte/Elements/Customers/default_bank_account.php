@@ -1,6 +1,6 @@
 <table class="table table-condensed table-striped form-custom-hack">
     <tr>
-        <td class="hack-col-label">Bank Type</td>
+        <td class="hack-col-label">Bank Name</td>
         <td>
         <?php
                 echo $this->Form->input('BANK_CD_MAPP', array(

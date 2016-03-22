@@ -8,7 +8,7 @@ $(document).ready(function () {
         if (interaction.val() != '') {
             $.ajax({
                 method: 'GET',
-                url: '/tickets/ajax_get_interaction/'+interaction.val(),
+                url: __base_url+'tickets/ajax_get_interaction/'+interaction.val(),
                 dataType: 'text'
             }).done(function (data) {
                 
@@ -34,7 +34,7 @@ $(document).ready(function () {
         if (interaction2.val() != '') {
             $.ajax({
                 method: 'GET',
-                url: '/tickets/ajax_get_interaction/'+interaction2.val(),
+                url: __base_url+'tickets/ajax_get_interaction/'+interaction2.val(),
                 dataType: 'text'
             }).done(function (data) {
                 

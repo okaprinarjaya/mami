@@ -18,7 +18,7 @@
     </tr>
 
     <tr>
-        <td class="hack-col-label">Address 1</td>
+        <td class="hack-col-label">Address</td>
         <td>
             <?php
             echo $this->Form->input('ADDR_1_COMPANY', array(
@@ -36,7 +36,7 @@
     </tr>
 
     <tr>
-        <td class="hack-col-label">Address 2</td>
+        <td class="hack-col-label">&nbsp;</td>
         <td>
             <?php
             echo $this->Form->input('ADDR_2_COMPANY', array(
@@ -54,7 +54,7 @@
     </tr>
 
     <tr>
-        <td class="hack-col-label">Address 3</td>
+        <td class="hack-col-label">&nbsp;</td>
         <td>
             <?php
             echo $this->Form->input('ADDR_3_COMPANY', array(

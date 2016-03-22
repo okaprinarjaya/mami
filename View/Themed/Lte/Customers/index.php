@@ -101,7 +101,6 @@
                 <tr>
                     <th>ID Customer</th>
                     <th>First Name</th>
-                    <th>Middle Name</th>
                     <th>Sex</th>
                     <th>Email</th>
                     <th>Client Type</th>
@@ -120,7 +119,6 @@
                 <tr>
                     <td><?php echo $val['Customer']['CUSTOMER_ID']; ?></td>
                     <td><?php echo ucwords($val['Customer']['CLI_NM']); ?></td>
-                    <td><?php echo ucwords($val['Customer']['MID_NM']); ?></td>
                     <td><?php echo $val['Customer']['SEX_CODE']; ?></td>
                     <td><?php echo $val['Customer']['EMAIL_ADD']; ?></td>
                     <td><?php echo $val['Customer']['CLI_TYP']; ?></td>
