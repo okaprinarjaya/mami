@@ -32,7 +32,7 @@
         <td>
         <?php
                 echo $this->Form->input('BANK_CD', array(
-                    'options' => array() ,
+                    'options' => isset($bank_code) && !empty($bank_code) ? $bank_code : array() ,
                     'div' => false,
                     'label' => false,
                     'class' => 'form-control input-sm',

@@ -61,4 +61,36 @@ $(document).ready(function () {
         });
     });
     
+    $('.items').on('click', function () {
+        var item_content = $(this).parent().parent().parent().find('.collapse');
+        
+        if (item_content.hasClass('in')) {
+            item_content.removeClass('in');
+        } else {
+            item_content.addClass('in');
+        }
+    });
+
+    var valueNation = $('#CustomerNATION').val();
+    if (valueNation == 'I') {
+        $('#CustomerBIRTHCOUNTRYCD').removeClass('required');
+    } else if(valueNation == 'F') {
+        $('#CustomerBIRTHCOUNTRYCD').addClass('required');
+    }else{
+        $('#CustomerBIRTHCOUNTRYCD').removeClass('required');
+    }
+    
+    $('#CustomerNATION').on('change', function () {
+        var value = $('#CustomerNATION').val();
+        if (value == 'I') {
+            $('#CustomerBIRTHCOUNTRYCD').removeClass('required');
+        } else if(value == 'F'){
+            $('#CustomerBIRTHCOUNTRYCD').addClass('required');
+        }else{
+            $('#CustomerBIRTHCOUNTRYCD').removeClass('required');
+        }
+    });
+    
+    
+    
 });

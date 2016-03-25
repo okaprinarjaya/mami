@@ -25,6 +25,7 @@ class Bank extends AppModel {
     
     public function getBankCode($name)
     {
+        
         $options['conditions'] = array(
             'BANK_CD_MAPP' => $name
         );
@@ -32,6 +33,7 @@ class Bank extends AppModel {
             'BANK_ID' ,
             'BANK_BRANCH_NM'
         );
+        
         return $this->find('all' , $options);
     }
     
