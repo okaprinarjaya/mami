@@ -50,7 +50,7 @@
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
-            ));
+            )); 
             ?>
         </td>
 
