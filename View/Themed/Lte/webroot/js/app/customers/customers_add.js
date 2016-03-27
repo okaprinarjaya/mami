@@ -1,9 +1,10 @@
 $(document).ready(function () {
-
+    /*
     window.Parsley.on('field:error', function() {
         // This global callback will be called for any field that fails validation.
         $('#customer-tabs a[href="#base"]').tab('show');
     });
+    */
     
     $('#expire').daterangepicker({
         format: 'YYYY-MM-DD' ,
@@ -20,6 +21,13 @@ $(document).ready(function () {
         singleDatePicker: true,
         showDropdowns: true
     });
+    
+    $('#renewal').daterangepicker({
+        format: 'YYYY-MM-DD' ,
+        singleDatePicker: true,
+        showDropdowns: true
+    });
+    
     $('#customer-tabs a[href="#base"]').tab('show');
     
     $('#bank_type').on('change' , function(){

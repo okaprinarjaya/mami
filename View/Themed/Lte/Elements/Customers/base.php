@@ -316,7 +316,6 @@
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm' ,
-                'data-parsley-type' => 'number'
             ));
             ?>
         </td>
@@ -348,7 +347,6 @@
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm' ,
-                'data-parsley-type' => 'number'
             ));
             ?>
         </td>
@@ -380,7 +378,6 @@
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm' ,
-                'data-parsley-type' => 'number'
             ));
             ?>
         </td>
@@ -411,7 +408,6 @@
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm' ,
-                'data-parsley-type' => 'number'
             ));
             ?>
         </td>

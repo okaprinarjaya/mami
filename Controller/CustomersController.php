@@ -326,11 +326,6 @@ class CustomersController extends AppController {
             '{n}.TtaFieldValues.FLD_VALU',
             '{n}.TtaFieldValues.FLD_VALU_DESC'
         );
-        $self_certification = array(
-            '1' => 'self Type 1',
-            '2' => 'self Type 2',
-            '3' => 'self Type 3'
-        );
         
         $w8 = $this->TtaFieldValues->getW8();
         $w8 = Hash::combine(
