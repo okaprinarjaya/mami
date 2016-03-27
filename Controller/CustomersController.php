@@ -57,7 +57,7 @@ class CustomersController extends AppController {
             } else {
                 $this->Session->setFlash('There is an error', 'Flash/error');
             }
-        }
+        } 
 
         $this->getTabDataForm();
     }
