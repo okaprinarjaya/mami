@@ -59,6 +59,8 @@ class CustomersController extends AppController {
             }
         }  
 
+        $this->set('bank_code', array());
+        $this->set('bank_cd_mapp', null);
         $this->getTabDataForm();
     }
     
@@ -78,13 +80,17 @@ class CustomersController extends AppController {
         ));
         
         $bank = $this->Bank->find('first', array(
-            'conditions' => array('Bank.BANK_BRANCH_NM' => $customer['Customer']['BRANCH_NAME'])
+            'conditions' => array('Bank.BANK_ID' => $customer['Customer']['BANK_CD'])
         ));
         
         $bank_code = array();
-        if(!empty($bank))
+        $bank_cd_mapp = null;
+
+        if (!empty($bank))
         {
-            $customer['Customer']['BANK_CD_MAPP'] = $bank['Bank']['BANK_CD_MAPP'];
+            $customer['Customer']['BANK_CD'] = $bank['Bank']['BANK_ID'];
+            $bank_cd_mapp = $bank['Bank']['BANK_CD_MAPP'];
+
             $listCodeBank =  $this->Bank->getBankCode($bank['Bank']['BANK_CD_MAPP']);
             $bank_code = Hash::combine(
                 $listCodeBank,
@@ -92,9 +98,12 @@ class CustomersController extends AppController {
                 '{n}.Bank.BANK_BRANCH_NM'
             );
         }
+
+
         
         $this->set(compact(
-            'bank_code'
+            'bank_code',
+            'bank_cd_mapp'
         ));
         
         $this->getTabDataForm();
@@ -106,6 +115,10 @@ class CustomersController extends AppController {
     {
         //tab base
         $agt_codes_fetch = $this->TamsAgent->getAGTCodes();
+        array_walk($agt_codes_fetch, function (&$item, $key) {
+            $item['TamsAgent']['AGT_NM'] = str_replace("+", " ", $item['TamsAgent']['AGT_NM']);
+        });
+
         $agt_codes = Hash::combine(
             $agt_codes_fetch, 
             '{n}.TamsAgent.AGT_CODE', 
@@ -200,9 +213,8 @@ class CustomersController extends AppController {
         );
         
         $client_types = array(
-            '1' => 'Client Type 1',
-            '2' => 'Client Type 2',
-            '3' => 'Client Type 3'
+            '1' => 'Personal',
+            '2' => 'Corporate'
         );
         
         $this->set(compact(

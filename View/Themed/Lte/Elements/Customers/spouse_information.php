@@ -1,7 +1,7 @@
 <table class="table table-condensed table-striped form-custom-hack">
     <tr>
-        <td class="hack-col-label">Spouse Name</td>
-        <td>
+        <td class="hack-col-label hack-label-width">Spouse Name</td>
+        <td class="hack-input-width">
             <?php
             echo $this->Form->input('SPOUSE_NM', array(
                 'type' => 'text',
@@ -12,8 +12,8 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Spouse Occupation</td>
-        <td>
+        <td class="hack-col-label hack-label-width">Spouse Occupation</td>
+        <td class="hack-input-width">
             <?php
             echo $this->Form->input('SPOUSE_OCCP_CODE', array(
                 'options' => $spouse_occupation ,

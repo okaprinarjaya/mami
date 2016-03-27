@@ -1,7 +1,7 @@
 <table class="table table-condensed table-striped form-custom-hack">
     <tr>
-        <td class="hack-col-label">Occupation Type</td>
-        <td>
+        <td class="hack-col-label hack-label-width">Occupation Type</td>
+        <td class="hack-input-width">
             <?php
             echo $this->Form->input('OCCP_TYP', array(
                 'options' => $occupation_type ,
@@ -13,8 +13,8 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Job Title</td>
-        <td>
+        <td class="hack-col-label hack-label-width">Job Title</td>
+        <td class="hack-input-width">
             <?php
             echo $this->Form->input('OCCP_DESC', array(
                 'type' => 'text',

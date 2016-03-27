@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50531
 File Encoding         : 65001
 
-Date: 2016-03-27 20:17:36
+Date: 2016-03-28 03:43:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -98,6 +98,11 @@ CREATE TABLE `customers` (
   `ENTITY_TYP` varchar(4) DEFAULT NULL,
   `CREATED_BY` int(11) DEFAULT NULL,
   `CREATED_BY_AGT` varchar(8) DEFAULT NULL,
+  `CLI_NM_COMPANY` varchar(32) DEFAULT NULL,
+  `ADDR_1_COMPANY` varchar(512) DEFAULT NULL,
+  `ADDR_2_COMPANY` varchar(512) DEFAULT NULL,
+  `ADDR_3_COMPANY` varchar(512) DEFAULT NULL,
+  `ZIP_CODE_COMPANY` varchar(8) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`CUSTOMER_ID`)
@@ -9781,5 +9786,5 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'vads.admin', '$2a$10$ztSQ8J6QRcZBz4ZSiQ3/i.H0K0AT1sCWvNkQFm/i6mduVq.D8gdqC', 'administrator', '2', 'vads.admin@vads.co.id', 'Vads Administrator', '2016-03-27 12:49:28', '2016-03-27 12:52:03');
-INSERT INTO `users` VALUES ('4', 'user.agent', '$2a$10$Lh534tsGWANa5c/5m2kIxe3XOodPNeyb.5DH5J6DDoRym00z7mDmi', 'agent', '2', 'user.agent@vads.co.id', 'User Agent', '2016-03-27 13:31:47', '2016-03-27 13:31:47');
+INSERT INTO `users` VALUES ('1', 'vads.admin', '$2a$10$VtkvuIXjLJwXr5BNS6q/TOmoOC.n094MXcv26oMzhpYuCbBVjbDAq', 'administrator', '2', 'vads.admin@vads.co.id', 'Vads Administrator', '2016-03-27 12:49:28', '2016-03-27 15:19:09');
+INSERT INTO `users` VALUES ('4', 'user.agent', '$2a$10$gkn.Wi0PI8Pq04OOhWXz5er0HPTYN13EA76HV1DhzrQ200uZPgigG', 'agent', '2', 'user.agent@vads.co.id', 'User Agent', '2016-03-27 13:31:47', '2016-03-27 15:19:16');

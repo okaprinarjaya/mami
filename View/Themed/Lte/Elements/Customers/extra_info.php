@@ -1,7 +1,7 @@
 <table class="table table-condensed table-striped form-custom-hack">
     <tr>
-        <td class="hack-col-label">Date of Renewal</td>
-        <td>
+        <td class="hack-col-label hack-label-width">Date of Renewal</td>
+        <td class="hack-input-width">
             <?php
             echo $this->Form->input('RENEWAL_DATE', array(
                 'type' => 'text',
@@ -13,8 +13,8 @@
             ?>
         </td>
 
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+        <td class="hack-label-width">&nbsp;</td>
+        <td class="hack-input-width">&nbsp;</td>
         <td>&nbsp;</td>
     </tr>
 

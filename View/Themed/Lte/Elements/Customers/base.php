@@ -1,8 +1,8 @@
 <table class="table table-condensed table-striped form-custom-hack">
     <input type="hidden" name="data[Customer][CUSTOMER_ID]" value="<?php echo isset($this->request->data['Customer']['CUSTOMER_ID']) ? $this->request->data['Customer']['CUSTOMER_ID'] : '';?>">
     <tr>
-        <td class="hack-col-label">CIF</td>
-        <td>
+        <td class="hack-col-label hack-label-width">CIF</td>
+        <td class="hack-input-width">
             <?php
             echo $this->Form->input('CIF_NUM', array(
                 'type' => 'text',
@@ -13,8 +13,8 @@
             ?>
         </td>
 
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+        <td class="hack-label-width">&nbsp;</td>
+        <td class="hack-input-width">&nbsp;</td>
         <td>&nbsp;</td>
     </tr>
 

@@ -1,7 +1,7 @@
 <table class="table table-condensed table-striped form-custom-hack">
     <tr>
-        <td class="hack-col-label">Company Name</td>
-        <td>
+        <td class="hack-col-label hack-label-width">Company Name</td>
+        <td class="hack-input-width">
             <?php
             echo $this->Form->input('CLI_NM_COMPANY', array(
                 'type' => 'text',
@@ -12,8 +12,8 @@
             ?>
         </td>
 
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+        <td class="hack-label-width">&nbsp;</td>
+        <td class="hack-input-width">&nbsp;</td>
         <td>&nbsp;</td>
     </tr>
 

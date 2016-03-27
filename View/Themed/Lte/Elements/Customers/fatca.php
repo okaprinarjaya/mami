@@ -1,7 +1,7 @@
 <table class="table table-condensed table-striped form-custom-hack">
     <tr>
-        <td class="hack-col-label">Owner FATCA Status</td>
-        <td>
+        <td class="hack-col-label hack-label-width">Owner FATCA Status</td>
+        <td class="hack-input-width">
             <?php
             echo $this->Form->input('CLI_FATCA_STAT', array(
                 'options' => $owner_facta_status ,
@@ -13,8 +13,8 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Override</td>
-        <td>
+        <td class="hack-col-label hack-label-width">Override</td>
+        <td class="hack-input-width">
             <?php
             echo $this->Form->input('CLI_FATCA_STAT_OVR', array(
                 'type' => 'text',
