@@ -280,7 +280,7 @@
         <td>
             <?php
             echo $this->Form->input('PRIM_PHON_COUNTRY_CD', array(
-                'options' => $home_country,
+                'options' => $country,
                 'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
@@ -311,7 +311,7 @@
         <td>
             <?php
             echo $this->Form->input('MOBILE_COUNTRY_CD', array(
-                'options' => $mobile_country,
+                'options' => $country,
                 'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
@@ -343,7 +343,7 @@
         <td>
             <?php
             echo $this->Form->input('OTHR_PHON_COUNTRY_CD', array(
-                'options' => $mobile2_country,
+                'options' => $country,
                 'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
@@ -375,7 +375,7 @@
         <td>
             <?php
             echo $this->Form->input('FAX_COUNTRY_CD', array(
-                'options' => $fax_country,
+                'options' => $country,
                 'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
@@ -406,7 +406,7 @@
         <td>
             <?php
             echo $this->Form->input('OFFICE_PHON_COUNTRY_CD', array(
-                'options' => $fax_country,
+                'options' => $country,
                 'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,

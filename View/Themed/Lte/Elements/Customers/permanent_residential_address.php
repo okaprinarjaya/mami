@@ -1,13 +1,13 @@
 <table class="table table-condensed table-striped form-custom-hack">
     <tr>
-        <td class="hack-col-label">Address</td>
+        <td class="hack-col-label col-md-6">Address</td>
         <td>
             <?php
             echo $this->Form->input('ADDR_1', array(
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm col-md-6'
             ));
             ?>
         </td>
