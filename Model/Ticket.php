@@ -26,8 +26,13 @@ class Ticket extends AppModel {
         $data_save['Ticket']['created'] = date('Y-m-d H:i:s');
         $data_save['Ticket']['created_by'] = $user_id;
 
+        $data_save['TicketMessage'][0]['ticket_message'] = trim($data_save['TicketMessage'][0]['ticket_message']);
+        if (empty($data_save['TicketMessage'][0]['ticket_message'])) {
+            unset($data_save['TicketMessage']);
+        }
+
         $this->create();
-        return $this->save($data_save);
+        return $this->saveAssociated($data_save);
     }
 
     public function updateTicket(array $data, $user_id)

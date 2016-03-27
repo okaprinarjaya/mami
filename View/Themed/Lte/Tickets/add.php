@@ -213,7 +213,7 @@
                     ?>
 
                     <?php
-                    echo $this->Form->input('TicketMessage.ticket_message', array(
+                    echo $this->Form->input('TicketMessage.0.ticket_message', array(
                         'type' => 'textarea',
                         'div' => 'form-group',
                         'label' => array(
