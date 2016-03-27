@@ -47,8 +47,7 @@ class CustomersController extends AppController {
         if ($this->request->is('post')) {
             $save = $this->Customer->createCustomer(
                 $this->request->data,
-                $this->Auth->user('id'),
-                $this->Auth->user('agt_code')
+                $this->Auth->user('id')
             );
 
             if ($save) {
@@ -65,7 +64,7 @@ class CustomersController extends AppController {
     public function edit($cid)
     {
         if ($this->request->is(array('post', 'put'))) {
-            if ($this->Customer->editCustomer($this->request->data)) {
+            if ($this->Customer->updateCustomer($this->request->data)) {
                 $this->Session->setFlash('Customer Data Successfuly Updated!', 'Flash/success');
                 return $this->redirect(array('controller' => 'customers', 'action' => 'index'));
             } else {

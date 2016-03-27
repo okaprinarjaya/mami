@@ -73,8 +73,7 @@ class TicketsController extends AppController {
         if ($this->request->is('post')) {
             if ($this->Ticket->createTicket(
                 $this->request->data,
-                $this->Auth->user('id'),
-                $this->Auth->user('agt_code')
+                $this->Auth->user('id')
             )) {
                 $this->Session->setFlash('New ticket created successfuly!', 'Flash/success');
                 return $this->redirect('/tickets');
@@ -87,7 +86,7 @@ class TicketsController extends AppController {
         $depts = Hash::combine($depts_fetch, '{n}.Department.id', '{n}.Department.department_name');
 
         $interactions_root = $this->Interaction->getInteractions();
-        $ticket_statuses = $this->TicketStatus->getTicketStatuses();
+        $ticket_statuses = array('C' => 'CLOSED', 'S' => 'SUBMIT');
         $customer = $this->Customer->find('first', array(
             'fields' => array('Customer.CLI_NM', 'Customer.MID_NM', 'Customer.EMAIL_ADD'),
             'conditions' => array('Customer.CUSTOMER_ID' => $customer_id)
@@ -115,7 +114,13 @@ class TicketsController extends AppController {
     public function edit($ticket_id)
     {
         if ($this->request->is(array('post', 'put'))) {
-            if ($this->Ticket->save($this->request->data)) {
+            
+            $this->request->data['TicketMessage'][0]['ticket_message'] = trim($this->request->data['TicketMessage'][0]['ticket_message']);
+            if (empty($this->request->data['TicketMessage'][0]['ticket_message'])) {
+                unset($this->request->data['TicketMessage']);
+            }
+
+            if ($this->Ticket->saveAssociated($this->request->data)) {
                 $this->Session->setFlash('Ticket Updated Successfuly!', 'Flash/success');
                 return $this->redirect('/tickets');
             } else {
@@ -132,7 +137,7 @@ class TicketsController extends AppController {
 
         if ($this->request->is('ajax')) {
             $ticket = $this->Ticket->getTicket($ticket_id);
-            $ticket_statuses = $this->TicketStatus->getTicketStatuses();
+            $ticket_statuses = array('C' => 'CLOSED', 'P' => 'IN PROGRESS');
             
             $this->set(compact(
                 'ticket',

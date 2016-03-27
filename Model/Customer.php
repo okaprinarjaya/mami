@@ -10,11 +10,10 @@ class Customer extends AppModel {
 	public $useTable = 'customers';
     public $primaryKey = 'CUSTOMER_ID';
     
-    public function createCustomer(array $data, $user_id, $user_id_agt)
+    public function createCustomer(array $data, $user_id)
     {
         $data_save = $data;
         $data_save['Customer']['CREATED_BY'] = $user_id;
-        $data_save['Customer']['CREATED_BY_AGT'] = $user_id_agt;        
 
         $this->create();
         if ($this->save($data_save)) {
@@ -24,7 +23,7 @@ class Customer extends AppModel {
         return false;
     }
     
-    public function editCustomer(array $data)
+    public function updateCustomer(array $data)
     {       
         if ($this->save($data)) {
             return true;

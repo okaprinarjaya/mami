@@ -196,9 +196,8 @@ echo $this->Form->input('id', array(
     ?>
 
     <?php
-    echo $this->Form->input('message', array(
+    echo $this->Form->input('TicketMessage.0.ticket_message', array(
         'type' => 'textarea',
-        'default' => $ticket['Ticket']['message'],
         'div' => 'form-group',
         'label' => array(
             'class' => 'col-sm-4 control-label',
@@ -208,7 +207,33 @@ echo $this->Form->input('id', array(
         'after' => '</div>',
         'class' => 'form-control'
     ));
+
+    echo $this->Form->input('TicketMessage.0.ticket_id', array(
+        'type' => 'hidden',
+        'default' => $ticket['Ticket']['id']
+    ));
+
     ?>
+
+    <div class="form-group">
+        <label class="col-sm-4 control-label">&nbsp;</label>
+        <div class="col-sm-6">
+            
+            <h4 style="font-weight: bold;">Follow-Up Messages</h4>
+            <hr />
+
+            <?php
+            foreach ($ticket['TicketMessage'] as $item):
+                $msg = nl2br($item['ticket_message']);
+                $msg .= '<br /><span style="font-weight: bold;">'.date('d-m-Y H:i:s', strtotime($item['created'])).'</span>';
+                
+                echo '<p>'.$msg.'<p>';
+                echo '<hr />';
+            endforeach;
+            ?>
+
+        </div>
+    </div>
 
     <?php
     echo $this->Form->input('ticket_status', array(
