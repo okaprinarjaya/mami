@@ -7,7 +7,14 @@ class Ticket extends AppModel {
     public $primaryKey = 'id';
     public $displayField = 'ticket_number';
 
-    public function createTicket(array $data, $user_id, $user_id_agt)
+    public $hasMany = array(
+        'TicketMessage' => array(
+            'className' => 'TicketMessage',
+            'foreignKey' => 'ticket_id'
+        )
+    );
+
+    public function createTicket(array $data, $user_id)
     {
         $data_save = $data;
         if ($data['Ticket']['ticket_status'] != 'C') {
@@ -18,14 +25,24 @@ class Ticket extends AppModel {
         
         $data_save['Ticket']['created'] = date('Y-m-d H:i:s');
         $data_save['Ticket']['created_by'] = $user_id;
-        $data_save['Ticket']['created_by_agt'] = $user_id_agt;
+
+        $data_save['TicketMessage'][0]['ticket_message'] = trim($data_save['TicketMessage'][0]['ticket_message']);
+        if (empty($data_save['TicketMessage'][0]['ticket_message'])) {
+            unset($data_save['TicketMessage']);
+        }
 
         $this->create();
-        return $this->save($data_save);
+        return $this->saveAssociated($data_save);
+    }
+
+    public function updateTicket(array $data, $user_id)
+    {
+        //
     }
 
     public function getTicket($ticket_id)
     {
+        $this->recursive = 2;
         $ticket = $this->find('first', array(
             'fields' => array(
                 'InteractionLevel1.interaction_title AS interaction_title1',

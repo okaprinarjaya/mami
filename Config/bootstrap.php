@@ -94,6 +94,11 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 
+Configure::write('roles', array(
+    'administrator' => 'Administrator',
+    'agent' => 'Agent'
+));
+
 function getWDays($startDate, $holidays = array(), $wDays) {
     
     // using + weekdays excludes weekends

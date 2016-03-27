@@ -30,6 +30,13 @@ class User extends AppModel {
         )
     );
 
+    public $belongsTo = array(
+        'Department' => array(
+            'className' => 'Department',
+            'foreignKey' => 'department_id'
+        )
+    );
+
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {
             $passwordHasher = new BlowfishPasswordHasher();
