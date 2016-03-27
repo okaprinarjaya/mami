@@ -25,147 +25,214 @@
             'class' => 'form-horizontal',
             'data-parsley-validate' => true ,
         ));
-
-        echo $this->Form->input('CUSTOMER_ID', array('type' => 'hidden'));
         ?>
-        
-        <!-- START TAB NAVIGATION -->
-        <ul id="customer-tabs" class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active">
-                <a href="#base" aria-controls="base" role="tab" data-toggle="tab">Base</a>
-            </li>
+        <div id="accordion" class="panel-group ">
+    
+            <!-- ITEM 1 -->
+            <div class="panel panel-success">
+            
+                <div class="panel-heading bg-mami-green1">
+                    <h4 class="panel-title">
+                        <input type="checkbox" class="items" checked> Base Information
+                    </h4>
+                </div>
+                
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <?php
+                            echo $this->element('Customers/base');
+                        ?>
+                    </div>
+                </div>
 
-            <li role="presentation">
-                <a href="#income_information" aria-controls="income_information" role="tab" data-toggle="tab">
-                    Income Information
-                </a>
-            </li>
+            </div>
+            
+            <!-- ITEM 2 -->
+            <div class="panel panel-success">
+            
+                <div class="panel-heading bg-mami-green1">
+                    <h4 class="panel-title">
+                        <input type="checkbox" class="items" /> Income Information
+                    </h4>
+                </div>
+                
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <?php
+                            echo $this->element('Customers/income_information');
+                        ?>
+                    </div>
+                </div>
 
-            <li role="presentation">
-                <a href="#spouse_information" aria-controls="spouse_information" role="tab" data-toggle="tab">
-                    Spouse Information
-                </a>
-            </li>
+            </div>
+            
+            <!-- ITEM 3 -->
+            <div class="panel panel-success">
+            
+                <div class="panel-heading bg-mami-green1">
+                    <h4 class="panel-title">
+                        <input type="checkbox" class="items" /> Spouse Information
+                    </h4>
+                </div>
+                
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <?php
+                            echo $this->element('Customers/spouse_information');
+                        ?>
+                    </div>
+                </div>
 
-            <li role="presentation">
-                <a href="#investment_information" aria-controls="investment_information" role="tab" data-toggle="tab">
-                    Invesment Information
-                </a>
-            </li>
+            </div>
+            
+            <!-- ITEM 3 -->
+            <div class="panel panel-success">
+            
+                <div class="panel-heading bg-mami-green1">
+                    <h4 class="panel-title">
+                        <input type="checkbox" class="items" /> Invesment Information
+                    </h4>
+                </div>
+                
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <?php
+                            echo $this->element('Customers/investment_information');
+                        ?>
+                    </div>
+                </div>
 
-            <li role="presentation">
-                <a href="#permanent_residential_address" aria-controls="permanent_residential_address" role="tab" data-toggle="tab">
-                    Permanent Residential Address
-                </a>
-            </li>
+            </div>
+            
+            <!-- ITEM 3 -->
+            <div class="panel panel-success">
+            
+                <div class="panel-heading bg-mami-green1">
+                    <h4 class="panel-title">
+                        <input type="checkbox" class="items" /> Permanent Residential Address
+                    </h4>
+                </div>
+                
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <?php
+                            echo $this->element('Customers/permanent_residential_address');
+                        ?>
+                    </div>
+                </div>
 
-            <li role="presentation">
-                <a href="#default_email_address" aria-controls="default_email_address" role="tab" data-toggle="tab">
-                    Default Mail Address
-                </a>
-            </li>
+            </div>
+            
+            <div class="panel panel-success">
+            
+                <div class="panel-heading bg-mami-green1">
+                    <h4 class="panel-title">
+                        <input type="checkbox" class="items" /> Default Mail Address
+                    </h4>
+                </div>
+                
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <?php
+                            echo $this->element('Customers/default_email_address');
+                        ?>
+                    </div>
+                </div>
 
-            <li role="presentation">
-                <a href="#company_information" aria-controls="company_information" role="tab" data-toggle="tab">
-                    Company Information
-                </a>
-            </li>
+            </div>
+            
+            <div class="panel panel-success">
+            
+                <div class="panel-heading bg-mami-green1">
+                    <h4 class="panel-title">
+                        <input type="checkbox" class="items" /> Company Information
+                    </h4>
+                </div>
+                
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <?php
+                            echo $this->element('Customers/company_information');
+                        ?>
+                    </div>
+                </div>
 
-            <li role="presentation">
-                <a href="#additional_foreign_id" aria-controls="additional_foreign_id" role="tab" data-toggle="tab">
-                    Additional Foreign ID
-                </a>
-            </li>
+            </div>
+            
+            <div class="panel panel-success">
+            
+                <div class="panel-heading bg-mami-green1">
+                    <h4 class="panel-title">
+                        <input type="checkbox" class="items" /> Additional Foreign ID
+                    </h4>
+                </div>
+                
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <?php
+                            echo $this->element('Customers/additional_foreign_id');
+                        ?>
+                    </div>
+                </div>
 
-            <li role="presentation">
-                <a href="#extra_info" aria-controls="extra_info" role="tab" data-toggle="tab">
-                    Extra Information
-                </a>
-            </li>
+            </div>
+            
+            <div class="panel panel-success">
+            
+                <div class="panel-heading bg-mami-green1">
+                    <h4 class="panel-title">
+                        <input type="checkbox" class="items" /> Extra Information
+                    </h4>
+                </div>
+                
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <?php
+                            echo $this->element('Customers/extra_info');
+                        ?>
+                    </div>
+                </div>
 
-            <li role="presentation">
-                <a href="#default_bank_account" aria-controls="default_bank_account" role="tab" data-toggle="tab">
-                    Default Bank Account
-                </a>
-            </li>
+            </div>
+            
+            <div class="panel panel-success">
+            
+                <div class="panel-heading bg-mami-green1">
+                    <h4 class="panel-title">
+                        <input type="checkbox" class="items" /> Default Bank Account
+                    </h4>
+                </div>
+                
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <?php
+                            echo $this->element('Customers/default_bank_account');
+                        ?>
+                    </div>
+                </div>
 
-            <li role="presentation">
-                <a href="#fatca" aria-controls="fatca" role="tab" data-toggle="tab">
-                    FATCA
-                </a>
-            </li>
+            </div>
+            
+            <div class="panel panel-success">
+            
+                <div class="panel-heading bg-mami-green1">
+                    <h4 class="panel-title">
+                        <input type="checkbox" class="items" /> FATCA
+                    </h4>
+                </div>
+                
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <?php
+                            echo $this->element('Customers/fatca');
+                        ?>
+                    </div>
+                </div>
 
-        </ul>
-
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="base">
-                <?php
-                echo $this->element('Customers/base');
-                ?>
             </div>
 
-            <div role="tabpanel" class="tab-pane" id="income_information">
-                <?php
-                echo $this->element('Customers/income_information');
-                ?>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="spouse_information">
-                <?php
-                echo $this->element('Customers/spouse_information');
-                ?>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="investment_information">
-                <?php
-                echo $this->element('Customers/investment_information');
-                ?>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="permanent_residential_address">
-                <?php
-                echo $this->element('Customers/permanent_residential_address');
-                ?>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="default_email_address">
-                <?php
-                echo $this->element('Customers/default_email_address');
-                ?>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="company_information">
-                <?php
-                echo $this->element('Customers/company_information');
-                ?>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="additional_foreign_id">
-                <?php
-                echo $this->element('Customers/additional_foreign_id');
-                ?>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="extra_info">
-                <?php
-                echo $this->element('Customers/extra_info');
-                ?>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="default_bank_account">
-                <?php
-                echo $this->element('Customers/default_bank_account');
-                ?>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="fatca">
-                <?php
-                echo $this->element('Customers/fatca');
-                ?>
-            </div>
         </div>
-
+        
         <!-- // END TAB NAVIGATION -->
 
         <div class="form-group" style="border: none; margin-left: 1%;">
@@ -207,6 +274,7 @@ echo $this->Html->css(
 echo $this->Html->script(
     array(
         '/bootstrap/js/tab.js',
+        '/plugins/moment.js',
         '/plugins/daterangepicker/daterangepicker.js',
         '/plugins/parsley/parsley.min.js',
         'app/customers/customers_add'

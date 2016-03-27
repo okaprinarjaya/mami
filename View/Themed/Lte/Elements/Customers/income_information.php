@@ -24,8 +24,6 @@
             ));
             ?>
         </td>
-
-        <td>&nbsp;</td>
     </tr>
 
     <tr>
@@ -53,8 +51,6 @@
             ));
             ?>
         </td>
-
-        <td>&nbsp;</td>
     </tr>
 
     <tr>
@@ -82,8 +78,6 @@
             ));
             ?>
         </td>
-
-        <td>&nbsp;</td>
     </tr>
 
     <tr>
@@ -100,7 +94,6 @@
             ?>
         </td>
 
-        <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
     </tr>

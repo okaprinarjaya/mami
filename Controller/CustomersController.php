@@ -10,6 +10,7 @@ class CustomersController extends AppController {
         'Country' ,
         'Bank' ,
         'Customer' ,
+        'OwnerOccupation'
     );
 
     public function beforeRender()
@@ -56,7 +57,7 @@ class CustomersController extends AppController {
             } else {
                 $this->Session->setFlash('There is an error', 'Flash/error');
             }
-        }
+        }  
 
         $this->getTabDataForm();
     }
@@ -74,6 +75,26 @@ class CustomersController extends AppController {
 
         $customer = $this->Customer->find('first', array(
             'conditions' => array('Customer.CUSTOMER_ID' => $cid)
+        ));
+        
+        $bank = $this->Bank->find('first', array(
+            'conditions' => array('Bank.BANK_BRANCH_NM' => $customer['Customer']['BRANCH_NAME'])
+        ));
+        
+        $bank_code = array();
+        if(!empty($bank))
+        {
+            $customer['Customer']['BANK_CD_MAPP'] = $bank['Bank']['BANK_CD_MAPP'];
+            $listCodeBank =  $this->Bank->getBankCode($bank['Bank']['BANK_CD_MAPP']);
+            $bank_code = Hash::combine(
+                $listCodeBank,
+                '{n}.Bank.BANK_ID',
+                '{n}.Bank.BANK_BRANCH_NM'
+            );
+        }
+        
+        $this->set(compact(
+            'bank_code'
         ));
         
         $this->getTabDataForm();
@@ -98,25 +119,33 @@ class CustomersController extends AppController {
             '{n}.TtaFieldValues.FLD_VALU_DESC'
         );
         
-        $status = array(
-            'A' => 'Active' , 
-            'N' => 'Not Active' , 
-        );
-         
-        $sex = array(
-            'M' => 'Male' ,
-            'F' => 'Female' ,
+        $status_fetch = $this->TtaFieldValues->getStatus();
+        $status = Hash::combine(
+            $status_fetch,
+            '{n}.TtaFieldValues.FLD_VALU',
+            '{n}.TtaFieldValues.FLD_VALU_DESC'
         );
         
-        $nationality = array(
-            '1' => 'WNI' ,
-            '2' => 'WNA' ,
+        $sex_fetch = $this->TtaFieldValues->getGender();
+        $sex = Hash::combine(
+            $sex_fetch,
+            '{n}.TtaFieldValues.FLD_VALU',
+            '{n}.TtaFieldValues.FLD_VALU_DESC'
         );
         
-        $id_type = array(
-            '1' => 'ID Type 1' ,
-            '2' => 'ID Type 2' ,
-            '3' => 'ID Type 3' ,
+        $nationality_fetch = $this->TtaFieldValues->getNation();
+        $nationality = Hash::combine(
+            $nationality_fetch,
+            '{n}.TtaFieldValues.FLD_VALU',
+            '{n}.TtaFieldValues.FLD_VALU_DESC'
+        );
+        
+        
+        $id_type_fetch = $this->TtaFieldValues->getIdType();
+        $id_type = Hash::combine(
+            $id_type_fetch,
+            '{n}.TtaFieldValues.FLD_VALU',
+            '{n}.TtaFieldValues.FLD_VALU_DESC'
         );
         
         $country = $this->Country->getCountry();
@@ -156,10 +185,11 @@ class CustomersController extends AppController {
             '3' => 'office Type 3' ,
         );
         
-        $marital_status = array(
-            'S' => 'Single' ,
-            'M' => 'Married' ,
-            'D' => 'Divorce' ,
+        $marital_status_fetch = $this->TtaFieldValues->getMaritalStatus();
+        $marital_status = Hash::combine(
+            $marital_status_fetch,
+            '{n}.TtaFieldValues.FLD_VALU',
+            '{n}.TtaFieldValues.FLD_VALU_DESC'
         );
         
         $religion = $this->TtaFieldValues->getReligion();
@@ -194,22 +224,25 @@ class CustomersController extends AppController {
         ));
         
         //tab income information
-        $occupation_type = array(
-            '1' => 'Occupation Type 1',
-            '2' => 'Occupation Type 2',
-            '3' => 'Occupation Type 3'
+        $occupation_type_fetch = $this->TtaFieldValues->getOccupation();
+        $occupation_type = Hash::combine(
+            $occupation_type_fetch,
+            '{n}.TtaFieldValues.FLD_VALU',
+            '{n}.TtaFieldValues.FLD_VALU_DESC'
         );
         
-        $owner_occupation = array(
-            '1' => 'Owner Occupation Type 1',
-            '2' => 'Owner Occupation Type 2',
-            '3' => 'Owner Occupation Type 3'
+        $owner_occupation_type_fetch = $this->OwnerOccupation->getOwnerOccupation();
+        $owner_occupation = Hash::combine(
+            $owner_occupation_type_fetch,
+            '{n}.OwnerOccupation.id',
+            '{n}.OwnerOccupation.OCCP_NM'
         );
         
-        $annual_income = array(
-            '1' => 'Annual Income Type 1',
-            '2' => 'Annual Income Type 2',
-            '3' => 'Annual Income Type 3'
+        $annual_income_fetch = $this->TtaFieldValues->getAnnualIncome();
+        $annual_income = Hash::combine(
+            $annual_income_fetch,
+            '{n}.TtaFieldValues.FLD_VALU',
+            '{n}.TtaFieldValues.FLD_VALU_DESC'
         );
         
         $this->set(compact(
@@ -220,34 +253,40 @@ class CustomersController extends AppController {
         
         
         //tab spouse information
-        $spouse_type = array(
-            '1' => 'Spouse Type 1',
-            '2' => 'Spouse Type 2',
-            '3' => 'Spouse Type 3'
+        $spouse_type_fetch = $this->TtaFieldValues->getSpouseType();
+        $spouse_type = Hash::combine(
+            $spouse_type_fetch,
+            '{n}.TtaFieldValues.FLD_VALU',
+            '{n}.TtaFieldValues.FLD_VALU_DESC'
         );
         
-        $spouse_occupation = array(
-            '1' => 'Spouse Occupation Type 1',
-            '2' => 'Spouse Occupation Type 2',
-            '3' => 'Spouse Occupation Type 3'
+        
+        $spouse_occupation = Hash::combine(
+            $occupation_type_fetch,
+            '{n}.TtaFieldValues.FLD_VALU',
+            '{n}.TtaFieldValues.FLD_VALU_DESC'
         );
+        
         $this->set(compact(
             'spouse_type',
             'spouse_occupation'
         ));
         
         //tab invesment information
-        $source_of_fund = array(
-            '1' => 'Source Type 1',
-            '2' => 'Source Type 2',
-            '3' => 'Source Type 3'
+        $source_of_fund_fetch = $this->TtaFieldValues->getSourceFund();
+        $source_of_fund = Hash::combine(
+            $source_of_fund_fetch,
+            '{n}.TtaFieldValues.FLD_VALU',
+            '{n}.TtaFieldValues.FLD_VALU_DESC'
         );
         
-        $red_flag = array(
-            '1' => 'Red Flag Type 1',
-            '2' => 'Red Flag Type 2',
-            '3' => 'Red Flag Type 3'
+        $red_flag_fetch = $this->TtaFieldValues->getRedFlag();
+        $red_flag = Hash::combine(
+            $red_flag_fetch,
+            '{n}.TtaFieldValues.FLD_VALU',
+            '{n}.TtaFieldValues.FLD_VALU_DESC'
         );
+        
         $this->set(compact(
             'source_of_fund',
             'red_flag'
@@ -265,18 +304,28 @@ class CustomersController extends AppController {
         ));
         
         //tabFATCA
-        $owner_facta_status = array(
-            '1' => 'facta Type 1',
-            '2' => 'facta Type 2',
-            '3' => 'facta Type 3'
+        $owner_facta_status_fetch = $this->TtaFieldValues->getFactaStatus();
+        $owner_facta_status = Hash::combine(
+            $owner_facta_status_fetch,
+            '{n}.TtaFieldValues.FLD_VALU',
+            '{n}.TtaFieldValues.FLD_VALU_DESC'
         );
         
-        $privacy_waifer = array(
-            '1' => 'waifer Type 1',
-            '2' => 'waifer Type 2',
-            '3' => 'waifer Type 3'
+        
+        $privacy_waifer_fetch = $this->TtaFieldValues->getWaifer();
+        $privacy_waifer = Hash::combine(
+            $privacy_waifer_fetch,
+            '{n}.TtaFieldValues.FLD_VALU',
+            '{n}.TtaFieldValues.FLD_VALU_DESC'
         );
         
+        
+        $self_certification_fetch = $this->TtaFieldValues->getSelfCert();
+        $self_certification = Hash::combine(
+            $self_certification_fetch,
+            '{n}.TtaFieldValues.FLD_VALU',
+            '{n}.TtaFieldValues.FLD_VALU_DESC'
+        );
         $self_certification = array(
             '1' => 'self Type 1',
             '2' => 'self Type 2',
@@ -290,10 +339,11 @@ class CustomersController extends AppController {
             '{n}.TtaFieldValues.FLD_VALU_DESC'
         );
         
-        $w9 = array(
-            '1' => 'w9 Type 1',
-            '2' => 'w9 Type 2',
-            '3' => 'w9 Type 3'
+        $w9 = $this->TtaFieldValues->getW8();
+        $w9 = Hash::combine(
+            $w9,
+            '{n}.TtaFieldValues.FLD_VALU',
+            '{n}.TtaFieldValues.FLD_VALU_DESC'
         );
         
         $entity = $this->TtaFieldValues->getEntity();
