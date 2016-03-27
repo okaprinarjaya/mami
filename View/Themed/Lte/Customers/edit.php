@@ -33,7 +33,7 @@
             
                 <div class="panel-heading bg-mami-green1">
                     <h4 class="panel-title">
-                        <input type="checkbox" class="items" checked> Base Information
+                        Base Information
                     </h4>
                 </div>
                 
