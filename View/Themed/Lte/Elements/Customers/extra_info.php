@@ -7,7 +7,8 @@
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm' ,
+                'id' => 'renewal'
             ));
             ?>
         </td>
