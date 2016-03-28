@@ -1,10 +1,11 @@
 <table class="table table-condensed table-striped form-custom-hack">
     <tr>
-        <td class="hack-col-label">Occupation Type</td>
-        <td>
+        <td class="hack-col-label hack-label-width">Occupation Type</td>
+        <td class="hack-input-width">
             <?php
             echo $this->Form->input('OCCP_TYP', array(
-                'type' => 'text',
+                'options' => $occupation_type ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -12,8 +13,8 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Job Title</td>
-        <td>
+        <td class="hack-col-label hack-label-width">Job Title</td>
+        <td class="hack-input-width">
             <?php
             echo $this->Form->input('OCCP_DESC', array(
                 'type' => 'text',
@@ -23,8 +24,6 @@
             ));
             ?>
         </td>
-
-        <td>&nbsp;</td>
     </tr>
 
     <tr>
@@ -32,7 +31,8 @@
         <td>
             <?php
             echo $this->Form->input('BUS_NATURE', array(
-                'type' => 'text',
+                'options' => $owner_occupation ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -51,8 +51,6 @@
             ));
             ?>
         </td>
-
-        <td>&nbsp;</td>
     </tr>
 
     <tr>
@@ -75,12 +73,11 @@
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
+                'id' => 'tax' ,
                 'class' => 'form-control input-sm'
             ));
             ?>
         </td>
-
-        <td>&nbsp;</td>
     </tr>
 
     <tr>
@@ -88,7 +85,8 @@
         <td>
             <?php
             echo $this->Form->input('ANNUAL_INCOME', array(
-                'type' => 'text',
+                'options' => $annual_income ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -96,7 +94,6 @@
             ?>
         </td>
 
-        <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
     </tr>

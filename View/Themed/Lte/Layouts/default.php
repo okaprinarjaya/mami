@@ -15,9 +15,11 @@
         '/bootstrap/css/bootstrap.min.css',
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
         'AdminLTE.min',
-        'skins/skin-green.min',
+        'skin-mami',
         'app'
     ));
+
+    echo $this->fetch('css');
     ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -29,7 +31,7 @@
 
 </head>
 
-<body class="hold-transition skin-green layout-top-nav">
+<body class="hold-transition skin-mami layout-top-nav">
 
     <div class="wrapper">
         
@@ -38,7 +40,10 @@
                 <div class="container">
                     
                     <div class="navbar-header">
-                        <a href="../../index2.html" class="navbar-brand">MAMI</a>
+                        <a href="<?php echo Router::url('/').'customers'; ?>" class="navbar-brand">
+                            <?php echo $this->Html->image('logo.png'); ?>
+                        </a>
+
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                             <i class="fa fa-bars"></i>
                         </button>
@@ -47,9 +52,63 @@
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         
                         <ul class="nav navbar-nav">
-                            <li class="active">
-                                <a href="#"><i class="fa fa-users"></i> &nbsp; Customers <span class="sr-only">(current)</span></a>
+                            <li>
+                                <?php
+                                echo $this->Html->link(
+                                    '<i class="fa fa-users"></i> &nbsp; Customers',
+                                    array('controller' => 'customers', 'action' => 'index'),
+                                    array('escape' => false)
+                                );
+                                ?>
                             </li>
+
+                            <li>
+                                <?php
+                                echo $this->Html->link(
+                                    '<i class="fa fa-ticket"></i> &nbsp; Tickets',
+                                    array('controller' => 'tickets', 'action' => 'index'),
+                                    array('escape' => false)
+                                );
+                                ?>
+                            </li>
+
+                            <?php
+                            if (AuthComponent::user('role') == 'administrator'):
+                            ?>
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-wrench"></span> &nbsp; 
+                                    Settings <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <?php
+                                        echo $this->Html->link(
+                                            '<span class="glyphicon glyphicon-user"></span> &nbsp; Users',
+                                            array('controller' => 'users', 'action' => 'index'),
+                                            array('escape' => false)
+                                        );
+                                        ?>
+                                    </li>
+
+                                    <li>
+                                        <?php
+                                        echo $this->Html->link(
+                                            '<span class="glyphicon glyphicon-th-large"></span> &nbsp; Departments',
+                                            array('controller' => 'departments', 'action' => 'index'),
+                                            array('escape' => false)
+                                        );
+                                        ?>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <?php
+                            endif;
+                            ?>
+
                         </ul>
 
                     </div>
@@ -60,15 +119,16 @@
                         <ul class="nav navbar-nav">
                             
                             <li class="dropdown user user-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                                     <span class="hidden-xs">
-                                        <span class="glyphicon glyphicon-user"></span> &nbsp; Alexander Pierce
+                                        <span class="glyphicon glyphicon-user"></span> &nbsp; 
+                                        <?php echo AuthComponent::user('complete_name'); ?>
                                     </span>
                                 </a>
                             </li>
 
                             <li class="dropdown user user-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="<?php echo Router::url('/').'users/logout'; ?>">
                                     <span class="hidden-xs">
                                         <span class="glyphicon glyphicon-off"></span> &nbsp; Logout
                                     </span>
@@ -88,8 +148,13 @@
                 
                 <section class="content-header">
                     <h1>
-                        <?php echo $__module_title__; ?> 
-                        <small><?php echo $__action_title__; ?></small>
+                        <?php
+                        if (isset($__module_title__)):
+                            echo $__module_title__;
+                        else:
+                            echo "Untitled";
+                        endif;
+                        ?> 
                     </h1>
                 </section>
 
@@ -100,6 +165,9 @@
                         
                         <!-- START -->
                         <?php
+                        echo $this->Session->flash('flash');
+                        echo $this->Session->flash('auth');
+
                         echo $this->fetch('content');
                         ?>
                         <!-- END -->
@@ -113,6 +181,13 @@
         </div>
 
     </div>
+
+<script type="text/javascript">
+<?php
+echo 'var __base_url = "'.Router::url('/').'";';
+echo "\n";
+?>
+</script>
 
 <?php
 echo $this->Html->script(array(

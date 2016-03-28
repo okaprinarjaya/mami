@@ -1,10 +1,11 @@
 <table class="table table-condensed table-striped form-custom-hack">
     <tr>
-        <td class="hack-col-label">Owner FATCA Status</td>
-        <td>
+        <td class="hack-col-label hack-label-width">Owner FATCA Status</td>
+        <td class="hack-input-width">
             <?php
             echo $this->Form->input('CLI_FATCA_STAT', array(
-                'type' => 'text',
+                'options' => $owner_facta_status ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -12,8 +13,8 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Override</td>
-        <td>
+        <td class="hack-col-label hack-label-width">Override</td>
+        <td class="hack-input-width">
             <?php
             echo $this->Form->input('CLI_FATCA_STAT_OVR', array(
                 'type' => 'text',
@@ -32,7 +33,8 @@
         <td>
             <?php
             echo $this->Form->input('PRI_WAIVER', array(
-                'type' => 'text',
+                'options' => $privacy_waifer ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -60,7 +62,8 @@
         <td>
             <?php
             echo $this->Form->input('FATCA_SELF_CERT', array(
-                'type' => 'text',
+                'options' => $self_certification ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -88,7 +91,8 @@
         <td>
             <?php
             echo $this->Form->input('W8_FORM', array(
-                'type' => 'text',
+                'options' => $w8 ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -116,7 +120,8 @@
         <td>
             <?php
             echo $this->Form->input('W9_FORM', array(
-                'type' => 'text',
+                'options' => $w9 ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -128,7 +133,8 @@
         <td>
             <?php
             echo $this->Form->input('ENTITY_TYP', array(
-                'type' => 'text',
+                'options' => $entity ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'

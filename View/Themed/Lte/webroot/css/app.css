@@ -1,9 +1,19 @@
 .form-custom-hack td {
     font-weight: bold;
+    font-size: 0.9em;
+    vertical-align: middle;
 }
 
 .hack-col-label {
     text-align: right;
+}
+
+.hack-label-width {
+  width: 18%;
+}
+
+.hack-input-width {
+  width: 32%;
 }
 
 /* --- GRID --- */
@@ -19,7 +29,7 @@
 
 .table-default-filter {
   background: #ffffff;
-  border-top: 2px solid #00A65A;
+  border-top: 2px solid #776F65;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;

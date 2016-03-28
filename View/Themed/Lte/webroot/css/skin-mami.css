@@ -1,0 +1,179 @@
+/*
+ * Special skin for MAMI
+ * -----------
+ */
+/* Pantone 5467 */
+/* Pantone 369 */
+/* Pantone 451 */
+/* Pantone 440 */
+/* Pantone 404 */
+/* Pantone 415 */
+/* Pantone CoolGray6 */
+/* Pantone 5615 */
+/* Pantone 5635 */
+/* Pantone 5646 */
+/* Pantone 5527 */
+.skin-mami .main-header .navbar {
+  background-color: #fff;
+}
+.skin-mami .main-header .navbar-nav > li > a {
+  padding: 20px;
+}
+.skin-mami .main-header .navbar-brand {
+  background: #fff;
+  min-height: 60px;
+}
+.skin-mami .main-header .navbar-brand > img {
+  height: 100%;
+  width: auto;
+}
+.skin-mami .main-header .navbar-toggle {
+  color: #00693c;
+}
+.skin-mami .main-header .navbar .nav > li > a {
+  color: #00693c;
+}
+.skin-mami .main-header .navbar .nav > li > a:hover,
+.skin-mami .main-header .navbar .nav > li > a:active,
+.skin-mami .main-header .navbar .nav > li > a:focus,
+.skin-mami .main-header .navbar .nav .open > a,
+.skin-mami .main-header .navbar .nav .open > a:hover,
+.skin-mami .main-header .navbar .nav .open > a:focus,
+.skin-mami .main-header .navbar .nav > .active > a {
+  background: #c9d4d0;
+  color: #1c3632;
+}
+.skin-mami .main-header .navbar .sidebar-toggle {
+  color: #00693c;
+}
+.skin-mami .main-header .navbar .sidebar-toggle:hover {
+  color: #1c3632;
+  background: #c9d4d0;
+}
+.skin-mami .main-header .navbar .sidebar-toggle {
+  color: #00693c;
+}
+.skin-mami .main-header .navbar .sidebar-toggle:hover {
+  color: #1c3632;
+  background-color: #008d4c;
+}
+@media (max-width: 767px) {
+  .skin-mami .main-header .navbar .dropdown-menu li.divider {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  .skin-mami .main-header .navbar .dropdown-menu li a {
+    color: #00693c;
+  }
+}
+.skin-mami .main-header .logo {
+  background-color: #00a65a;
+  color: #fff;
+  border-bottom: 0 solid transparent;
+}
+.skin-mami .main-header .logo:hover {
+  background-color: #00a157;
+}
+.skin-mami .main-header li.user-header {
+  background-color: #00a65a;
+}
+.skin-mami .content-header {
+  background: transparent;
+}
+.skin-mami .wrapper,
+.skin-mami .main-sidebar,
+.skin-mami .left-side {
+  background-color: #f9fafc;
+}
+.skin-mami .content-wrapper,
+.skin-mami .main-footer {
+  border-left: 1px solid #d2d6de;
+}
+.skin-mami .user-panel > .info,
+.skin-mami .user-panel > .info > a {
+  color: #444;
+}
+.skin-mami .sidebar-menu > li {
+  -webkit-transition: border-left-color 0.3s ease;
+  -o-transition: border-left-color 0.3s ease;
+  transition: border-left-color 0.3s ease;
+}
+.skin-mami .sidebar-menu > li.header {
+  color: #848484;
+  background: #f9fafc;
+}
+.skin-mami .sidebar-menu > li > a {
+  border-left: 3px solid transparent;
+  font-weight: 600;
+}
+.skin-mami .sidebar-menu > li:hover > a,
+.skin-mami .sidebar-menu > li.active > a {
+  color: #000;
+  background: #f4f4f5;
+}
+.skin-mami .sidebar-menu > li.active {
+  border-left-color: #00a65a;
+}
+.skin-mami .sidebar-menu > li.active > a {
+  font-weight: 600;
+}
+.skin-mami .sidebar-menu > li > .treeview-menu {
+  background: #f4f4f5;
+}
+.skin-mami .sidebar a {
+  color: #444;
+}
+.skin-mami .sidebar a:hover {
+  text-decoration: none;
+}
+.skin-mami .treeview-menu > li > a {
+  color: #777;
+}
+.skin-mami .treeview-menu > li.active > a,
+.skin-mami .treeview-menu > li > a:hover {
+  color: #000;
+}
+.skin-mami .treeview-menu > li.active > a {
+  font-weight: 600;
+}
+.skin-mami .sidebar-form {
+  border-radius: 3px;
+  border: 1px solid #d2d6de;
+  margin: 10px 10px;
+}
+.skin-mami .sidebar-form input[type="text"],
+.skin-mami .sidebar-form .btn {
+  box-shadow: none;
+  background-color: #fff;
+  border: 1px solid transparent;
+  height: 35px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.skin-mami .sidebar-form input[type="text"] {
+  color: #666;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 2px;
+}
+.skin-mami .sidebar-form input[type="text"]:focus,
+.skin-mami .sidebar-form input[type="text"]:focus + .input-group-btn .btn {
+  background-color: #fff;
+  color: #666;
+}
+.skin-mami .sidebar-form input[type="text"]:focus + .input-group-btn .btn {
+  border-left-color: #fff;
+}
+.skin-mami .sidebar-form .btn {
+  color: #999;
+  border-top-left-radius: 0;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 0;
+}
+@media (min-width: 768px) {
+  .skin-mami.sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu {
+    border-left: 1px solid #d2d6de;
+  }
+}

@@ -1,7 +1,7 @@
 <table class="table table-condensed table-striped form-custom-hack">
     <tr>
-        <td class="hack-col-label">Spouse Name</td>
-        <td>
+        <td class="hack-col-label hack-label-width">Spouse Name</td>
+        <td class="hack-input-width">
             <?php
             echo $this->Form->input('SPOUSE_NM', array(
                 'type' => 'text',
@@ -12,11 +12,12 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Spouse Occupation</td>
-        <td>
+        <td class="hack-col-label hack-label-width">Spouse Occupation</td>
+        <td class="hack-input-width">
             <?php
             echo $this->Form->input('SPOUSE_OCCP_CODE', array(
-                'type' => 'text',
+                'options' => $spouse_occupation ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -32,7 +33,8 @@
         <td>
             <?php
             echo $this->Form->input('SPOUSE_ID_TYP', array(
-                'type' => 'text',
+                'options' => $spouse_type ,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -48,7 +50,7 @@
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
-            ));
+            )); 
             ?>
         </td>
 
