@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50531
 File Encoding         : 65001
 
-Date: 2016-03-28 03:43:17
+Date: 2016-03-30 11:00:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -106,11 +106,12 @@ CREATE TABLE `customers` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`CUSTOMER_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of customers
 -- ----------------------------
+INSERT INTO `customers` VALUES ('1', '', '', '1', '001', null, '', '', 'Bung', 'Jonny', 'M', '', null, '', null, '', null, '', '', '', '', '', '', null, '', '08174128301', '08174128301', '08174128301', '', '08174128301', 'bungjonny@yahoo.com', null, '', null, '', '', '', '', '', null, null, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1', null, '', '', '', '', '', '2016-03-30 03:35:00', '2016-03-30 03:35:00');
 
 -- ----------------------------
 -- Table structure for `departments`
@@ -120,12 +121,12 @@ CREATE TABLE `departments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `department_name` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of departments
 -- ----------------------------
-INSERT INTO `departments` VALUES ('1', 'MAMI Backend');
+INSERT INTO `departments` VALUES ('1', 'CS MAMI');
 INSERT INTO `departments` VALUES ('2', 'Other Other Department');
 
 -- ----------------------------
@@ -456,57 +457,143 @@ CREATE TABLE `tams_agents` (
   `AGT_NM` varchar(32) DEFAULT NULL,
   `STAT_CD` varchar(4) DEFAULT NULL,
   `AGT_TYP` varchar(4) DEFAULT NULL,
-  `BR_CODE` varchar(8) DEFAULT NULL,
-  PRIMARY KEY (`AGT_CODE`)
+  `BR_CODE` varchar(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tams_agents
 -- ----------------------------
-INSERT INTO `tams_agents` VALUES ('9A0001', 'Vacant', '01', 'A', 'BR000');
-INSERT INTO `tams_agents` VALUES ('9A0003', 'Maureen+Firdaus', '01', 'A', '');
-INSERT INTO `tams_agents` VALUES ('9A0004', 'Maulana+Yusuf', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1041', 'Muhammad+Rudy+Basuki', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1042', 'Sthephanie+Chandra', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1043', 'Cipta+Indra+Rukmana', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1044', 'Andika+Santoso', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1045', 'Graeni+Hayuningrum', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1046', 'Vina+Novia', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1047', 'Surya+Hadinata', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1048', 'Dolly+Roesli', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1049', 'Jeny', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1050', 'Fenny+Setiawati', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1051', 'SANTIKA+SETYANINGTYAS', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1052', 'Adie+Ardhiawan', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1053', 'Dicky+Samantha+Hadi', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1054', 'Maryadi', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1055', 'Widiana', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1056', 'Gita+Restu+Pratiwi', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1057', 'Gilang+Dulamar+Yunanto', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1059', 'Anggarini+Dwitya+Saraswati', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1060', 'Hans+Surya+Lesmana', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1061', 'Riza+Murcahyo', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1062', 'Nurning+Widya+Hastuti', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1063', 'Sandra+Wanti++Nurdini', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1064', 'Michael+', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1065', 'Citra+Ratnasari+Tairas', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1066', 'Yudhi+Aldisa', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1067', 'Anisa+Busroh', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1068', 'CYNTHIA+ANGELIA', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1069', 'CHRISTINA+MEKARSARI', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1070', 'MULYADNATA', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1071', 'EDDY+FEBRIANTO+ARIFIN', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1072', 'RAZI+FIRMANSYAH', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1073', 'SHANDI+SETIA+SEJATI', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1074', 'FRANCIS+MARGARITA', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1075', 'TRIAS+KEMIRAY', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1068', 'CYNTHIA ANGELIA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1073', 'SHANDI SETIA SEJATI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1074', 'FRANCIS MARGARITA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1075', 'TRIAS KEMIRAY', '01', 'A', 'BR001');
 INSERT INTO `tams_agents` VALUES ('9A1076', 'MARYONO', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1077', 'CAROLINE+SANTOSO+WIBOWO', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1078', 'PERNANDO+BUDIMAN', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1079', 'ILHAM+MUHARAM+MUHAMAD', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1080', 'LUKY+MARENDA', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1081', 'DIAH+RETNO+PUSPIKASARI', '01', 'A', 'BR001');
-INSERT INTO `tams_agents` VALUES ('9A1082', 'RIDHO+FREZA+LATONDA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1078', 'PERNANDO BUDIMAN', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1081', 'DIAH RETNO PUSPIKASARI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1041', 'MUHAMMAD RUDY BASUKI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1042', 'STHEPHANIE CHANDRA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1043', 'CIPTA INDRA RUKMANA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1044', 'ANDIKA SANTOSO', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1045', 'GRAENI HAYUNINGRUM', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1046', 'VINA NOVIA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1047', 'SURYA HADINATA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1048', 'DOLLY ROESLI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1049', 'JENY', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1050', 'FENNY SETIAWATI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1051', 'SANTIKA SETYANINGTYAS', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1052', 'ADIE ARDHIAWAN', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1053', 'DICKY SAMANTHA HADI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1054', 'MARYADI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1055', 'WIDIANA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1056', 'GITA RESTU PRATIWI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1057', 'GILANG DULAMAR YUNANTO', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1059', 'ANGGARINI DWITYA SARASWATI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1060', 'HANS SURYA LESMANA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1061', 'RIZA MURCAHYO', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1062', 'NURNING WIDYA HASTUTI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1063', 'SANDRA WANTI NURDINI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1064', 'MICHAEL ', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1065', 'CITRA RATNASARI TAIRAS', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1066', 'YUDHI ALDISA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1067', 'ANISA BUSROH', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A0003', 'MAUREEN FIRDAUS', '01', 'A', '');
+INSERT INTO `tams_agents` VALUES ('9A0001', 'VACANT', '01', 'A', 'BR000');
+INSERT INTO `tams_agents` VALUES ('9A0004', 'MAULANA YUSUF', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1070', 'MULYADNATA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1071', 'EDDY FEBRIANTO ARIFIN', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1072', 'RAZI FIRMANSYAH', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1077', 'CAROLINE SANTOSO WIBOWO', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1082', 'RIDHO FREZA LATONDA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1069', 'CHRISTINA MEKARSARI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1080', 'LUKY MARENDA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1079', 'ILHAM MUHARAM MUHAMAD', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1063', 'SANDRA WANTI NURDINI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1032', 'FERNANDA SURYADI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1021', 'POPI PUSPITA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1028', 'FENDY YOHAN', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1007', 'REZA HERMAWAN', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1003', 'YULIA ANGGIARINI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1006', 'SOFIA SUPANDI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1039', 'DIAN ERLIANA SARI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1004', 'VERONICA BUDIHARDJA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1001', 'ERLINA TRISTIANTI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1002', 'JULIA PUSPITA DEWI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1038', 'NURUL FITRI AMALIA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1041', 'MUHAMMAD RUDY BASUKI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1040', 'ROSITA WIRAWAN', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1005', 'GANESHA WAHYU TIRTO', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1013', 'PUTRI KUSBRAMAYANTI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1011', 'TANTRI CHANDRA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1016', 'ADE RAKMAT SURYANTO', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A0002', 'MYRNA SUKIRNO', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1020', 'EKO PUJI SISWANTO WIRYADIKRAMA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1008', 'LASMI NINGRUM', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1009', 'ANGGIE BIANKA PARAMEITHA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1014', 'YOHANI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1015', 'SAFITRI LARASATI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1025', 'AGUS KURNIAWAN', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1027', 'ODI HARDIANNANDA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1026', 'STANLEY PEDDIJANTO', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1034', 'ROSSA ERES VONINDA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1018', 'SYARIF PUTRA SATRIA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1022', 'LEO RAMADONA AKBAR', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1023', 'RONY IRAWAN SUTANTO', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1033', 'ENY TRI WAHYUNI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1019', 'RICKY HARRIS FADHILA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1010', 'NYOMAN BAYU WIYONO', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1012', 'ANDIKA KUSUMA AJI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1031', 'HENDRA SURYADI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1029', 'SOFIYANI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1030', 'CEASARINI FELICIA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1017', 'VANIA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1036', 'ANDHIKA HEZAN', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1042', 'STHEPHANIE CHANDRA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1001', 'ERLINA TRISTIANTI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1002', 'JULIA PUSPITA DEWI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1003', 'YULIA ANGGIARINI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A0002', 'MYRNA SUKIRNO', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1004', 'VERONICA BUDIHARDJA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1005', 'GANESHA WAHYU TIRTO', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1006', 'SOFIA SUPANDI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1007', 'REZA HERMAWAN', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1008', 'LASMI NINGRUM', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1009', 'ANGGIE BIANKA PARAMEITHA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1010', 'NYOMAN BAYU WIYONO', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1011', 'TANTRI CHANDRA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1012', 'ANDIKA KUSUMA AJI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1013', 'PUTRI KUSBRAMAYANTI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1014', 'YOHANI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1015', 'SAFITRI LARASATI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1016', 'ADE RAKMAT SURYANTO', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1017', 'VANIA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1018', 'SYARIF PUTRA SATRIA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1019', 'RICKY HARRIS FADHILA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1020', 'EKO PUJI SISWANTO WIRYADIKRAMA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1021', 'POPI PUSPITA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1022', 'LEO RAMADONA AKBAR', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1023', 'RONY IRAWAN SUTANTO', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1025', 'AGUS KURNIAWAN', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1026', 'STANLEY PEDDIJANTO', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1027', 'ODI HARDIANNANDA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1028', 'FENDY YOHAN', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1029', 'SOFIYANI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1030', 'CEASARINI FELICIA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1031', 'HENDRA SURYADI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1032', 'FERNANDA SURYADI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1033', 'ENY TRI WAHYUNI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1034', 'ROSSA ERES VONINDA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1026', 'STANLEY PEDDIJANTO', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1036', 'ANDHIKA HEZAN', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1038', 'NURUL FITRI AMALIA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1039', 'DIAN ERLIANA SARI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1040', 'ROSITA WIRAWAN', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1066', 'YUDHI ALDISA', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A1035', 'RATIH PUSPITA DAMAYANTI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('9A0005', 'MICHAEL HANDRY', '01', 'A', '');
+INSERT INTO `tams_agents` VALUES ('9A1058', 'AHMAD BIMO RESPATI', '01', 'A', 'BR001');
+INSERT INTO `tams_agents` VALUES ('900001', 'MAMI', 'A', 'AGT', '');
+INSERT INTO `tams_agents` VALUES ('900023', 'PSI', 'A', 'AGT', '');
+INSERT INTO `tams_agents` VALUES ('900022', 'IPOT', 'A', 'AGT', '');
 
 -- ----------------------------
 -- Table structure for `tickets`
@@ -533,11 +620,13 @@ CREATE TABLE `tickets` (
   `modified` datetime DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tickets
 -- ----------------------------
+INSERT INTO `tickets` VALUES ('1', '1', '2', '16', null, 'MAMI0000001', '1', null, 'C', 'Bung Jonny', 'bungjonny@yahoo.com', '08174128301', 'Test subject subject test', 'E', '7', '2016-03-28', '2016-03-28 03:35:39', '2016-03-28 05:10:32', '1');
+INSERT INTO `tickets` VALUES ('3', '1', '1', '5', '31', 'MAMI0000002', null, null, 'C', 'Bung Jonny', 'bungjonny@yahoo.com', '08174128301', 'Subject test test test', 'W', '7', null, '2016-03-30 05:52:36', '2016-03-30 05:52:36', '7');
 
 -- ----------------------------
 -- Table structure for `ticket_messages`
@@ -547,13 +636,17 @@ CREATE TABLE `ticket_messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ticket_id` int(11) NOT NULL,
   `ticket_message` text NOT NULL,
+  `created_by` int(11) NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ticket_messages
 -- ----------------------------
+INSERT INTO `ticket_messages` VALUES ('1', '1', 'Message ini message ini message message ini message', '1', '2016-03-30 03:35:39');
+INSERT INTO `ticket_messages` VALUES ('2', '1', 'Kami sudah melakukan analisa terhadap data yg dikeluhkan oleh bapak oka yg sangat ganteng dan rupawan itu. \r\n\r\nTernyata, hasilnya adalah memang benar bahwa bapak oka itu ganteng dan baik hati.', '7', '2016-03-30 05:05:09');
+INSERT INTO `ticket_messages` VALUES ('3', '3', 'Message message message message message message', '7', '2016-03-30 05:52:36');
 
 -- ----------------------------
 -- Table structure for `ticket_status`
@@ -9781,10 +9874,13 @@ CREATE TABLE `users` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES ('1', 'vads.admin', '$2a$10$VtkvuIXjLJwXr5BNS6q/TOmoOC.n094MXcv26oMzhpYuCbBVjbDAq', 'administrator', '2', 'vads.admin@vads.co.id', 'Vads Administrator', '2016-03-27 12:49:28', '2016-03-27 15:19:09');
 INSERT INTO `users` VALUES ('4', 'user.agent', '$2a$10$gkn.Wi0PI8Pq04OOhWXz5er0HPTYN13EA76HV1DhzrQ200uZPgigG', 'agent', '2', 'user.agent@vads.co.id', 'User Agent', '2016-03-27 13:31:47', '2016-03-27 15:19:16');
+INSERT INTO `users` VALUES ('5', 'budiana.astawa', '$2a$10$AspfpAk3JEZNsPP1YZZfC.0yu3o1yrFwutwFeGlwTEtDRT3n0j/xW', 'tl', '1', 'Budiana.Astawa@vads.co.id', 'Budiana Astawa', '2016-03-30 04:26:34', '2016-03-30 04:26:34');
+INSERT INTO `users` VALUES ('6', 'yulia.anggiarini', '$2a$10$Pee6nIQxHpACPNL0/5VV0uQEgoXZt6V/k9AqIF2rYKLjzIFu9uU8m', 'administrator', '1', 'Yulia_Anggiarini@manulife.com', 'Yulia Anggiarini', '2016-03-30 04:28:25', '2016-03-30 04:28:25');
+INSERT INTO `users` VALUES ('7', 'lasmi.ningrum', '$2a$10$L7dnTTMLKw10w69rTQMOnOdQNhF3bOFy4.S.FdGj5VpNX3GpUtPN2', 'administrator', '1', 'Lasmi_Ningrum@manulife.com', 'Lasmi Ningrum', '2016-03-30 04:29:02', '2016-03-30 04:29:02');
