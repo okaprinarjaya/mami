@@ -60,6 +60,7 @@ class TicketsController extends AppController {
         $tickets = array();
 
         try {
+            $this->Ticket->recursive = 2;
             $tickets = $this->Paginator->paginate($this->Ticket);
         } catch (NotFoundException $e) {
             $this->redirect('/tickets?'.http_build_query($this->request->query));
@@ -116,6 +117,8 @@ class TicketsController extends AppController {
         if ($this->request->is(array('post', 'put'))) {
             
             $this->request->data['TicketMessage'][0]['ticket_message'] = trim($this->request->data['TicketMessage'][0]['ticket_message']);
+            $this->request->data['TicketMessage'][0]['created_by'] = $this->Auth->user('id');
+
             if (empty($this->request->data['TicketMessage'][0]['ticket_message'])) {
                 unset($this->request->data['TicketMessage']);
             }

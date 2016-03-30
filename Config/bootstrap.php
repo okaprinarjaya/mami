@@ -96,6 +96,7 @@ CakeLog::config('error', array(
 
 Configure::write('roles', array(
     'administrator' => 'Administrator',
+    'tl' => 'TL',
     'agent' => 'Agent'
 ));
 

@@ -1,6 +1,11 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title">Ticket Detail</h4>
+    <h4 class="modal-title">
+        Ticket Detail: 
+        <span style="font-weight: bold;">
+            <?php echo $ticket['Ticket']['ticket_number']; ?>
+        </span>
+    </h4>
 </div>
 
 <?php
@@ -131,9 +136,9 @@ echo $this->Form->input('id', array(
     ?>
 
     <?php
-    echo $this->Form->input('department_id', array(
+    echo $this->Form->input('Foo.department_id', array(
         'type' => 'text',
-        'default' => $ticket['Ticket']['department_id'],
+        'default' => isset($ticket['Department']['department_name']) ? $ticket['Department']['department_name'] : '-',
         'disabled' => 'disabled',
         'div' => 'form-group',
         'label' => array(
@@ -205,14 +210,16 @@ echo $this->Form->input('id', array(
         ),
         'between' => '<div class="col-sm-6">',
         'after' => '</div>',
-        'class' => 'form-control'
+        'class' => 'form-control',
+        'disabled' => $ticket['Ticket']['ticket_status'] == 'C' ? 'disabled' : ''
     ));
 
-    echo $this->Form->input('TicketMessage.0.ticket_id', array(
-        'type' => 'hidden',
-        'default' => $ticket['Ticket']['id']
-    ));
-
+    if ($ticket['Ticket']['ticket_status'] != 'C') {
+        echo $this->Form->input('TicketMessage.0.ticket_id', array(
+            'type' => 'hidden',
+            'default' => $ticket['Ticket']['id']
+        ));
+    }
     ?>
 
     <div class="form-group">
@@ -225,7 +232,11 @@ echo $this->Form->input('id', array(
             <?php
             foreach ($ticket['TicketMessage'] as $item):
                 $msg = nl2br($item['ticket_message']);
-                $msg .= '<br /><span style="font-weight: bold;">'.date('d-m-Y H:i:s', strtotime($item['created'])).'</span>';
+                $msg .= '<br />';
+                $msg .= '<span style="font-weight: bold;">';
+                $msg .= $item['User']['complete_name'].' - ';
+                $msg .= date('d-m-Y H:i:s', strtotime($item['created']));
+                $msg .= '</span>';
                 
                 echo '<p>'.$msg.'<p>';
                 echo '<hr />';
@@ -245,9 +256,10 @@ echo $this->Form->input('id', array(
             'class' => 'col-sm-4 control-label',
             'text' => 'Ticket Status'
         ),
-        'between' => '<div class="col-sm-6">',
+        'between' => '<div class="col-sm-3">',
         'after' => '</div>',
-        'class' => 'form-control'
+        'class' => 'form-control',
+        'disabled' => $ticket['Ticket']['ticket_status'] == 'C' ? 'disabled' : ''
     ));
     ?>
     

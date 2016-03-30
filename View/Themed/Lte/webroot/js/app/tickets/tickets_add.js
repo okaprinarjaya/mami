@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+    $('#TicketAddForm').parsley();
     
     $('#TicketInteractionCode1').on('change', function () {
         var interaction = $('#TicketInteractionCode1 :selected');
@@ -19,6 +21,13 @@ $(document).ready(function () {
             }).always(function (data) {
                 //
             });
+
+            // Disable assign to dept
+            if (interaction.val() == '1' || interaction.val() == '2') {
+                $('#TicketDepartmentId').attr('disabled', true);
+            } else {
+                $('#TicketDepartmentId').attr('disabled', false);
+            }
 
         } else {
             interaction2.html('<option value="" selected="selected">--EMPTY--</option>');

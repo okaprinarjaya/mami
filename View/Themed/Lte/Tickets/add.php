@@ -230,6 +230,7 @@
                     echo $this->Form->input('ticket_status', array(
                         'options' => $ticket_statuses,
                         'empty' => '--CHOOSE--',
+                        'required' => true,
                         'div' => 'form-group',
                         'label' => array(
                             'class' => 'col-sm-4 control-label',
@@ -237,7 +238,7 @@
                         ),
                         'between' => '<div class="col-sm-4">',
                         'after' => '</div>',
-                        'class' => 'form-control'
+                        'class' => 'form-control',
                     ));
                     ?>
 

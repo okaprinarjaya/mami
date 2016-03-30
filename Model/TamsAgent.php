@@ -9,7 +9,9 @@ class TamsAgent extends AppModel {
 
     public function getAGTCodes()
     {
-        return $this->find('all');
+        return $this->find('all', array(
+            'group' => array('TamsAgent.AGT_CODE')
+        ));
     }
 
 }

@@ -84,8 +84,9 @@
                     <th>Customer Name</th>
                     <th>Interaction</th>
                     <th>Interaction Detail</th>
-                    <th>Interaction Sub Detail</th>
                     <th>Due Date</th>
+                    <th>Days</th>
+                    <th>Aging</th>
                     <th>Status</th>
                     <th>Department</th>
                     <th>&nbsp;</th>
@@ -106,7 +107,7 @@
 
                     <td>
                         <?php
-                        echo $item['Ticket']['id'];
+                        echo $item['Ticket']['ticket_number'];
                         ?>
                     </td>
 
@@ -136,13 +137,42 @@
 
                     <td>
                         <?php
-                        echo $item['InteractionLevel3']['interaction_title3'];
+                        echo $item['Ticket']['due_date'];
                         ?>
                     </td>
 
                     <td>
                         <?php
-                        echo $item['Ticket']['due_date'];
+                        $created_date = strtotime($item['Ticket']['created']);
+                        $now = time();
+                        $datediff = $now - $created_date;
+                        $days = floor($datediff / (60 * 60 * 24));
+                        $days_label = 'day';
+
+                        if ($days > 1) {
+                            $days_label = 'days';
+                        }
+
+                        echo $days.' '.$days_label;
+                        ?>
+                    </td>
+
+                    <td>
+                        <?php
+                        if ($item['Ticket']['due_date'] != null):
+                            $now = time();
+                            $due_date = strtotime($item['Ticket']['due_date']);
+                            if ($now > $due_date):
+                                $datediff_aging = $now - $due_date;
+                                $days_aging = floor($datediff_aging / (60 * 60 * 24));
+
+                                echo '+'.$days_aging;
+                            else:
+                                echo '-';
+                            endif;
+                        else:
+                            echo '-';
+                        endif;
                         ?>
                     </td>
 
@@ -154,7 +184,7 @@
 
                     <td>
                         <?php
-                        echo $item['Ticket']['department_id'];
+                        echo isset($item['Department']['department_name']) ? $item['Department']['department_name'] : '-';
                         ?>
                     </td>
 

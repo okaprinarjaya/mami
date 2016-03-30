@@ -263,17 +263,17 @@
 </div>
 
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
 <?php
 echo $this->Html->css(
     array('/plugins/parsley/parsley.css'),
     array('inline' => false)
 );
 ?>
-<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
 <?php
 echo $this->Html->script(
     array(
-        '/bootstrap/js/tab.js',
         '/plugins/moment.js',
         '/plugins/daterangepicker/daterangepicker.js',
         '/plugins/parsley/parsley.min.js',
