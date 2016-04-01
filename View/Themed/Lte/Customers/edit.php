@@ -25,6 +25,8 @@
             'class' => 'form-horizontal',
             'data-parsley-validate' => true ,
         ));
+
+        echo $this->Form->input('CUSTOMER_ID');
         ?>
         <div id="accordion" class="panel-group ">
     

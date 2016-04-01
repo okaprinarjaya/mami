@@ -22,11 +22,19 @@ $(document).ready(function () {
                 //
             });
 
-            // Disable assign to dept
+            
+            // If interaction Inquiry or Follow-up
             if (interaction.val() == '1' || interaction.val() == '2') {
+
+                // Disable assign to dept
                 $('#TicketDepartmentId').attr('disabled', true);
+
+                // Automatically set ticket status to CLOSED status
+                $('#TicketTicketStatus').val('C');
+
             } else {
                 $('#TicketDepartmentId').attr('disabled', false);
+                $('#TicketTicketStatus').val('');
             }
 
         } else {

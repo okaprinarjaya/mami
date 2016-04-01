@@ -14,7 +14,7 @@
         ));
         ?>
         <td/>
-        <td class="hack-col-label hack-label-width">Account Number</td>
+        <td class="hack-col-label hack-label-width">Bank Account Number</td>
         <td class="hack-input-width">
             <?php
             echo $this->Form->input('BANK_ACCT_NUM', array(
@@ -43,7 +43,7 @@
         ?>
         <td/>
 
-        <td class="hack-col-label">Account Name</td>
+        <td class="hack-col-label">Bank Account Name</td>
         <td>
         <?php
         echo $this->Form->input('BANK_ACCT_NM', array(
@@ -59,7 +59,7 @@
     </tr>
 
     <tr>
-        <td class="hack-col-label">Branch</td>
+        <td class="hack-col-label">Branch of Account</td>
         <td id="branch_name">
         <?php
         echo $this->Form->input('BRANCH_NAME', array(

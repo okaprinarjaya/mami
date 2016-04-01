@@ -1,5 +1,5 @@
 <table class="table table-condensed table-striped form-custom-hack">
-    <input type="hidden" name="data[Customer][CUSTOMER_ID]" value="<?php echo isset($this->request->data['Customer']['CUSTOMER_ID']) ? $this->request->data['Customer']['CUSTOMER_ID'] : '';?>">
+
     <tr>
         <td class="hack-col-label hack-label-width">CIF</td>
         <td class="hack-input-width">
@@ -32,17 +32,29 @@
             ?>
         </td>
 
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
-
-    <tr>
-        <td class="hack-col-label">Client Type</td>
+        <td class="hack-col-label">Client Type <span class"required-input" style="color: red;">*</span></td>
         <td>
             <?php
             echo $this->Form->input('CLI_TYP', array(
                 'options' => $client_types,
+                'empty' => '--CHOOSE--',
+                'div' => false,
+                'label' => false,
+                'class' => 'form-control input-sm' ,
+                'required' => true
+            ));
+            ?>
+        </td>
+
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td class="hack-col-label">SID <span class"required-input" style="color: red;">*</span></td>
+        <td>
+            <?php
+            echo $this->Form->input('SID', array(
+                'type' => 'text',
                 'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
@@ -98,7 +110,15 @@
     </tr>
 
     <tr>
-        <td class="hack-col-label">First Name</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td class="hack-col-label">First Name <span class"required-input" style="color: red;">*</span></td>
         <td>
             <?php
             echo $this->Form->input('CLI_NM', array(
@@ -111,7 +131,7 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Middle Name</td>
+        <td class="hack-col-label">Middle Name  <span class"required-input" style="color: red;">*</span></td>
         <td>
             <?php
             echo $this->Form->input('MID_NM', array(
@@ -128,7 +148,7 @@
     </tr>
 
     <tr>
-        <td class="hack-col-label">Sex</td>
+        <td class="hack-col-label">Sex <span class"required-input" style="color: red;">*</span></td>
         <td>
             <?php
             echo $this->Form->input('SEX_CODE', array(
@@ -142,10 +162,10 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Staff Number</td>
+        <td class="hack-col-label">Last Name</td>
         <td>
             <?php
-            echo $this->Form->input('EMPLOYEE_NUM', array(
+            echo $this->Form->input('LAST_NM', array(
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
@@ -171,12 +191,11 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Country</td>
+        <td class="hack-col-label">Staff Number</td>
         <td>
             <?php
-            echo $this->Form->input('COUNTRY_CD', array(
-                'options' => $country,
-                'empty' => '--CHOOSE--',
+            echo $this->Form->input('EMPLOYEE_NUM', array(
+                'type' => 'text',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -201,11 +220,12 @@
             ?>
         </td>
 
-        <td class="hack-col-label">ID Number</td>
+        <td class="hack-col-label">Country</td>
         <td>
             <?php
-            echo $this->Form->input('ID_NUM', array(
-                'type' => 'text',
+            echo $this->Form->input('COUNTRY_CD', array(
+                'options' => $country,
+                'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm'
@@ -230,6 +250,35 @@
             ?>
         </td>
 
+        <td class="hack-col-label">ID Number</td>
+        <td>
+            <?php
+            echo $this->Form->input('ID_NUM', array(
+                'type' => 'text',
+                'div' => false,
+                'label' => false,
+                'class' => 'form-control input-sm'
+            ));
+            ?>
+        </td>
+
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td class="hack-col-label">Country of Place Birth</td>
+        <td>
+            <?php
+            echo $this->Form->input('BIRTH_COUNTRY_CD', array(
+                'options' => $country,
+                'empty' => '--CHOOSE--',
+                'div' => false,
+                'label' => false,
+                'class' => 'form-control input-sm'
+            ));
+            ?>
+        </td>
+
         <td class="hack-col-label">Birth Date</td>
         <td>
             <?php
@@ -247,10 +296,10 @@
     </tr>
 
     <tr>
-        <td class="hack-col-label">Country of Place Birth</td>
+        <td class="hack-col-label">Home Country</td>
         <td>
             <?php
-            echo $this->Form->input('BIRTH_COUNTRY_CD', array(
+            echo $this->Form->input('PRIM_PHON_COUNTRY_CD', array(
                 'options' => $country,
                 'empty' => '--CHOOSE--',
                 'div' => false,
@@ -276,33 +325,10 @@
     </tr>
 
     <tr>
-        <td class="hack-col-label">Home Country</td>
-        <td>
-            <?php
-            echo $this->Form->input('PRIM_PHON_COUNTRY_CD', array(
-                'options' => $country,
-                'empty' => '--CHOOSE--',
-                'div' => false,
-                'label' => false,
-                'class' => 'form-control input-sm'
-            ));
-            ?>
-        </td>
-
-        <td class="hack-col-label">Home Phone Number</td>
-        <td>
-            <?php
-            echo $this->Form->input('PRIM_PHON_NUM', array(
-                'type' => 'text',
-                'div' => false,
-                'label' => false,
-                'class' => 'form-control input-sm' ,
-                'required' => true ,
-                'data-parsley-type' => 'number'
-            ));
-            ?>
-        </td>
-
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
         <td>&nbsp;</td>
     </tr>
 
@@ -320,11 +346,11 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Mobile Phone Number</td>
+        <td class="hack-col-label">Home Phone Number <span class"required-input" style="color: red;">*</span></td>
         <td>
             <?php
-            echo $this->Form->input('MOBILE_NUM', array(
-                'type' => 'text' ,
+            echo $this->Form->input('PRIM_PHON_NUM', array(
+                'type' => 'text',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm' ,
@@ -351,11 +377,11 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Mobile Phone Number 2</td>
+        <td class="hack-col-label">Mobile Phone Number <span class"required-input" style="color: red;">*</span></td>
         <td>
             <?php
-            echo $this->Form->input('OTHER_PHON_NUM', array(
-                'type' => 'text',
+            echo $this->Form->input('MOBILE_NUM', array(
+                'type' => 'text' ,
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm' ,
@@ -382,14 +408,15 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Fax Number</td>
+        <td class="hack-col-label">Mobile Phone Number 2 <span class"required-input" style="color: red;">*</span></td>
         <td>
             <?php
-            echo $this->Form->input('FAX_NUM', array(
+            echo $this->Form->input('OTHER_PHON_NUM', array(
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm' ,
+                'required' => true ,
                 'data-parsley-type' => 'number'
             ));
             ?>
@@ -412,15 +439,14 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Office Number</td>
+        <td class="hack-col-label">Fax Number</td>
         <td>
             <?php
-            echo $this->Form->input('OFFICE_PHON_NUM', array(
+            echo $this->Form->input('FAX_NUM', array(
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
                 'class' => 'form-control input-sm' ,
-                'required' => true ,
                 'data-parsley-type' => 'number'
             ));
             ?>
@@ -430,7 +456,7 @@
     </tr>
 
     <tr>
-        <td class="hack-col-label">Email</td>
+        <td class="hack-col-label">Email <span class"required-input" style="color: red;">*</span></td>
         <td>
             <?php
             echo $this->Form->input('EMAIL_ADD', array(
@@ -444,15 +470,16 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Religion</td>
+        <td class="hack-col-label">Office Number <span class"required-input" style="color: red;">*</span></td>
         <td>
             <?php
-            echo $this->Form->input('RELIGION', array(
-                'options' => $religion,
-                'empty' => '--CHOOSE--',
+            echo $this->Form->input('OFFICE_PHON_NUM', array(
+                'type' => 'text',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm' ,
+                'required' => true ,
+                'data-parsley-type' => 'number'
             ));
             ?>
         </td>
@@ -473,6 +500,45 @@
             ));
             ?>
         </td>
+
+        <td class="hack-col-label">EXT</td>
+        <td>
+            <?php
+            echo $this->Form->input('EXT', array(
+                'type' => 'text',
+                'div' => false,
+                'label' => false,
+                'class' => 'form-control input-sm'
+            ));
+            ?>
+        </td>
+
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+
+        <td class="hack-col-label">Religion</td>
+        <td>
+            <?php
+            echo $this->Form->input('RELIGION', array(
+                'options' => $religion,
+                'empty' => '--CHOOSE--',
+                'div' => false,
+                'label' => false,
+                'class' => 'form-control input-sm'
+            ));
+            ?>
+        </td>
+
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
 
         <td class="hack-col-label">Risk Profile</td>
         <td>

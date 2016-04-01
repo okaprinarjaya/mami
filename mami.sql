@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50531
 File Encoding         : 65001
 
-Date: 2016-03-30 11:00:35
+Date: 2016-04-01 08:10:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,6 +30,7 @@ CREATE TABLE `customers` (
   `REMARKS` varchar(256) DEFAULT NULL,
   `CLI_NM` varchar(32) DEFAULT NULL,
   `MID_NM` varchar(32) DEFAULT NULL,
+  `LAST_NM` varchar(16) DEFAULT NULL,
   `SEX_CODE` char(1) DEFAULT NULL,
   `EMPLOYEE_NUM` varchar(64) DEFAULT NULL,
   `NATION` tinyint(4) DEFAULT NULL,
@@ -50,6 +51,7 @@ CREATE TABLE `customers` (
   `OTHER_PHON_NUM` varchar(16) DEFAULT NULL,
   `FAX_NUM` varchar(16) DEFAULT NULL,
   `OFFICE_PHON_NUM` varchar(16) DEFAULT NULL,
+  `EXT` varchar(8) DEFAULT NULL,
   `EMAIL_ADD` varchar(32) DEFAULT NULL,
   `RELIGION` tinyint(4) DEFAULT NULL,
   `MARITAL_STATUS` char(1) DEFAULT NULL,
@@ -111,7 +113,7 @@ CREATE TABLE `customers` (
 -- ----------------------------
 -- Records of customers
 -- ----------------------------
-INSERT INTO `customers` VALUES ('1', '', '', '1', '001', null, '', '', 'Bung', 'Jonny', 'M', '', null, '', null, '', null, '', '', '', '', '', '', null, '', '08174128301', '08174128301', '08174128301', '', '08174128301', 'bungjonny@yahoo.com', null, '', null, '', '', '', '', '', null, null, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1', null, '', '', '', '', '', '2016-03-30 03:35:00', '2016-03-30 03:35:00');
+INSERT INTO `customers` VALUES ('1', '', '', '1', '001', '1', '', '', 'Bung', 'Jonny', 'Lastri', 'M', '', null, '', null, '', null, '', '', '', '', '', '', null, '', '08174128301', '08174128301', '08174128301', '', '08174128301', '112233', 'bungjonny@yahoo.com', null, '', null, '', '', '', '', '', null, null, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '0140001', '111222333', 'Bung Jonny', 'B C A PINTU AIR  I', '', '', '', '', '', '', '', '', '', '', '1', null, '', '', '', '', '', '2016-03-30 03:35:00', '2016-04-01 02:57:33');
 
 -- ----------------------------
 -- Table structure for `departments`

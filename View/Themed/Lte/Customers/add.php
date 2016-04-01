@@ -33,7 +33,7 @@
             
                 <div class="panel-heading bg-mami-green1">
                     <h4 class="panel-title">
-                        Base Information
+                        Personal Information
                     </h4>
                 </div>
                 
