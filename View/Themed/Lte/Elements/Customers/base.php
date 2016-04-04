@@ -50,7 +50,7 @@
     </tr>
 
     <tr>
-        <td class="hack-col-label">SID <span class"required-input" style="color: red;">*</span></td>
+        <td class="hack-col-label">SID</td>
         <td>
             <?php
             echo $this->Form->input('SID', array(
@@ -58,8 +58,7 @@
                 'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm' ,
-                'required' => true
+                'class' => 'form-control input-sm'
             ));
             ?>
         </td>
@@ -131,15 +130,14 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Middle Name  <span class"required-input" style="color: red;">*</span></td>
+        <td class="hack-col-label">Middle Name</td>
         <td>
             <?php
             echo $this->Form->input('MID_NM', array(
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm' ,
-                'required' => true
+                'class' => 'form-control input-sm'
             ));
             ?>
         </td>
@@ -346,16 +344,14 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Home Phone Number <span class"required-input" style="color: red;">*</span></td>
+        <td class="hack-col-label">Home Phone Number</td>
         <td>
             <?php
             echo $this->Form->input('PRIM_PHON_NUM', array(
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm' ,
-                'required' => true ,
-                'data-parsley-type' => 'number'
+                'class' => 'form-control input-sm'
             ));
             ?>
         </td>
@@ -408,16 +404,14 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Mobile Phone Number 2 <span class"required-input" style="color: red;">*</span></td>
+        <td class="hack-col-label">Mobile Phone Number 2</td>
         <td>
             <?php
             echo $this->Form->input('OTHER_PHON_NUM', array(
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm' ,
-                'required' => true ,
-                'data-parsley-type' => 'number'
+                'class' => 'form-control input-sm'
             ));
             ?>
         </td>
@@ -470,16 +464,14 @@
             ?>
         </td>
 
-        <td class="hack-col-label">Office Number <span class"required-input" style="color: red;">*</span></td>
+        <td class="hack-col-label">Office Phone Number</td>
         <td>
             <?php
             echo $this->Form->input('OFFICE_PHON_NUM', array(
                 'type' => 'text',
                 'div' => false,
                 'label' => false,
-                'class' => 'form-control input-sm' ,
-                'required' => true ,
-                'data-parsley-type' => 'number'
+                'class' => 'form-control input-sm'
             ));
             ?>
         </td>

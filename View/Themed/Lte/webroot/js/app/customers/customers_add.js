@@ -1,29 +1,25 @@
 $(document).ready(function () {
-    /*
-    window.Parsley.on('field:error', function() {
-        // This global callback will be called for any field that fails validation.
-        $('#customer-tabs a[href="#base"]').tab('show');
-    });
-    */
     
     $('#expire').daterangepicker({
-        format: 'YYYY-MM-DD' ,
+        format: 'DD/MM/YYYY' ,
         singleDatePicker: true,
         showDropdowns: true
     });
+
     $('#birth').daterangepicker({
-        format: 'YYYY-MM-DD' ,
+        format: 'DD/MM/YYYY' ,
         singleDatePicker: true,
         showDropdowns: true
     });
+
     $('#tax').daterangepicker({
-        format: 'YYYY-MM-DD' ,
+        format: 'DD/MM/YYYY' ,
         singleDatePicker: true,
         showDropdowns: true
     });
     
     $('#renewal').daterangepicker({
-        format: 'YYYY-MM-DD' ,
+        format: 'DD/MM/YYYY' ,
         singleDatePicker: true,
         showDropdowns: true
     });
@@ -32,6 +28,7 @@ $(document).ready(function () {
     
     $('#bank_type').on('change' , function(){
         var name = $('#bank_type').val();
+
         $.ajax({
             method: 'GET',
             url: __base_url+'customers/get_bank_code?name='+name,
@@ -41,6 +38,7 @@ $(document).ready(function () {
             $.each( data, function( key, value ) {
                 acc += '<option value="'+value.code+'">'+value.name+'</option>';
             });
+
             $('#bank_code').html(acc);
             
             acc2 = '<input type="text" readonly="readonly" id="CustomerBRANCHNAME" class="form-control input-sm" name="data[Customer][BRANCH_NAME]">';
@@ -62,6 +60,7 @@ $(document).ready(function () {
         }).done(function (data) {
             acc = '<input type="text" value="'+data.name+'" readonly="readonly" id="CustomerBRANCHNAME" class="form-control input-sm" name="data[Customer][BRANCH_NAME]">';
             $('#branch_name').html(acc);
+
         }).fail(function (data) {
             alert('Failed to request data');
         }).always(function (data) {
@@ -82,9 +81,9 @@ $(document).ready(function () {
     var valueNation = $('#CustomerNATION').val();
     if (valueNation == 'I') {
         $('#CustomerBIRTHCOUNTRYCD').removeClass('required');
-    } else if(valueNation == 'F') {
+    } else if (valueNation == 'F') {
         $('#CustomerBIRTHCOUNTRYCD').addClass('required');
-    }else{
+    } else {
         $('#CustomerBIRTHCOUNTRYCD').removeClass('required');
     }
     
@@ -92,13 +91,11 @@ $(document).ready(function () {
         var value = $('#CustomerNATION').val();
         if (value == 'I') {
             $('#CustomerBIRTHCOUNTRYCD').removeClass('required');
-        } else if(value == 'F'){
+        } else if (value == 'F'){
             $('#CustomerBIRTHCOUNTRYCD').addClass('required');
-        }else{
+        } else {
             $('#CustomerBIRTHCOUNTRYCD').removeClass('required');
         }
     });
-    
-    
-    
+
 });

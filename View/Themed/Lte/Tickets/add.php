@@ -74,7 +74,8 @@
                         ),
                         'between' => '<div class="col-sm-4">',
                         'after' => '</div>',
-                        'class' => 'form-control'
+                        'class' => 'form-control',
+                        'required' => true
                     ));
                     ?>
 
@@ -141,6 +142,7 @@
                     <?php
                     echo $this->Form->input('telephone', array(
                         'type' => 'text',
+                        'default' => $customer['Customer']['MOBILE_NUM'],
                         'div' => 'form-group',
                         'label' => array(
                             'class' => 'col-sm-4 control-label',
@@ -177,7 +179,8 @@
                         ),
                         'between' => '<div class="col-sm-4">',
                         'after' => '</div>',
-                        'class' => 'form-control'
+                        'class' => 'form-control',
+                        'required' => true
                     ));
                     ?>
 
@@ -192,7 +195,8 @@
                         ),
                         'between' => '<div class="col-sm-4">',
                         'after' => '</div>',
-                        'class' => 'form-control'
+                        'class' => 'form-control',
+                        'required' => true
                     ));
                     ?>
 

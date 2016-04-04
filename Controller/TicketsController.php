@@ -26,8 +26,19 @@ class TicketsController extends AppController {
             $conditions['Ticket.ticket_status'] = $this->request->query['ticket_status'];
         }
 
+        if (isset($this->request->query['interaction_code1']) && !empty($this->request->query['interaction_code1'])) {
+            $conditions['InteractionLevel1.id'] = $this->request->query['interaction_code1'];
+        }
+
+        if (isset($this->request->query['interaction_code2']) && !empty($this->request->query['interaction_code2'])) {
+            $conditions['InteractionLevel2.id'] = $this->request->query['interaction_code2'];
+        }
+
         $this->Paginator->settings = array(
             'fields' => array(
+                'InteractionLevel1.id AS interaction_id1',
+                'InteractionLevel2.id AS interaction_id2',
+                'InteractionLevel3.id AS interaction_id3',
                 'InteractionLevel1.interaction_title AS interaction_title1',
                 'InteractionLevel2.interaction_title AS interaction_title2',
                 'InteractionLevel3.interaction_title AS interaction_title3',
@@ -57,6 +68,7 @@ class TicketsController extends AppController {
         );
 
         $ticket_statuses = $this->TicketStatus->getTicketStatuses();
+        $interactions_root = $this->Interaction->getInteractions();
         $tickets = array();
 
         try {
@@ -66,7 +78,7 @@ class TicketsController extends AppController {
             $this->redirect('/tickets?'.http_build_query($this->request->query));
         }
 
-        $this->set(compact('tickets', 'ticket_statuses'));
+        $this->set(compact('tickets', 'ticket_statuses', 'interactions_root'));
     }
 
     public function add($customer_id)
@@ -89,8 +101,15 @@ class TicketsController extends AppController {
         $interactions_root = $this->Interaction->getInteractions();
         $ticket_statuses = array('C' => 'CLOSED', 'S' => 'SUBMIT');
         $customer = $this->Customer->find('first', array(
-            'fields' => array('Customer.CLI_NM', 'Customer.MID_NM', 'Customer.EMAIL_ADD'),
-            'conditions' => array('Customer.CUSTOMER_ID' => $customer_id)
+            'fields' => array(
+                'Customer.CLI_NM',
+                'Customer.MID_NM',
+                'Customer.EMAIL_ADD',
+                'Customer.MOBILE_NUM'
+            ),
+            'conditions' => array(
+                'Customer.CUSTOMER_ID' => $customer_id
+            )
         ));
 
         $channel_types = array(

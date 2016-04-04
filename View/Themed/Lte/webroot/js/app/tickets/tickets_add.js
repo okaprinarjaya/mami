@@ -38,8 +38,8 @@ $(document).ready(function () {
             }
 
         } else {
-            interaction2.html('<option value="" selected="selected">--EMPTY--</option>');
-            interaction3.html('<option value="" selected="selected">--EMPTY--</option>');
+            interaction2.html('<option value="" selected="selected">--CHOOSE--</option>');
+            interaction3.html('<option value="" selected="selected">--CHOOSE--</option>');
         }
 
     });

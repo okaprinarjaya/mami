@@ -47,11 +47,35 @@
                     <div class="dataTables_filter">
 
                         <?php
+                        echo $this->Form->input('interaction_code1', array(
+                            'options' => $interactions_root,
+                            'empty' => '--CHOOSE--',
+                            'default' => isset($this->request->query['interaction_code1']) ? $this->request->query['interaction_code1'] : '',
+                            'label' => 'Interaction :&nbsp;',
+                            'div' => false,
+                            'class' => 'form-control input-sm',
+                            'style' => 'margin-right: 5px; width: 150px;'
+                        ));
+                        ?>
+
+                        <?php
+                        echo $this->Form->input('interaction_code2', array(
+                            'options' => array(),
+                            'empty' => '--CHOOSE--',
+                            'default' => isset($this->request->query['interaction_code2']) ? $this->request->query['interaction_code2'] : '',
+                            'label' => 'Interaction Detail :&nbsp;',
+                            'div' => false,
+                            'class' => 'form-control input-sm',
+                            'style' => 'margin-right: 5px; width: 150px;'
+                        ));
+                        ?>
+
+                        <?php
                         echo $this->Form->input('ticket_status', array(
                             'options' => $ticket_statuses,
-                            'empty' => '-NO FILTER-',
+                            'empty' => '--NO FILTER--',
                             'default' => isset($this->request->query['ticket_status']) ? $this->request->query['ticket_status'] : '',
-                            'label' => 'Ticket Status :&nbsp;',
+                            'label' => 'Status :&nbsp;',
                             'div' => false,
                             'class' => 'form-control input-sm',
                             'style' => 'margin-right: 5px;'
@@ -84,6 +108,7 @@
                     <th>Customer Name</th>
                     <th>Interaction</th>
                     <th>Interaction Detail</th>
+                    <th>Created Date</th>
                     <th>Due Date</th>
                     <th>Days</th>
                     <th>Aging</th>
@@ -137,7 +162,17 @@
 
                     <td>
                         <?php
-                        echo $item['Ticket']['due_date'];
+                        echo date('d-m-Y', strtotime($item['Ticket']['created']));
+                        ?>
+                    </td>
+
+                    <td>
+                        <?php
+                        if ($item['Ticket']['due_date'] != null):
+                            echo date('d-m-Y', strtotime($item['Ticket']['due_date']));
+                        else:
+                            echo "-";
+                        endif;
                         ?>
                     </td>
 
