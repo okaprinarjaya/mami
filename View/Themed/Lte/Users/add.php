@@ -25,8 +25,7 @@
                 <?php
                 echo $this->Form->create('User', array(
                     'role' => 'form',
-                    'class' => 'form-horizontal',
-                    'novalidate' => true
+                    'class' => 'form-horizontal'
                 ));
                 ?>
 
@@ -39,7 +38,8 @@
                     ),
                     'between' => '<div class="col-sm-6">',
                     'after' => '</div>',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'required' => true
                 ));
                 ?>
 
@@ -52,7 +52,8 @@
                     ),
                     'between' => '<div class="col-sm-6">',
                     'after' => '</div>',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'required' => true
                 ));
                 ?>
 
@@ -65,7 +66,8 @@
                     ),
                     'between' => '<div class="col-sm-6">',
                     'after' => '</div>',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'required' => true
                 ));
                 ?>
 
@@ -79,7 +81,8 @@
                     ),
                     'between' => '<div class="col-sm-6">',
                     'after' => '</div>',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'required' => true
                 ));
                 ?>
 
@@ -93,7 +96,8 @@
                     ),
                     'between' => '<div class="col-sm-6">',
                     'after' => '</div>',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'required' => true
                 ));
                 ?>
 
@@ -106,7 +110,8 @@
                     ),
                     'between' => '<div class="col-sm-6">',
                     'after' => '</div>',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'required' => true
                 ));
                 ?>
 
@@ -126,3 +131,20 @@
     </div>
 
 </div>
+
+<?php
+echo $this->Html->css(
+    array('/plugins/parsley/parsley.css'),
+    array('inline' => false)
+);
+?>
+
+<?php
+echo $this->Html->script(
+    array(
+        '/plugins/parsley/parsley.min.js',
+        'app/users/users_add'
+    ),
+    array('block' => 'scriptBottom')
+);
+?>
