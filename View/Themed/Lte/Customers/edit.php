@@ -1,7 +1,7 @@
 <div class="box box-mami-green1">
                             
     <div class="box-header with-border">
-        <h3 class="box-title"><span class="glyphicon glyphicon-plus"></span> New Customer</h3>
+        <h3 class="box-title"><span class="glyphicon glyphicon-search"></span> &nbsp; Customer Detail</h3>
     </div>
 
     <div class="box-body">
@@ -35,7 +35,7 @@
             
                 <div class="panel-heading bg-mami-green1">
                     <h4 class="panel-title">
-                        Base Information
+                        Personal Customer Information
                     </h4>
                 </div>
                 

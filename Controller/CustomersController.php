@@ -4,6 +4,7 @@ App::uses('AppController', 'Controller');
 class CustomersController extends AppController {
 
 	public $components = array('Paginator');
+
     public $uses = array(
         'TamsAgent', 
         'TtaFieldValues' ,
@@ -22,7 +23,7 @@ class CustomersController extends AppController {
     {
         $conditions = array();
         if (isset($this->request->query['kwd']) && !empty($this->request->query['kwd'])) {
-            if(isset($this->request->query['filter_field']) && !empty($this->request->query['filter_field']))
+            if (isset($this->request->query['filter_field']) && !empty($this->request->query['filter_field']))
             {
                 $conditions[$this->request->query['filter_field'] . ' LIKE'] = '%'.$this->request->query['kwd'].'%';
             }
@@ -98,9 +99,7 @@ class CustomersController extends AppController {
                 '{n}.Bank.BANK_BRANCH_NM'
             );
         }
-
-
-        
+       
         $this->set(compact(
             'bank_code',
             'bank_cd_mapp'
@@ -110,15 +109,16 @@ class CustomersController extends AppController {
         $this->request->data = $customer;
         
         $this->autoRender = false;
-        if($customer['Customer']['CLI_TYP'] == 1)
+        if ($customer['Customer']['CLI_TYP'] == 1) {
             $this->render('edit');
-        else if($customer['Customer']['CLI_TYP'] == 2)
+        } else if ($customer['Customer']['CLI_TYP'] == 2) {
             $this->render('edit-corporate');
+        }
     }
     
     public function getTabDataForm()
     {
-        //tab base
+        // Tab base
         $agt_codes_fetch = $this->TamsAgent->getAGTCodes();
         array_walk($agt_codes_fetch, function (&$item, $key) {
             $item['TamsAgent']['AGT_NM'] = str_replace("+", " ", $item['TamsAgent']['AGT_NM']);
@@ -173,36 +173,6 @@ class CustomersController extends AppController {
             '{n}.Country.COUNTRY_NM'
         );
         
-        $home_country = array(
-            '1' => 'home Type 1' ,
-            '2' => 'home Type 2' ,
-            '3' => 'home Type 3' ,
-        );
-        
-        $mobile_country = array(
-            '1' => 'mobile Type 1' ,
-            '2' => 'mobile Type 2' ,
-            '3' => 'mobile Type 3' ,
-        );
-        
-        $mobile2_country = array(
-            '1' => 'mobile2 Type 1' ,
-            '2' => 'mobile2 Type 2' ,
-            '3' => 'mobile2 Type 3' ,
-        );
-        
-        $fax_country = array(
-            '1' => 'fax Type 1' ,
-            '2' => 'fax Type 2' ,
-            '3' => 'fax Type 3' ,
-        );
-        
-        $office_country = array(
-            '1' => 'office Type 1' ,
-            '2' => 'office Type 2' ,
-            '3' => 'office Type 3' ,
-        );
-        
         $marital_status_fetch = $this->TtaFieldValues->getMaritalStatus();
         $marital_status = Hash::combine(
             $marital_status_fetch,
@@ -240,7 +210,7 @@ class CustomersController extends AppController {
             'client_types'
         ));
         
-        //tab income information
+        // Tab income information
         $occupation_type_fetch = $this->TtaFieldValues->getOccupation();
         $occupation_type = Hash::combine(
             $occupation_type_fetch,
@@ -269,7 +239,7 @@ class CustomersController extends AppController {
         ));
         
         
-        //tab spouse information
+        // Tab spouse information
         $spouse_type_fetch = $this->TtaFieldValues->getSpouseType();
         $spouse_type = Hash::combine(
             $spouse_type_fetch,
@@ -289,7 +259,7 @@ class CustomersController extends AppController {
             'spouse_occupation'
         ));
         
-        //tab invesment information
+        // Tab invesment information
         $source_of_fund_fetch = $this->TtaFieldValues->getSourceFund();
         $source_of_fund = Hash::combine(
             $source_of_fund_fetch,
@@ -309,7 +279,7 @@ class CustomersController extends AppController {
             'red_flag'
         ));
         
-        //tab Bank
+        // Tab Bank
         $bank = $this->Bank->getBankMapp();
         $bank = Hash::combine(
             $bank,
@@ -320,7 +290,7 @@ class CustomersController extends AppController {
             'bank'
         ));
         
-        //tabFATCA
+        // Tab FATCA
         $owner_facta_status_fetch = $this->TtaFieldValues->getFactaStatus();
         $owner_facta_status = Hash::combine(
             $owner_facta_status_fetch,
