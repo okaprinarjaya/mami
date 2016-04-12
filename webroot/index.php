@@ -59,10 +59,10 @@ if (!defined('APP_DIR')) {
  */
 
 // PATH OKA
-define('CAKE_CORE_INCLUDE_PATH', 'D:' . DS . 'DocumentRoot' . DS . 'Cake2' . DS . 'lib');
+//define('CAKE_CORE_INCLUDE_PATH', 'D:' . DS . 'DocumentRoot' . DS . 'Cake2' . DS . 'lib');
 
 // PATH ALEX
-// define('CAKE_CORE_INCLUDE_PATH', 'C:' . DS . 'xampp' . DS .'htdocs'. DS .  'cake2' . DS . 'lib');
+define('CAKE_CORE_INCLUDE_PATH', 'C:' . DS . 'xampp' . DS .'htdocs'. DS .  'cake2' . DS . 'lib');
 
 /**
  * This auto-detects CakePHP as a composer installed library.

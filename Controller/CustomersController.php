@@ -109,6 +109,11 @@ class CustomersController extends AppController {
         $this->getTabDataForm();
         $this->request->data = $customer;
         
+        $this->autoRender = false;
+        if($customer['Customer']['CLI_TYP'] == 1)
+            $this->render('edit');
+        else if($customer['Customer']['CLI_TYP'] == 2)
+            $this->render('edit-corporate');
     }
     
     public function getTabDataForm()
