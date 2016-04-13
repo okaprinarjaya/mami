@@ -37,6 +37,7 @@
             <?php
             echo $this->Form->input('CLI_TYP', array(
                 'options' => $client_types,
+                'default' => 2,
                 'empty' => '--CHOOSE--',
                 'div' => false,
                 'label' => false,

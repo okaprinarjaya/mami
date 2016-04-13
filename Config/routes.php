@@ -22,6 +22,17 @@
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
+    Router::connect('/customers/add/:customertype',
+        array(
+            'controller' => 'customers',
+            'action' => 'add'
+        ),
+        array(
+            'customertype' => 'personal|corporate',
+            'pass' => array('customertype')
+        )
+    );
+
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

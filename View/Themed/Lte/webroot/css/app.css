@@ -6,10 +6,12 @@
 
 .hack-col-label {
     text-align: right;
+    vertical-align: middle;
 }
 
 .hack-label-width {
-  width: 18%;
+  width: 15%;
+  vertical-align: middle;
 }
 
 .hack-input-width {
@@ -39,4 +41,15 @@
 
 .hack-col-label .required-input {
   color: red;
+}
+
+#authMessage {
+  background-color: #FFCE44;
+  color: white;
+
+  padding: 25px;
+}
+
+.skin-mami .main-header .navbar-brand {
+  min-height: 55px;
 }

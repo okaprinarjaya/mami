@@ -37,7 +37,7 @@
         
         <header class="main-header">
             <nav class="navbar navbar-static-top">
-                <div class="container">
+                <div class="container-fluid">
                     
                     <div class="navbar-header">
                         <a href="<?php echo Router::url('/').'customers'; ?>" class="navbar-brand">
@@ -52,6 +52,7 @@
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         
                         <ul class="nav navbar-nav">
+
                             <li>
                                 <?php
                                 echo $this->Html->link(
@@ -105,6 +106,55 @@
                                 </ul>
                             </li>
 
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-file-text"></i> &nbsp; 
+                                    Reports <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <?php
+                                        echo $this->Html->link(
+                                            '<i class="fa fa-dashboard"></i> &nbsp; Dashboard',
+                                            array('controller' => 'customers', 'action' => 'index'),
+                                            array('escape' => false)
+                                        );
+                                        ?>
+                                    </li>
+
+                                    <li>
+                                        <?php
+                                        echo $this->Html->link(
+                                            '<i class="fa fa-table"></i> &nbsp; Report A',
+                                            array('controller' => 'customers', 'action' => 'index'),
+                                            array('escape' => false)
+                                        );
+                                        ?>
+                                    </li>
+
+                                    <li>
+                                        <?php
+                                        echo $this->Html->link(
+                                            '<i class="fa fa-table"></i> &nbsp; Report B',
+                                            array('controller' => 'customers', 'action' => 'index'),
+                                            array('escape' => false)
+                                        );
+                                        ?>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <?php
+                                echo $this->Html->link(
+                                    '<i class="fa fa-book"></i> &nbsp; Knowledge Base',
+                                    array('controller' => 'customers', 'action' => 'index'),
+                                    array('escape' => false)
+                                );
+                                ?>
+                            </li>
+
                             <?php
                             endif;
                             ?>
@@ -144,7 +194,7 @@
         </header>
 
         <div class="content-wrapper">
-            <div class="container">
+            <div class="container-fluid">
                 
                 <section class="content-header">
                     <h1>

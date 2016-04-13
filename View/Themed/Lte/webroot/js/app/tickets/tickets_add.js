@@ -30,16 +30,26 @@ $(document).ready(function () {
                 $('#TicketDepartmentId').attr('disabled', true);
 
                 // Automatically set ticket status to CLOSED status
+                $('#FooTicketStatus').val('C');
+                $('#FooTicketStatus').attr('disabled', 'disabled');
+
                 $('#TicketTicketStatus').val('C');
 
             } else {
                 $('#TicketDepartmentId').attr('disabled', false);
                 $('#TicketTicketStatus').val('');
+
+                $('#FooTicketStatus').val('');
+                $('#FooTicketStatus').attr('disabled', false);
             }
 
         } else {
             interaction2.html('<option value="" selected="selected">--CHOOSE--</option>');
             interaction3.html('<option value="" selected="selected">--CHOOSE--</option>');
+
+            $('#FooTicketStatus').val('');
+            $('#FooTicketStatus').attr('disabled', false);
+            $('#TicketTicketStatus').val('');
         }
 
     });
@@ -67,6 +77,10 @@ $(document).ready(function () {
             interaction3.html('<option value="" selected="selected">--EMPTY--</option>');
         }
 
+    });
+
+    $('#FooTicketStatus').on('change', function () {
+        $('#TicketTicketStatus').val(this.value);
     });
 
 });

@@ -22,30 +22,54 @@ class CustomersController extends AppController {
     public function index()
     {
         $conditions = array();
+        
         if (isset($this->request->query['kwd']) && !empty($this->request->query['kwd'])) {
-            if (isset($this->request->query['filter_field']) && !empty($this->request->query['filter_field']))
-            {
-                $conditions[$this->request->query['filter_field'] . ' LIKE'] = '%'.$this->request->query['kwd'].'%';
+            $conditions['OR'] = array();
+            $conditions['OR'][]['Customer.CLI_NM LIKE'] = '%'.$this->request->query['kwd'].'%';
+            $conditions['OR'][]['Customer.CLI_NM_PERSON LIKE'] = '%'.$this->request->query['kwd'].'%';
+            $conditions['OR'][]['Customer.MID_NM LIKE'] = '%'.$this->request->query['kwd'].'%';
+            $conditions['OR'][]['Customer.LAST_NM LIKE'] = '%'.$this->request->query['kwd'].'%';
+            $conditions['OR'][]['Customer.EMAIL_ADD LIKE'] = '%'.$this->request->query['kwd'].'%';
+            $conditions['OR'][]['Customer.EMAIL_ADD_PERSON LIKE'] = '%'.$this->request->query['kwd'].'%';
+            $conditions['OR'][]['Customer.MOBILE_NUM_PERSON LIKE'] = '%'.$this->request->query['kwd'].'%';
+            $conditions['OR'][]['Customer.MOBILE_NUM LIKE'] = '%'.$this->request->query['kwd'].'%';
+        }
+
+        if (isset($this->request->query['customer_type']) && !empty($this->request->query['customer_type'])) {
+            $num_type = 2;
+            if ($this->request->query['customer_type'] == 'personal') {
+                $num_type = 1;
             }
+
+            $conditions['Customer.CLI_TYP'] =  $num_type;
         }
         
         $this->Paginator->settings = array(
             'conditions' => $conditions,
+            'order' => array('Customer.created' => 'DESC'),
             'limit' => isset($this->request->query['rpp']) ? $this->request->query['rpp'] : 50,
         );
 
         $cust = array();
+
         try {
             $cust = $this->Paginator->paginate($this->Customer);
         } catch (NotFoundException $e) {
             $this->redirect('/customers');
         }
 
-        $this->set(compact('cust'));
+        $client_types = array(
+            '1' => 'Personal',
+            '2' => 'Corporate'
+        );
+
+        $this->set(compact('cust', 'client_types'));
     }
 
-    public function add()
+    public function add($customer_type)
     {
+        $this->autoRender = false;
+
         if ($this->request->is('post')) {
             $save = $this->Customer->createCustomer(
                 $this->request->data,
@@ -63,6 +87,12 @@ class CustomersController extends AppController {
         $this->set('bank_code', array());
         $this->set('bank_cd_mapp', null);
         $this->getTabDataForm();
+
+        if ($customer_type == 'personal') {
+            $this->render('add');
+        } else if ($customer_type == 'corporate') {
+            $this->render('add-corporate');
+        }
     }
     
     public function edit($cid)

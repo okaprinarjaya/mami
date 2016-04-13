@@ -9,8 +9,29 @@
         <div id="menu-bar" style="margin-bottom: 15px;">
             <?php
             echo $this->Html->link(
-                '<span class="glyphicon glyphicon-plus"></span> Add New Customer',
-                array('controller' => 'customers', 'action' => 'add'),
+                '<span class="glyphicon glyphicon-plus"></span> Customer Personal',
+                array(
+                    'controller' => 'customers',
+                    'action' => 'add',
+                    'personal'
+                ),
+                array(
+                    'class' => 'btn btn-mami-green1',
+                    'escape' => false
+                )
+            );
+            ?>
+
+            &nbsp;
+
+            <?php
+            echo $this->Html->link(
+                '<span class="glyphicon glyphicon-plus"></span> Customer Corporate',
+                array(
+                    'controller' => 'customers',
+                    'action' => 'add',
+                    'corporate'
+                ),
                 array(
                     'class' => 'btn btn-mami-green1',
                     'escape' => false
@@ -60,19 +81,14 @@
                     <div class="dataTables_filter">
 
                         <?php
-                        echo $this->Form->input('filter_field', array(
+                        echo $this->Form->input('customer_type', array(
                             'options' => array(
-                                'CUSTOMER_ID' => 'ID Customer',
-                                'CLI_NM' => 'First Name',
-                                'MOBILE_NUM' => 'Mobile Phone',
-                                'OTHER_PHON_NUM' => 'Mobile Phone 2',
-                                'PRIM_PHON_NUM' => 'Home Phone',
-                                'CLI_TYP' => 'Client Type' ,
-                                'SEX_CODE' => 'Gender' ,
+                                'corporate' => 'Corporate',
+                                'personal' => 'Personal'
                             ),
-                            'empty' => '-NO FILTER-',
-                            'default' => isset($this->request->query['filter_field']) ? $this->request->query['filter_field'] : '',
-                            'label' => 'Filter by :&nbsp;',
+                            'empty' => '--EMPTY--',
+                            'default' => isset($this->request->query['customer_type']) ? $this->request->query['customer_type'] : '',
+                            'label' => 'Customer Type: &nbsp; ',
                             'div' => false,
                             'class' => 'form-control input-sm',
                             'style' => 'margin-right: 5px;'
@@ -99,38 +115,68 @@
         <table id="pbs-index" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>ID Customer</th>
+                    <th>No.</th>
                     <th>First Name</th>
-                    <th>Sex</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
+                    <th>Birth Date</th>
+                    <th>Mailing Address</th>
                     <th>Email</th>
-                    <th>Client Type</th>
                     <th>Home Phone No.</th>
                     <th>Mobile Phone No.</th>
-                    <th>Mobile Phone 2 No. </th>
-                    <th>Office No. </th>
-                    <th>Action</th>
+                    <th>Client Type</th>
+                    <th>&nbsp;</th>
                 </tr>
             </thead>
 
             <tbody>
                 <?php
-                foreach($cust as $key => $val):
+                $page = $this->Paginator->params['paging']['Customer']['page'];
+                $limit = $this->Paginator->params['paging']['Customer']['limit'];
+                $rows_num = (($limit * $page) - $limit) + 1;
+
+                foreach($cust as $item):
                 ?>
                 <tr>
-                    <td><?php echo $val['Customer']['CUSTOMER_ID']; ?></td>
-                    <td><?php echo ucwords($val['Customer']['CLI_NM']); ?></td>
-                    <td><?php echo $val['Customer']['SEX_CODE']; ?></td>
-                    <td><?php echo $val['Customer']['EMAIL_ADD']; ?></td>
-                    <td><?php echo $val['Customer']['CLI_TYP']; ?></td>
-                    <td><?php echo $val['Customer']['PRIM_PHON_NUM']; ?></td>
-                    <td><?php echo $val['Customer']['MOBILE_NUM']; ?></td>
-                    <td><?php echo $val['Customer']['OTHER_PHON_NUM']; ?></td>
-                    <td><?php echo $val['Customer']['OFFICE_PHON_NUM']; ?></td>
+                    <td style="text-align: center;"><?php echo $rows_num; ?></td>
+                    
+                    <td>
+                        <?php
+                        if ($item['Customer']['CLI_TYP'] < 2):
+                            echo ucfirst($item['Customer']['CLI_NM']);
+                        elseif ($item['Customer']['CLI_TYP'] == 2):
+                            echo ucfirst($item['Customer']['CLI_NM_PERSON']);
+                        endif;
+                        ?>
+                    </td>
+
+                    <td><?php echo ucfirst($item['Customer']['MID_NM']); ?></td>
+                    <td><?php echo ucfirst($item['Customer']['LAST_NM']); ?></td>
+                    <td><?php echo $item['Customer']['BIRTH_DT']; ?></td>
+                    <td><?php echo $item['Customer']['ADDR_1_DEFAULT']; ?></td>
+                    
+                    <td>
+                        <?php
+                        if ($item['Customer']['CLI_TYP'] < 2):
+                            echo $item['Customer']['EMAIL_ADD'];
+                        elseif ($item['Customer']['CLI_TYP'] == 2):
+                            echo $item['Customer']['EMAIL_ADD_PERSON'];
+                        endif;
+                        ?>
+                    </td>
+                    
+                    <td><?php echo $item['Customer']['PRIM_PHON_NUM']; ?></td>
+                    <td><?php echo $item['Customer']['MOBILE_NUM']; ?></td>
+                    <td><?php echo $client_types[$item['Customer']['CLI_TYP']]; ?></td>
                     <td>
                         <?php
                         echo $this->Html->link(
                             '<span class="glyphicon glyphicon-search"></span> Detail',
-                            array('controller' => 'customers', 'action' => 'edit', $val['Customer']['CUSTOMER_ID']),
+                            array(
+                                'controller' => 'customers',
+                                'action' => 'edit',
+                                $item['Customer']['CUSTOMER_ID']
+                            ),
                             array('escape' => false)
                         )
                         ?>
@@ -140,7 +186,11 @@
                         <?php
                         echo $this->Html->link(
                             '<i class="fa fa-ticket"></i> Create Ticket',
-                            array('controller' => 'tickets', 'action' => 'add', $val['Customer']['CUSTOMER_ID']),
+                            array(
+                                'controller' => 'tickets',
+                                'action' => 'add',
+                                $item['Customer']['CUSTOMER_ID']
+                            ),
                             array('escape' => false)
                         )
                         ?>
@@ -148,6 +198,7 @@
                 </tr>
                 
                 <?php
+                $rows_num++;
                 endforeach;
                 ?>
                 

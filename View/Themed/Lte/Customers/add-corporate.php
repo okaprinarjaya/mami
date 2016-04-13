@@ -1,7 +1,7 @@
 <div class="box box-mami-green1">
                             
     <div class="box-header with-border">
-        <h3 class="box-title"><i class="fa fa-user"></i> &nbsp; New Customer Personal</h3>
+        <h3 class="box-title"><i class="fa fa-building"></i> &nbsp; New Customer Corporate</h3>
     </div>
 
     <div class="box-body">
@@ -25,6 +25,8 @@
             'class' => 'form-horizontal',
             'data-parsley-validate' => true ,
         ));
+
+        echo $this->Form->input('CUSTOMER_ID');
         ?>
         <div id="accordion" class="panel-group ">
     
@@ -33,71 +35,72 @@
             
                 <div class="panel-heading bg-mami-green1">
                     <h4 class="panel-title">
-                        Personal Customer Information
+                        Corporate Customer Information
                     </h4>
                 </div>
                 
                 <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <?php
-                            echo $this->element('Customers/base');
+                            echo $this->element('CustomersCorporate/base');
                         ?>
                     </div>
                 </div>
 
             </div>
             
-            <!-- ITEM 2 -->
             <div class="panel panel-success">
             
                 <div class="panel-heading bg-mami-green1">
                     <h4 class="panel-title">
-                        <input type="checkbox" class="items" /> Income Information
+                        <input type="checkbox" class="items" /> Company Information
                     </h4>
                 </div>
                 
                 <div id="collapseOne" class="panel-collapse collapse">
                     <div class="panel-body">
                         <?php
-                            echo $this->element('Customers/income_information');
+                            echo $this->element('CustomersCorporate/company_information');
                         ?>
                     </div>
                 </div>
 
             </div>
+            
             
             <!-- ITEM 3 -->
             <div class="panel panel-success">
             
                 <div class="panel-heading bg-mami-green1">
                     <h4 class="panel-title">
-                        <input type="checkbox" class="items" /> Spouse Information
+                        <input type="checkbox" class="items" /> Contact Information
                     </h4>
                 </div>
                 
                 <div id="collapseOne" class="panel-collapse collapse">
                     <div class="panel-body">
                         <?php
-                            echo $this->element('Customers/spouse_information');
+                            echo $this->element('CustomersCorporate/contact_information');
                         ?>
                     </div>
                 </div>
 
             </div>
             
+            
             <!-- ITEM 3 -->
             <div class="panel panel-success">
             
                 <div class="panel-heading bg-mami-green1">
                     <h4 class="panel-title">
-                        <input type="checkbox" class="items" /> Invesment Information
+                        <input type="checkbox" class="items" /> Contact person
                     </h4>
                 </div>
                 
                 <div id="collapseOne" class="panel-collapse collapse">
                     <div class="panel-body">
                         <?php
-                            echo $this->element('Customers/investment_information');
+                            echo $this->element('CustomersCorporate/contact_person');
                         ?>
                     </div>
                 </div>
@@ -116,7 +119,7 @@
                 <div id="collapseOne" class="panel-collapse collapse">
                     <div class="panel-body">
                         <?php
-                            echo $this->element('Customers/permanent_residential_address');
+                            echo $this->element('CustomersCorporate/permanent_residential_address');
                         ?>
                     </div>
                 </div>
@@ -134,84 +137,14 @@
                 <div id="collapseOne" class="panel-collapse collapse">
                     <div class="panel-body">
                         <?php
-                            echo $this->element('Customers/default_email_address');
+                            echo $this->element('CustomersCorporate/default_email_address');
                         ?>
                     </div>
                 </div>
 
             </div>
             
-            <div class="panel panel-success">
             
-                <div class="panel-heading bg-mami-green1">
-                    <h4 class="panel-title">
-                        <input type="checkbox" class="items" /> Company Information
-                    </h4>
-                </div>
-                
-                <div id="collapseOne" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
-                            echo $this->element('Customers/company_information');
-                        ?>
-                    </div>
-                </div>
-
-            </div>
-            
-            <div class="panel panel-success">
-            
-                <div class="panel-heading bg-mami-green1">
-                    <h4 class="panel-title">
-                        <input type="checkbox" class="items" /> Additional Foreign ID
-                    </h4>
-                </div>
-                
-                <div id="collapseOne" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
-                            echo $this->element('Customers/additional_foreign_id');
-                        ?>
-                    </div>
-                </div>
-
-            </div>
-            
-            <div class="panel panel-success">
-            
-                <div class="panel-heading bg-mami-green1">
-                    <h4 class="panel-title">
-                        <input type="checkbox" class="items" /> Extra Information
-                    </h4>
-                </div>
-                
-                <div id="collapseOne" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
-                            echo $this->element('Customers/extra_info');
-                        ?>
-                    </div>
-                </div>
-
-            </div>
-            
-            <div class="panel panel-success">
-            
-                <div class="panel-heading bg-mami-green1">
-                    <h4 class="panel-title">
-                        <input type="checkbox" class="items" /> Default Bank Account
-                    </h4>
-                </div>
-                
-                <div id="collapseOne" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <?php
-                            echo $this->element('Customers/default_bank_account');
-                        ?>
-                    </div>
-                </div>
-
-            </div>
             
             <div class="panel panel-success">
             
@@ -224,7 +157,7 @@
                 <div id="collapseOne" class="panel-collapse collapse">
                     <div class="panel-body">
                         <?php
-                            echo $this->element('Customers/fatca');
+                            echo $this->element('CustomersCorporate/fatca');
                         ?>
                     </div>
                 </div>

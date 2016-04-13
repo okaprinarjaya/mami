@@ -27,8 +27,13 @@
                         Create Ticket for CIF: <?php echo '#'.$customer_id; ?> 
                         - 
                         Customer: 
+
                         <?php
-                        echo ucwords($customer['Customer']['CLI_NM'].' '.$customer['Customer']['MID_NM']);
+                        if ($customer['Customer']['CLI_TYP'] < 2):
+                            echo ucwords($customer['Customer']['CLI_NM'].' '.$customer['Customer']['MID_NM']);
+                        elseif ($customer['Customer']['CLI_TYP'] == 2):
+                            echo ucfirst($customer['Customer']['CLI_NM_PERSON']);
+                        endif;
                         ?>
                     </legend>
 
@@ -43,8 +48,6 @@
                     <?php
                     echo $this->Form->input('Foo.cif', array(
                         'type' => 'text',
-                        'default' => $customer_id,
-                        'disabled' => 'disabled',
                         'div' => 'form-group',
                         'label' => array(
                             'class' => 'col-sm-4 control-label',
@@ -231,7 +234,7 @@
                     ?>
 
                     <?php
-                    echo $this->Form->input('ticket_status', array(
+                    echo $this->Form->input('Foo.ticket_status', array(
                         'options' => $ticket_statuses,
                         'empty' => '--CHOOSE--',
                         'required' => true,
@@ -243,6 +246,11 @@
                         'between' => '<div class="col-sm-4">',
                         'after' => '</div>',
                         'class' => 'form-control',
+                    ));
+
+                    echo $this->Form->input('ticket_status', array(
+                        'type' => 'hidden',
+                        'default' => ''
                     ));
                     ?>
 

@@ -104,6 +104,8 @@ class TicketsController extends AppController {
             'fields' => array(
                 'Customer.CLI_NM',
                 'Customer.MID_NM',
+                'Customer.CLI_TYP',
+                'Customer.CLI_NM_PERSON',
                 'Customer.EMAIL_ADD',
                 'Customer.MOBILE_NUM'
             ),
@@ -159,7 +161,11 @@ class TicketsController extends AppController {
 
         if ($this->request->is('ajax')) {
             $ticket = $this->Ticket->getTicket($ticket_id);
-            $ticket_statuses = array('C' => 'CLOSED', 'P' => 'IN PROGRESS');
+            $ticket_statuses = array(
+                'S' => 'SUBMIT',
+                'C' => 'CLOSED',
+                'P' => 'IN PROGRESS'
+            );
             
             $this->set(compact(
                 'ticket',
