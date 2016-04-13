@@ -12,6 +12,8 @@
             ));
             ?>
         </td>
+
+        <td>&nbsp;</td>
         <td>&nbsp;</td>
     </tr>
     
@@ -20,7 +22,7 @@
         <td class="hack-col-label">Office</td>
         <td>
         <?php
-        echo $this->Form->input('EXT_PERSON', array(
+        echo $this->Form->input('OFFICE_PHON_NUM_PERSON', array(
             'type' => 'text',
             'div' => false,
             'label' => false,
@@ -29,9 +31,20 @@
         ?>
         </td>
         
-        <td>&nbsp;</td>
+        <td class="hack-col-label">EXT</td>
+        <td>
+        <?php
+        echo $this->Form->input('EXT_PERSON', array(
+            'type' => 'text',
+            'div' => false,
+            'label' => false,
+            'class' => 'form-control input-sm',
+            'style' => 'width: 100px;'
+        ));
+        ?>
+        </td>
     </tr>
-    
+   
     <tr>
         
         <td class="hack-col-label">Mobile</td>
@@ -46,6 +59,7 @@
         ?>
         </td>
         
+        <td>&nbsp;</td>
         <td>&nbsp;</td>
     </tr>
     
@@ -64,6 +78,7 @@
         </td>
         
         <td>&nbsp;</td>
+        <td>&nbsp;</td>
     </tr>
     
     <tr>
@@ -80,6 +95,7 @@
         ?>
         </td>
         
+        <td>&nbsp;</td>
         <td>&nbsp;</td>
     </tr>
     
