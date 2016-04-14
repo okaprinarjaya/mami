@@ -36,12 +36,18 @@ class CustomersController extends AppController {
         }
 
         if (isset($this->request->query['customer_type']) && !empty($this->request->query['customer_type'])) {
-            $num_type = 2;
+            $num_type = null;
             if ($this->request->query['customer_type'] == 'personal') {
                 $num_type = 1;
+            } else if ($this->request->query['customer_type'] == 'corporate') {
+                $num_type = 2;
+            } else {
+                $num_type = null;
             }
 
-            $conditions['Customer.CLI_TYP'] =  $num_type;
+            if ($num_type != null) {
+                $conditions['Customer.CLI_TYP'] =  $num_type;
+            }
         }
         
         $this->Paginator->settings = array(

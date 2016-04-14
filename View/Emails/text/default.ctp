@@ -1,17 +1,17 @@
-<?php
-/**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       app.View.Emails.text
- * @since         CakePHP(tm) v 0.10.0.1076
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */
-?>
-<?php echo $content; ?>
+Hi <?php echo $pic_name; ?>,
+
+A new ticket has been created.
+
+Ticket Detail
+--------------------------------------------------
+
+Ticket Number: <?php echo $ticket_number; ?>
+
+Customer Name: <?php echo $ticket['Ticket']['customer_name']; ?>
+
+Customer Type: <?php echo $ticket['Customer']['CLI_TYP'] == 2 ? 'Corporate' : 'Personal'; ?>
+
+Interaction: <?php echo $ticket['InteractionLevel1']['interaction_title1']; ?>
+
+Interaction Detail: <?php echo $ticket['InteractionLevel2']['interaction_title2']; ?>
+

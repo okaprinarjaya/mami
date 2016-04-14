@@ -81,7 +81,74 @@ class Ticket extends AppModel {
         }
 
         $this->create();
-        return $this->saveAssociated($data_save);
+        $save = $this->saveAssociated($data_save);
+
+        if ($save) {
+
+            // Fetch last created / newest ticket
+            $aticket = $this->find('first', array(
+                'fields' => array(
+                    'InteractionLevel1.id AS interaction_id1',
+                    'InteractionLevel2.id AS interaction_id2',
+                    'InteractionLevel3.id AS interaction_id3',
+                    'InteractionLevel1.interaction_title AS interaction_title1',
+                    'InteractionLevel2.interaction_title AS interaction_title2',
+                    'InteractionLevel3.interaction_title AS interaction_title3',
+                    'Ticket.*',
+                    'Customer.CLI_TYP'
+                ),
+                'conditions' => array('Ticket.ticket_number' => $ticket_number),
+                'joins' => array(
+                    array(
+                        'table' => 'interactions',
+                        'alias' => 'InteractionLevel1',
+                        'conditions' => array('Ticket.interaction_code1 = InteractionLevel1.id')
+                    ),
+                    array(
+                        'table' => 'interactions',
+                        'alias' => 'InteractionLevel2',
+                        'conditions' => array('Ticket.interaction_code2 = InteractionLevel2.id')
+                    ),
+                    array(
+                        'table' => 'interactions',
+                        'alias' => 'InteractionLevel3',
+                        'type' => 'LEFT',
+                        'conditions' => array('Ticket.interaction_code3 = InteractionLevel3.id')
+                    ),
+                    array(
+                        'table' => 'customers',
+                        'alias' => 'Customer',
+                        'conditions' => array('Ticket.cif = Customer.CUSTOMER_ID')
+                    )
+                ),
+            ));
+
+            // Send email to bosses
+            App::uses('CakeEmail', 'Network/Email');
+
+            $bosses = ClassRegistry::init('User')->find('all', array(
+                'fields' => array('User.email', 'User.complete_name'),
+                'conditions' => array('User.role' => 'administrator')
+            ));
+
+            $email = new CakeEmail('smtp');
+            $email->emailFormat('text');
+            $email->template('default', 'default');
+
+            foreach ($bosses as $boss) {
+                $email->viewVars(array(
+                    'ticket_number' => $ticket_number,
+                    'pic_name' => $boss['User']['complete_name'],
+                    'ticket' => $aticket
+                ));
+
+                $email->to($boss['User']['email']);
+                $email->subject("[MAMI CRM System] New ticket created: ".$ticket_number);
+                $email->send();
+            }
+        }
+
+        return $save;
     }
 
     public function updateTicket(array $data, $user_id)

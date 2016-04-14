@@ -84,11 +84,20 @@
                         echo $this->Form->input('customer_type', array(
                             'options' => array(
                                 'corporate' => 'Corporate',
-                                'personal' => 'Personal'
+                                'personal' => 'Personal',
+                                'a' => 'CIF',
+                                'b' => 'First Name',
+                                'c' => 'Middle Name',
+                                'd' => 'Last Name',
+                                'e' => 'Birth Date',
+                                'f' => 'Mailing Address',
+                                'g' => 'Email',
+                                'h' => 'Home Phone No.',
+                                'i' => 'Mobile Phone No.'
                             ),
                             'empty' => '--EMPTY--',
                             'default' => isset($this->request->query['customer_type']) ? $this->request->query['customer_type'] : '',
-                            'label' => 'Customer Type: &nbsp; ',
+                            'label' => 'Filter by: &nbsp; ',
                             'div' => false,
                             'class' => 'form-control input-sm',
                             'style' => 'margin-right: 5px;'
@@ -116,6 +125,7 @@
             <thead>
                 <tr>
                     <th>No.</th>
+                    <th>CIF</th>
                     <th>First Name</th>
                     <th>Middle Name</th>
                     <th>Last Name</th>
@@ -139,6 +149,8 @@
                 ?>
                 <tr>
                     <td style="text-align: center;"><?php echo $rows_num; ?></td>
+
+                    <td>&nbsp;</td>
                     
                     <td>
                         <?php

@@ -4,7 +4,14 @@ App::uses('AppController', 'Controller');
 class TicketsController extends AppController {
 
 	public $components = array('Paginator');
-    public $uses = array('Ticket', 'TicketStatus', 'Department', 'Interaction', 'Customer');
+    public $uses = array(
+        'Ticket',
+        'TicketStatus',
+        'Department',
+        'Interaction',
+        'Customer',
+        'User'
+    );
 
     public function beforeRender()
     {
@@ -84,12 +91,15 @@ class TicketsController extends AppController {
     public function add($customer_id)
     {
         if ($this->request->is('post')) {
+
             if ($this->Ticket->createTicket(
                 $this->request->data,
                 $this->Auth->user('id')
             )) {
+                
                 $this->Session->setFlash('New ticket created successfuly!', 'Flash/success');
                 return $this->redirect('/tickets');
+
             } else {
                 $this->Session->setFlash('Failed to create new ticket', 'Flash/error');
             }
