@@ -150,7 +150,10 @@
                                 echo $this->Html->link(
                                     '<i class="fa fa-book"></i> &nbsp; Knowledge Base',
                                     'http://192.168.198.180:8484/mami-kb',
-                                    array('escape' => false)
+                                    array(
+                                        'escape' => false,
+                                        'target' => '_blank'
+                                    )
                                 );
                                 ?>
                             </li>

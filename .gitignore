@@ -1,6 +1,7 @@
 # CakePHP 2
 tmp/*
 Config/database.php
+Config/email.php
 webroot/index.php
 vendors/*
 Vendor/*

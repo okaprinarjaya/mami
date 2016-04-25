@@ -13,6 +13,8 @@ class OwnerOccupation extends AppModel {
     
     public function getOwnerOccupation()
     {
-       return $this->find('all');
+        return $this->find('all', array(
+            'group' => array('OwnerOccupation.OCCP_NM')
+        ));
     }
 }
