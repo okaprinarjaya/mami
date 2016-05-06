@@ -5,21 +5,111 @@
     </div>
 
     <div class="box-body">
+        <div style="padding: 5px; border:1px #DDDDDD solid; margin-bottom: 5px;">
+            <?php
+            echo $this->Form->create('Filter', array(
+                'type' => 'get',
+                'class' => 'form-inline',
+                'role' => 'form'
+            ));
+            ?>
 
-        <?php
-        echo $this->Form->create('Filter', array(
-            'type' => 'get',
-            'class' => 'form-inline',
-            'role' => 'form'
-        ));
-        ?>
+            <?php
+            echo $this->Form->input('interaction_code1', array(
+                'options' => $interactions_root,
+                'empty' => '--CHOOSE--',
+                'default' => isset($this->request->query['interaction_code1']) ? $this->request->query['interaction_code1'] : '',
+                'label' => 'Interaction : &nbsp;',
+                'div' => false,
+                'class' => 'form-control input-sm',
+                'style' => 'margin-right: 5px; margin-bottom:5px; width: 150px;'
+            ));
+            ?>
 
-        <div class="container-fluid table-default-filter" style="padding-bottom: 5px;">
-            <div class="row" style="margin-top: 5px; position: relative;">
-                
+            <?php
+            echo $this->Form->input('interaction_code2', array(
+                'options' => array(),
+                'empty' => '--CHOOSE--',
+                'default' => isset($this->request->query['interaction_code2']) ? $this->request->query['interaction_code2'] : '',
+                'label' => 'Interaction Detail :&nbsp;',
+                'div' => false,
+                'class' => 'form-control input-sm',
+                'style' => 'margin-right: 5px; margin-bottom:5px; width: 150px;'
+            ));
+            ?>
+
+            <?php
+            echo $this->Form->input('ticket_status', array(
+                'options' => $ticket_statuses,
+                'empty' => '--NO FILTER--',
+                'default' => isset($this->request->query['ticket_status']) ? $this->request->query['ticket_status'] : '',
+                'label' => 'Status :&nbsp;',
+                'div' => false,
+                'class' => 'form-control input-sm',
+                'style' => 'margin-right: 5px; margin-bottom:5px;'
+            ));
+            ?>
+
+            <?php
+            echo $this->Form->input('sla_state', array(
+                'options' => array(
+                    'LT_SLA' => 'Belum melewati SLA',
+                    'GT_SLA' => 'Sudah Melewati'
+                ),
+                'empty' => '--CHOOSE--',
+                'default' => isset($this->request->query['sla_state']) ? $this->request->query['sla_state'] : '',
+                'label' => 'SLA :&nbsp;',
+                'div' => false,
+                'class' => 'form-control input-sm',
+                'style' => 'margin-right: 5px; margin-bottom:5px;'
+            ));
+            ?>
+
+            <?php
+            echo $this->Form->input('periode', array(
+                'options' => array(
+                    'D' => 'Daily',
+                    'W' => 'Weekly',
+                    'M' => 'Monthly'
+                ),
+                'empty' => '--CHOOSE--',
+                'default' => isset($this->request->query['periode']) ? $this->request->query['periode'] : '',
+                'label' => 'Periode :&nbsp;',
+                'div' => false,
+                'class' => 'form-control input-sm',
+                'style' => 'margin-right: 5px; margin-bottom:5px;'
+            ));
+            ?>
+
+            <br />
+
+            <?php
+            echo $this->Form->input('from_date', array(
+                'type' => 'text',
+                'default' => isset($this->request->query['from_date']) ? $this->request->query['from_date'] : '',
+                'label' => 'From Date :&nbsp;',
+                'div' => false,
+                'class' => 'form-control input-sm',
+                'style' => 'margin-right: 5px;'
+            ));
+            ?>
+
+            <?php
+            echo $this->Form->input('to_date', array(
+                'type' => 'text',
+                'default' => isset($this->request->query['to_date']) ? $this->request->query['to_date'] : '',
+                'label' => 'To Date :&nbsp;',
+                'div' => false,
+                'class' => 'form-control input-sm',
+                'style' => 'margin-right: 5px;'
+            ));
+            ?>
+        </div>
+
+        <div class="dataTables_wrapper form-inline dt-bootstrap">
+            <div class="row">
                 <div class="col-sm-6">
-
-                    <div class="dataTables_length">
+                    <div class="dataTables_length" id="example_length">
                         <label>
                             Show 
                             <?php
@@ -34,64 +124,25 @@
                                 'label' => false,
                                 'div' => false,
                                 'class' => 'form-control input-sm',
-                                'onchange' => 'this.form.submit()'
+                                'onchange' => 'this.form.submit()',
+                                'aria-controls' => 'example'
                             ));
                             ?>
                             entries
                         </label>
                     </div>
-
                 </div>
 
-                <div style="position: absolute; right:5px;">
-                    <div class="dataTables_filter">
-
-                        <?php
-                        echo $this->Form->input('interaction_code1', array(
-                            'options' => $interactions_root,
-                            'empty' => '--CHOOSE--',
-                            'default' => isset($this->request->query['interaction_code1']) ? $this->request->query['interaction_code1'] : '',
-                            'label' => 'Interaction :&nbsp;',
-                            'div' => false,
-                            'class' => 'form-control input-sm',
-                            'style' => 'margin-right: 5px; width: 150px;'
-                        ));
-                        ?>
-
-                        <?php
-                        echo $this->Form->input('interaction_code2', array(
-                            'options' => array(),
-                            'empty' => '--CHOOSE--',
-                            'default' => isset($this->request->query['interaction_code2']) ? $this->request->query['interaction_code2'] : '',
-                            'label' => 'Interaction Detail :&nbsp;',
-                            'div' => false,
-                            'class' => 'form-control input-sm',
-                            'style' => 'margin-right: 5px; width: 150px;'
-                        ));
-                        ?>
-
-                        <?php
-                        echo $this->Form->input('ticket_status', array(
-                            'options' => $ticket_statuses,
-                            'empty' => '--NO FILTER--',
-                            'default' => isset($this->request->query['ticket_status']) ? $this->request->query['ticket_status'] : '',
-                            'label' => 'Status :&nbsp;',
-                            'div' => false,
-                            'class' => 'form-control input-sm',
-                            'style' => 'margin-right: 5px;'
-                        ));
-                        ?>
-
-                        <label style="margin-right: 10px;">
+                <div class="pull-right" style="margin-right: 15px;">
+                    <div id="example_filter" class="dataTables_filter">
+                        <label>
                             <input class="form-control input-sm" type="text" name="kwd" value="<?php echo isset($this->request->query['kwd']) ? $this->request->query['kwd'] : ''; ?>">
                         </label>
-
                         <button type="submit" class="btn btn-mami-brown1">
                             <span class="glyphicon glyphicon-zoom-in"></span> Search
                         </button>
                     </div>
                 </div>
-
             </div>
         </div>
 

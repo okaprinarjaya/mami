@@ -24,9 +24,33 @@ class TicketsController extends AppController {
 
         if (isset($this->request->query['kwd']) && !empty($this->request->query['kwd'])) {
             $conditions['OR'] = array(
-                array('Ticket.customer_name' => '%'.$this->request->query['kwd'].'%'),
-                array('Ticket.email' => '%'.$this->request->query['kwd'].'%'),
+                array('Ticket.customer_name LIKE' => '%'.$this->request->query['kwd'].'%'),
+                array('Ticket.email LIKE' => '%'.$this->request->query['kwd'].'%'),
+                array('Ticket.ticket_number LIKE' => '%'.$this->request->query['kwd'].'%'),
             );
+        }
+
+        if (isset($this->request->query['periode']) && !empty($this->request->query['periode'])) {
+            $periode_conds = array();
+
+            if ($this->request->query['periode'] == 'D') {
+                $periode_conds['Ticket.created'] = date('Y-m-d');
+
+            } else if ($this->request->query['periode'] == 'W') {
+                $week_date_range = $this->current_week_date_range(mktime(0, 0, 0, 4, 12, 2016));
+                $periode_conds['Ticket.created >= ? AND Ticket.created <= ?'] = array(
+                    $week_date_range['sd'],
+                    $week_date_range['ed']
+                );
+
+            } else if ($this->request->query['periode'] == 'M') {
+                $periode_conds['MONTH(Ticket.created)'] = date('m');
+            }
+
+            if ($periode_conds) {
+                $conditions = array_merge($conditions, $periode_conds);
+            }
+            
         }
 
         if (isset($this->request->query['ticket_status']) && !empty($this->request->query['ticket_status'])) {
@@ -143,8 +167,7 @@ class TicketsController extends AppController {
         ));
     }
 
-    public function edit($ticket_id)
-    {
+    public function edit($ticket_id) {
         if ($this->request->is(array('post', 'put'))) {
             
             $this->request->data['TicketMessage'][0]['ticket_message'] = trim($this->request->data['TicketMessage'][0]['ticket_message']);
@@ -164,8 +187,7 @@ class TicketsController extends AppController {
         }
     }
 
-    public function ajax_modal_get_ticket_detail($ticket_id)
-    {
+    public function ajax_modal_get_ticket_detail($ticket_id) {
         $this->autoRender = false;
         $this->layout = null;
 
@@ -187,8 +209,7 @@ class TicketsController extends AppController {
         }
     }
 
-    public function ajax_get_interaction($parent_id)
-    {
+    public function ajax_get_interaction($parent_id) {
         $this->autoRender = false;
         $this->layout = null;
 
@@ -206,6 +227,24 @@ class TicketsController extends AppController {
             $this->response->type('text');
             echo $interactions_str;
         }
+    }
+
+    private function current_week_date_range($test_custom_time = null) {
+        $monday = strtotime("last monday");
+        if ($test_custom_time != null) {
+            $monday = strtotime("last monday", $test_custom_time);
+        }
+
+        $monday = date('w', $monday) == date('w') ? $monday + 7 * 86400 : $monday;
+
+        $sunday = strtotime(date("Y-m-d", $monday)." +6 days");
+        $this_week_sd = date("Y-m-d", $monday);
+        $this_week_ed = date("Y-m-d", $sunday);
+
+        return array(
+            'sd' => $this_week_sd,
+            'ed' => $this_week_ed
+        );
     }
 
 }
