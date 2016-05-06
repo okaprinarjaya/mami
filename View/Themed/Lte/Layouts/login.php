@@ -11,7 +11,7 @@
     <?php
     echo $this->Html->css(array(
         '/bootstrap/css/bootstrap.min.css',
-        'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
+        '/plugins/font-awesome-4.6.2/css/font-awesome.min.css',
         'AdminLTE.min',
         'skin-mami',
         'app'

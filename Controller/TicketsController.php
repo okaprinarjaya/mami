@@ -30,6 +30,26 @@ class TicketsController extends AppController {
             );
         }
 
+        if (isset($this->request->query['sla_state']) && !empty($this->request->query['sla_state'])) {
+            if ($this->request->query['sla_state'] == 'LT_SLA') {
+                array_push($conditions, array('Ticket.due_date > NOW()'));
+            } else if ($this->request->query['sla_state'] == 'GT_SLA') {
+                array_push($conditions, array('Ticket.due_date < NOW()'));
+            }
+        }
+
+        if (isset($this->request->query['from_date_val']) && !empty($this->request->query['from_date_val'])) {
+            $ed = $this->request->query['to_date_val'];
+            if (empty($this->request->query['to_date_val'])) {
+                $ed = $this->request->query['from_date_val'];
+            }
+
+            $conditions['Ticket.created >= ? AND Ticket.created <= ?'] = array(
+                $this->request->query['from_date_val'],
+                $ed
+            );
+        }
+
         if (isset($this->request->query['periode']) && !empty($this->request->query['periode'])) {
             $periode_conds = array();
 
@@ -100,6 +120,12 @@ class TicketsController extends AppController {
 
         $ticket_statuses = $this->TicketStatus->getTicketStatuses();
         $interactions_root = $this->Interaction->getInteractions();
+        $interactions_codes2 = array();
+
+        if (isset($this->request->query['interaction_code1']) && !empty($this->request->query['interaction_code1'])) {
+            $interactions_codes2 = $this->Interaction->getInteractions($this->request->query['interaction_code1']);
+        }
+
         $tickets = array();
 
         try {
@@ -109,7 +135,12 @@ class TicketsController extends AppController {
             $this->redirect('/tickets?'.http_build_query($this->request->query));
         }
 
-        $this->set(compact('tickets', 'ticket_statuses', 'interactions_root'));
+        $this->set(compact(
+            'tickets',
+            'ticket_statuses',
+            'interactions_root',
+            'interactions_codes2'
+        ));
     }
 
     public function add($customer_id)
@@ -185,6 +216,49 @@ class TicketsController extends AppController {
                 return $this->redirect('/tickets');
             }
         }
+    }
+
+    public function export_excel() {
+        require APP . 'Vendor' . DS . 'PHPExcel' . DS . 'Classes' . DS . 'PHPExcel.php';
+
+        // Create new PHPExcel object
+$objPHPExcel = new PHPExcel();
+// Set document properties
+$objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+                             ->setLastModifiedBy("Maarten Balliauw")
+                             ->setTitle("Office 2007 XLSX Test Document")
+                             ->setSubject("Office 2007 XLSX Test Document")
+                             ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+                             ->setKeywords("office 2007 openxml php")
+                             ->setCategory("Test result file");
+// Add some data
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'Hello')
+            ->setCellValue('B2', 'world!')
+            ->setCellValue('C1', 'Hello')
+            ->setCellValue('D2', 'world!');
+// Miscellaneous glyphs, UTF-8
+$objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A4', 'Miscellaneous glyphs')
+            ->setCellValue('A5', 'éàèùâêîôûëïüÿäöüç');
+// Rename worksheet
+$objPHPExcel->getActiveSheet()->setTitle('Simple');
+// Set active sheet index to the first sheet, so Excel opens this as the first sheet
+$objPHPExcel->setActiveSheetIndex(0);
+// Redirect output to a client’s web browser (Excel2007)
+header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+header('Content-Disposition: attachment;filename="01simple.xlsx"');
+header('Cache-Control: max-age=0');
+// If you're serving to IE 9, then the following may be needed
+header('Cache-Control: max-age=1');
+// If you're serving to IE over SSL, then the following may be needed
+header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+header ('Pragma: public'); // HTTP/1.0
+$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+$objWriter->save('php://output');
+exit;
     }
 
     public function ajax_modal_get_ticket_detail($ticket_id) {

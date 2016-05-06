@@ -24,5 +24,28 @@ $(document).ready(function () {
             $('#FilterInteractionCode2').html('<option value="" selected="selected">--EMPTY--</option>');
         }
     });
+
+    $("#FooFromDate").datepicker({
+        format: 'dd/mm/yyyy',
+        autoclose: true
+    }).on("changeDate", function (e) {
+        $("#FilterFromDateVal").val(e.format("yyyy-mm-dd"));
+        $("#FilterPeriode").val('');        
+    });
+
+    $("#FooToDate").datepicker({
+        format: 'dd/mm/yyyy',
+        autoclose: true
+    }).on("changeDate", function (e) {
+        $("#FilterToDateVal").val(e.format("yyyy-mm-dd"));
+        $("#FilterPeriode").val('');
+    });
+
+    $("#FilterPeriode").on("change", function () {
+        $("#FooFromDate").val("");
+        $("#FooToDate").val("");
+        $("#FilterFromDateVal").val("");
+        $("#FilterToDateVal").val("");
+    });
     
 });

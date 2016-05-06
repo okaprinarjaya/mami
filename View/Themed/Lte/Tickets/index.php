@@ -28,7 +28,7 @@
 
             <?php
             echo $this->Form->input('interaction_code2', array(
-                'options' => array(),
+                'options' => $interactions_codes2,
                 'empty' => '--CHOOSE--',
                 'default' => isset($this->request->query['interaction_code2']) ? $this->request->query['interaction_code2'] : '',
                 'label' => 'Interaction Detail :&nbsp;',
@@ -54,7 +54,7 @@
             echo $this->Form->input('sla_state', array(
                 'options' => array(
                     'LT_SLA' => 'Belum melewati SLA',
-                    'GT_SLA' => 'Sudah Melewati'
+                    'GT_SLA' => 'Sudah Melewati SLA'
                 ),
                 'empty' => '--CHOOSE--',
                 'default' => isset($this->request->query['sla_state']) ? $this->request->query['sla_state'] : '',
@@ -84,7 +84,7 @@
             <br />
 
             <?php
-            echo $this->Form->input('from_date', array(
+            echo $this->Form->input('Foo.from_date', array(
                 'type' => 'text',
                 'default' => isset($this->request->query['from_date']) ? $this->request->query['from_date'] : '',
                 'label' => 'From Date :&nbsp;',
@@ -92,16 +92,26 @@
                 'class' => 'form-control input-sm',
                 'style' => 'margin-right: 5px;'
             ));
+
+            echo $this->Form->input('from_date_val', array(
+                'type' => 'hidden',
+                'default' => isset($this->request->query['from_date_val']) ? $this->request->query['from_date_val'] : ''
+            ));
             ?>
 
             <?php
-            echo $this->Form->input('to_date', array(
+            echo $this->Form->input('Foo.to_date', array(
                 'type' => 'text',
                 'default' => isset($this->request->query['to_date']) ? $this->request->query['to_date'] : '',
                 'label' => 'To Date :&nbsp;',
                 'div' => false,
                 'class' => 'form-control input-sm',
                 'style' => 'margin-right: 5px;'
+            ));
+
+            echo $this->Form->input('to_date_val', array(
+                'type' => 'hidden',
+                'default' => isset($this->request->query['to_date_val']) ? $this->request->query['to_date_val'] : ''
             ));
             ?>
         </div>
@@ -130,6 +140,20 @@
                             ?>
                             entries
                         </label>
+
+                        <?php
+                        echo $this->Html->link(
+                            '<i class="fa fa-file-excel-o"></i> Export to Excel',
+                            array(
+                                'controller' => 'tickets',
+                                'action' => 'export_excel'
+                            ),
+                            array(
+                                'class' => 'btn btn-sm btn-mami-green1',
+                                'escape' => false
+                            )
+                        );
+                        ?>
                     </div>
                 </div>
 
@@ -329,8 +353,14 @@
 </style>
 
 <?php
+echo $this->Html->css(
+    array('/plugins/datepicker/datepicker3'),
+    array('inline' => false)
+);
+
 echo $this->Html->script(
     array(
+        '/plugins/datepicker/bootstrap-datepicker',
         'app/tickets/tickets_index'
     ),
     array('block' => 'scriptBottom')
