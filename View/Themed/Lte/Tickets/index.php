@@ -140,25 +140,25 @@
                             ?>
                             entries
                         </label>
+                    </div>
+                </div>
 
+                <div class="pull-right" style="margin-right: 15px;">
+                    <div id="example_filter" class="dataTables_filter">
                         <?php
                         echo $this->Html->link(
                             '<i class="fa fa-file-excel-o"></i> Export to Excel',
-                            array(
+                            Router::url(array(
                                 'controller' => 'tickets',
                                 'action' => 'export_excel'
-                            ),
+                            )).'?'.http_build_query($this->request->query),
                             array(
                                 'class' => 'btn btn-sm btn-mami-green1',
                                 'escape' => false
                             )
                         );
                         ?>
-                    </div>
-                </div>
 
-                <div class="pull-right" style="margin-right: 15px;">
-                    <div id="example_filter" class="dataTables_filter">
                         <label>
                             <input class="form-control input-sm" type="text" name="kwd" value="<?php echo isset($this->request->query['kwd']) ? $this->request->query['kwd'] : ''; ?>">
                         </label>

@@ -221,44 +221,266 @@ class TicketsController extends AppController {
     public function export_excel() {
         require APP . 'Vendor' . DS . 'PHPExcel' . DS . 'Classes' . DS . 'PHPExcel.php';
 
-        // Create new PHPExcel object
-$objPHPExcel = new PHPExcel();
-// Set document properties
-$objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
-                             ->setLastModifiedBy("Maarten Balliauw")
-                             ->setTitle("Office 2007 XLSX Test Document")
-                             ->setSubject("Office 2007 XLSX Test Document")
-                             ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
-                             ->setKeywords("office 2007 openxml php")
-                             ->setCategory("Test result file");
-// Add some data
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('A1', 'Hello')
-            ->setCellValue('B2', 'world!')
-            ->setCellValue('C1', 'Hello')
-            ->setCellValue('D2', 'world!');
-// Miscellaneous glyphs, UTF-8
-$objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('A4', 'Miscellaneous glyphs')
-            ->setCellValue('A5', 'éàèùâêîôûëïüÿäöüç');
-// Rename worksheet
-$objPHPExcel->getActiveSheet()->setTitle('Simple');
-// Set active sheet index to the first sheet, so Excel opens this as the first sheet
-$objPHPExcel->setActiveSheetIndex(0);
-// Redirect output to a client’s web browser (Excel2007)
-header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="01simple.xlsx"');
-header('Cache-Control: max-age=0');
-// If you're serving to IE 9, then the following may be needed
-header('Cache-Control: max-age=1');
-// If you're serving to IE over SSL, then the following may be needed
-header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
-header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-header ('Pragma: public'); // HTTP/1.0
-$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-$objWriter->save('php://output');
-exit;
+        $conditions = array();
+
+        if (isset($this->request->query['kwd']) && !empty($this->request->query['kwd'])) {
+            $conditions['OR'] = array(
+                array('Ticket.customer_name LIKE' => '%'.$this->request->query['kwd'].'%'),
+                array('Ticket.email LIKE' => '%'.$this->request->query['kwd'].'%'),
+                array('Ticket.ticket_number LIKE' => '%'.$this->request->query['kwd'].'%'),
+            );
+        }
+
+        if (isset($this->request->query['sla_state']) && !empty($this->request->query['sla_state'])) {
+            if ($this->request->query['sla_state'] == 'LT_SLA') {
+                array_push($conditions, array('Ticket.due_date > NOW()'));
+            } else if ($this->request->query['sla_state'] == 'GT_SLA') {
+                array_push($conditions, array('Ticket.due_date < NOW()'));
+            }
+        }
+
+        if (isset($this->request->query['from_date_val']) && !empty($this->request->query['from_date_val'])) {
+            $ed = $this->request->query['to_date_val'];
+            if (empty($this->request->query['to_date_val'])) {
+                $ed = $this->request->query['from_date_val'];
+            }
+
+            $conditions['Ticket.created >= ? AND Ticket.created <= ?'] = array(
+                $this->request->query['from_date_val'],
+                $ed
+            );
+        }
+
+        if (isset($this->request->query['periode']) && !empty($this->request->query['periode'])) {
+            $periode_conds = array();
+
+            if ($this->request->query['periode'] == 'D') {
+                $periode_conds['Ticket.created'] = date('Y-m-d');
+
+            } else if ($this->request->query['periode'] == 'W') {
+                $week_date_range = $this->current_week_date_range(mktime(0, 0, 0, 4, 12, 2016));
+                $periode_conds['Ticket.created >= ? AND Ticket.created <= ?'] = array(
+                    $week_date_range['sd'],
+                    $week_date_range['ed']
+                );
+
+            } else if ($this->request->query['periode'] == 'M') {
+                $periode_conds['MONTH(Ticket.created)'] = date('m');
+            }
+
+            if ($periode_conds) {
+                $conditions = array_merge($conditions, $periode_conds);
+            }
+            
+        }
+
+        if (isset($this->request->query['ticket_status']) && !empty($this->request->query['ticket_status'])) {
+            $conditions['Ticket.ticket_status'] = $this->request->query['ticket_status'];
+        }
+
+        if (isset($this->request->query['interaction_code1']) && !empty($this->request->query['interaction_code1'])) {
+            $conditions['InteractionLevel1.id'] = $this->request->query['interaction_code1'];
+        }
+
+        if (isset($this->request->query['interaction_code2']) && !empty($this->request->query['interaction_code2'])) {
+            $conditions['InteractionLevel2.id'] = $this->request->query['interaction_code2'];
+        }
+
+        $options = array(
+            'fields' => array(
+                'InteractionLevel1.id AS interaction_id1',
+                'InteractionLevel2.id AS interaction_id2',
+                'InteractionLevel3.id AS interaction_id3',
+                'InteractionLevel1.interaction_title AS interaction_title1',
+                'InteractionLevel2.interaction_title AS interaction_title2',
+                'InteractionLevel3.interaction_title AS interaction_title3',
+                'Ticket.*'
+            ),
+            'conditions' => $conditions,
+            'joins' => array(
+                array(
+                    'table' => 'interactions',
+                    'alias' => 'InteractionLevel1',
+                    'conditions' => array('Ticket.interaction_code1 = InteractionLevel1.id')
+                ),
+                array(
+                    'table' => 'interactions',
+                    'alias' => 'InteractionLevel2',
+                    'conditions' => array('Ticket.interaction_code2 = InteractionLevel2.id')
+                ),
+                array(
+                    'table' => 'interactions',
+                    'alias' => 'InteractionLevel3',
+                    'type' => 'LEFT',
+                    'conditions' => array('Ticket.interaction_code3 = InteractionLevel3.id')
+                )
+            ),
+            'order' => array('Ticket.created' => 'DESC'),
+            'limit' => isset($this->request->query['rpp']) ? $this->request->query['rpp'] : 50,
+        );
+
+        $this->Ticket->recursive = 2;
+        $tickets = $this->Ticket->find('all', $options);
+        $ticket_statuses = $this->TicketStatus->getTicketStatuses();
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+
+        // Set heading title
+        $objPHPExcel->getActiveSheet()->setCellValue('B2', "Report");
+        $objPHPExcel->getActiveSheet()->getStyle('B2')->applyFromArray(array(
+            'font' => array('size' => 20)
+        ));
+
+        $r1_start_row_th = 4;
+        $r1_start_row_td = $r1_start_row_th + 1;
+
+        $objPHPExcel->getActiveSheet()->setCellValue('B'.$r1_start_row_th, 'Ticket No.');
+        $objPHPExcel->getActiveSheet()->setCellValue('C'.$r1_start_row_th, 'CIF');
+        $objPHPExcel->getActiveSheet()->setCellValue('D'.$r1_start_row_th, 'Customer Name');
+        $objPHPExcel->getActiveSheet()->setCellValue('E'.$r1_start_row_th, 'Interaction');
+        $objPHPExcel->getActiveSheet()->setCellValue('F'.$r1_start_row_th, 'Interaction Detail');
+        $objPHPExcel->getActiveSheet()->setCellValue('G'.$r1_start_row_th, 'Created Date');
+        $objPHPExcel->getActiveSheet()->setCellValue('H'.$r1_start_row_th, 'Due Date');
+        $objPHPExcel->getActiveSheet()->setCellValue('I'.$r1_start_row_th, 'Days');
+        $objPHPExcel->getActiveSheet()->setCellValue('J'.$r1_start_row_th, 'Aging');
+        $objPHPExcel->getActiveSheet()->setCellValue('K'.$r1_start_row_th, 'Status');
+        $objPHPExcel->getActiveSheet()->setCellValue('L'.$r1_start_row_th, 'Dept.');
+
+        $num = 1;
+        foreach ($tickets as $item) {
+            $objPHPExcel->getActiveSheet()->setCellValue('B'.$r1_start_row_td, trim(ucwords($item['Ticket']['ticket_number'])));
+            $objPHPExcel->getActiveSheet()->setCellValue('C'.$r1_start_row_td, trim($item['Ticket']['cif']));
+            $objPHPExcel->getActiveSheet()->setCellValue('D'.$r1_start_row_td, trim($item['Ticket']['customer_name']));
+            $objPHPExcel->getActiveSheet()->setCellValue('E'.$r1_start_row_td, trim($item['InteractionLevel1']['interaction_title1']));
+            $objPHPExcel->getActiveSheet()->setCellValue('F'.$r1_start_row_td, trim($item['InteractionLevel2']['interaction_title2']));
+            $objPHPExcel->getActiveSheet()->setCellValue('G'.$r1_start_row_td, date('d/m/Y', strtotime($item['Ticket']['created'])));
+
+            if ($item['Ticket']['due_date'] != null):
+                $objPHPExcel->getActiveSheet()->setCellValue('H'.$r1_start_row_td, date('d/m/Y', strtotime($item['Ticket']['due_date'])));
+            else:
+                $objPHPExcel->getActiveSheet()->setCellValue('H'.$r1_start_row_td, '-');
+            endif;
+
+            $created_date = strtotime($item['Ticket']['created']);
+            $now = time();
+            $datediff = $now - $created_date;
+            $days = floor($datediff / (60 * 60 * 24));
+            $days_label = 'day';
+
+            if ($days > 1) {
+                $days_label = 'days';
+            }
+
+            $objPHPExcel->getActiveSheet()->setCellValue('I'.$r1_start_row_td, $days.' '.$days_label);
+
+            $vJ = '';
+            if ($item['Ticket']['due_date'] != null):
+                $now = time();
+                $due_date = strtotime($item['Ticket']['due_date']);
+                if ($now > $due_date):
+                    $datediff_aging = $now - $due_date;
+                    $days_aging = floor($datediff_aging / (60 * 60 * 24));
+
+                    $vJ = '+'.$days_aging;
+                else:
+                    $vJ = '-';
+                endif;
+            else:
+                $vJ = '-';
+            endif;
+
+            $objPHPExcel->getActiveSheet()->setCellValue('J'.$r1_start_row_td, $vJ);
+            
+            $objPHPExcel->getActiveSheet()->setCellValue('K'.$r1_start_row_td, $ticket_statuses[$item['Ticket']['ticket_status']]);
+            
+            $objPHPExcel->getActiveSheet()->setCellValue('L'.$r1_start_row_td, isset($item['Department']['department_name']) ? $item['Department']['department_name'] : '-');
+
+            $r1_start_row_td++;
+            $num++;
+        }
+
+        // Set width column report 1
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(10);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(45);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(21);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(31);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(19);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(17);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(11);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(9);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('K')->setWidth(9);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('L')->setWidth(23);
+
+        // Set alignment column header (th) report 1
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('B'.$r1_start_row_th.':L'.$r1_start_row_th)
+                    ->getAlignment()
+                    ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('B'.$r1_start_row_th.':L'.$r1_start_row_th)
+                    ->getAlignment()
+                    ->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+        // Set body (td) cells report 1
+        $start_data_cell = $r1_start_row_th + 1;
+        
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('B'.$start_data_cell.':C'.$r1_start_row_td)
+                    ->getAlignment()
+                    ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('B'.$start_data_cell.':C'.$r1_start_row_td)
+                    ->getAlignment()
+                    ->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('D'.$start_data_cell.':D'.$r1_start_row_td)
+                    ->getAlignment()
+                    ->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+        // Set bold col header report 1 
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('B'.$r1_start_row_th.':L'.$r1_start_row_th)
+                    ->getFont()
+                    ->setBold(true);
+
+        $objPHPExcel->getActiveSheet()
+                    ->getRowDimension(4)
+                    ->setRowHeight(23);
+
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('B'.$r1_start_row_th.':L'.$r1_start_row_td)
+                    ->applyFromArray(array(
+                        'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
+                    ));
+        
+        // File name
+        $title = 'Report';
+        $filename = $title.".xlsx";
+
+        // Redirect output to a client’s web browser (Excel2007)
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'.$filename.'"');
+        header('Cache-Control: max-age=0');
+
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
+
+        // If you're serving to IE over SSL, then the following may be needed
+        header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+        header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header ('Pragma: public'); // HTTP/1.0
+
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->setIncludeCharts(TRUE);
+        $objWriter->save('php://output');
+
+        exit(0);
     }
 
     public function ajax_modal_get_ticket_detail($ticket_id) {
