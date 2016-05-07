@@ -35,6 +35,8 @@ class TicketsController extends AppController {
                 array_push($conditions, array('Ticket.due_date > NOW()'));
             } else if ($this->request->query['sla_state'] == 'GT_SLA') {
                 array_push($conditions, array('Ticket.due_date < NOW()'));
+            }  else if ($this->request->query['sla_state'] == 'EQ_SLA') {
+                array_push($conditions, array('DATE(Ticket.due_date) = DATE(NOW())'));
             }
         }
 
@@ -236,6 +238,8 @@ class TicketsController extends AppController {
                 array_push($conditions, array('Ticket.due_date > NOW()'));
             } else if ($this->request->query['sla_state'] == 'GT_SLA') {
                 array_push($conditions, array('Ticket.due_date < NOW()'));
+            }  else if ($this->request->query['sla_state'] == 'EQ_SLA') {
+                array_push($conditions, array('DATE(Ticket.due_date) = DATE(NOW())'));
             }
         }
 

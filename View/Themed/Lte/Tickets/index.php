@@ -54,7 +54,8 @@
             echo $this->Form->input('sla_state', array(
                 'options' => array(
                     'LT_SLA' => 'Belum melewati SLA',
-                    'GT_SLA' => 'Sudah Melewati SLA'
+                    'GT_SLA' => 'Sudah Melewati SLA',
+                    'EQ_SLA' => 'Due Date',
                 ),
                 'empty' => '--CHOOSE--',
                 'default' => isset($this->request->query['sla_state']) ? $this->request->query['sla_state'] : '',
