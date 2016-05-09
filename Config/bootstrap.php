@@ -127,3 +127,18 @@ function getWDays($startDate, $holidays = array(), $wDays) {
 
     return $new_date;
 }
+
+function date_range($first, $last, $step = '+1 day', $output_format = 'Y-m-d' ) {
+
+    $dates = array();
+    $current = strtotime($first);
+    $last = strtotime($last);
+
+    while( $current <= $last ) {
+
+        $dates[] = date($output_format, $current);
+        $current = strtotime($step, $current);
+    }
+
+    return $dates;
+}

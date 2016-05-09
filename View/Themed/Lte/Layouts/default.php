@@ -40,7 +40,7 @@
                 <div class="container-fluid">
                     
                     <div class="navbar-header">
-                        <a href="<?php echo Router::url('/').'customers'; ?>" class="navbar-brand">
+                        <a href="<?php echo Router::url('/').'dashboard'; ?>" class="navbar-brand">
                             <?php echo $this->Html->image('logo.png'); ?>
                         </a>
 
@@ -113,6 +113,19 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+
+                                    <li>
+                                        <?php
+                                        echo $this->Html->link(
+                                            '<i class="fa fa-dashboard"></i> &nbsp; Dashboard',
+                                            array(
+                                                'controller' => 'dashboard',
+                                                'action' => 'index'
+                                            ),
+                                            array('escape' => false)
+                                        );
+                                        ?>
+                                    </li>
 
                                     <li>
                                         <?php
