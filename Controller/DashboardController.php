@@ -21,11 +21,25 @@ class DashboardController extends AppController {
         //
     }
 
-    public function ajax_chart() {
+    public function ajax_chart($periode) {
         $this->autoRender = false;
+
         if ($this->request->is('ajax')) {
 
-            $date_range = date_range('2016-04-01', '2016-04-30');
+            $date_info = array();
+            if ($periode == 'monthly') {
+                $date_info['sd'] = date('Y-04-01');
+                $date_info['ed'] = date('Y-04-30');
+            } else if ($periode == 'weekly') {
+                $week_date_range = current_week_date_range(mktime(0, 0, 0, 4, 12, 2016));
+                $date_info['sd'] = $week_date_range['sd'];
+                $date_info['ed'] = $week_date_range['ed'];
+            } else {
+                $date_info['sd'] = date('Y-04-13');
+                $date_info['ed'] = date('Y-04-13');
+            }
+
+            $date_range = date_range($date_info['sd'], $date_info['ed']);
             $chart_data = array();
 
             foreach ($date_range as $item) {
@@ -40,7 +54,7 @@ class DashboardController extends AppController {
                 ),
                 'conditions' => array(
                     'Ticket.ticket_status' => 'P',
-                    'DATE(Ticket.created) >= ? AND DATE(Ticket.created) <= ?' => array('2016-04-01', '2016-04-28')
+                    'DATE(Ticket.created) >= ? AND DATE(Ticket.created) <= ?' => array($date_info['sd'], $date_info['ed'])
                 ),
                 'group' => array('DATE(Ticket.created)')
             ));
@@ -52,7 +66,7 @@ class DashboardController extends AppController {
                 ),
                 'conditions' => array(
                     'Ticket.ticket_status' => 'S',
-                    'DATE(Ticket.created) >= ? AND DATE(Ticket.created) <= ?' => array('2016-04-01', '2016-04-30')
+                    'DATE(Ticket.created) >= ? AND DATE(Ticket.created) <= ?' => array($date_info['sd'], $date_info['ed'])
                 ),
                 'group' => array('DATE(Ticket.created)')
             ));
@@ -66,13 +80,11 @@ class DashboardController extends AppController {
             }
 
             $chart_data_display = array();
-            $chart_data['2016-04-10']['OPEN'] = 10;
-            $chart_data['2016-04-10']['SUBMIT'] = 15;
 
             foreach ($chart_data as $itemKey => $itemVal) {
                 $dt_split = explode("-", $itemKey);
                 $chart_data_display[] = array(
-                    'dt' => $dt_split[2].'/'.$dt_split[1],
+                    'dt' => $dt_split[2],
                     'vo' => $itemVal['OPEN'],
                     'vs' => $itemVal['SUBMIT']
                 );

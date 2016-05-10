@@ -142,3 +142,21 @@ function date_range($first, $last, $step = '+1 day', $output_format = 'Y-m-d' ) 
 
     return $dates;
 }
+
+function current_week_date_range($test_custom_time = null) {
+    $monday = strtotime("last monday");
+    if ($test_custom_time != null) {
+        $monday = strtotime("last monday", $test_custom_time);
+    }
+
+    $monday = date('w', $monday) == date('w') ? $monday + 7 * 86400 : $monday;
+
+    $sunday = strtotime(date("Y-m-d", $monday)." +6 days");
+    $this_week_sd = date("Y-m-d", $monday);
+    $this_week_ed = date("Y-m-d", $sunday);
+
+    return array(
+        'sd' => $this_week_sd,
+        'ed' => $this_week_ed
+    );
+}

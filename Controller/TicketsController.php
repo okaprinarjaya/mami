@@ -59,7 +59,7 @@ class TicketsController extends AppController {
                 $periode_conds['Ticket.created'] = date('Y-m-d');
 
             } else if ($this->request->query['periode'] == 'W') {
-                $week_date_range = $this->current_week_date_range(mktime(0, 0, 0, 4, 12, 2016));
+                $week_date_range = current_week_date_range(mktime(0, 0, 0, 4, 12, 2016));
                 $periode_conds['Ticket.created >= ? AND Ticket.created <= ?'] = array(
                     $week_date_range['sd'],
                     $week_date_range['ed']
@@ -262,7 +262,7 @@ class TicketsController extends AppController {
                 $periode_conds['Ticket.created'] = date('Y-m-d');
 
             } else if ($this->request->query['periode'] == 'W') {
-                $week_date_range = $this->current_week_date_range(mktime(0, 0, 0, 4, 12, 2016));
+                $week_date_range = current_week_date_range(mktime(0, 0, 0, 4, 12, 2016));
                 $periode_conds['Ticket.created >= ? AND Ticket.created <= ?'] = array(
                     $week_date_range['sd'],
                     $week_date_range['ed']
@@ -527,24 +527,6 @@ class TicketsController extends AppController {
             $this->response->type('text');
             echo $interactions_str;
         }
-    }
-
-    private function current_week_date_range($test_custom_time = null) {
-        $monday = strtotime("last monday");
-        if ($test_custom_time != null) {
-            $monday = strtotime("last monday", $test_custom_time);
-        }
-
-        $monday = date('w', $monday) == date('w') ? $monday + 7 * 86400 : $monday;
-
-        $sunday = strtotime(date("Y-m-d", $monday)." +6 days");
-        $this_week_sd = date("Y-m-d", $monday);
-        $this_week_ed = date("Y-m-d", $sunday);
-
-        return array(
-            'sd' => $this_week_sd,
-            'ed' => $this_week_ed
-        );
     }
 
 }
