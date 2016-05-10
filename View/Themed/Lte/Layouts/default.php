@@ -134,7 +134,7 @@
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            )).'?interaction_code1=4&interaction_code2=&ticket_status=&sla_state=&periode=&from_date=&from_date_val=&to_date=&to_date_val=&rpp=10&kwd=',
+                                            ),true).'?interaction_code1=4&interaction_code2=&ticket_status=&sla_state=&periode=&from_date=&from_date_val=&to_date=&to_date_val=&rpp=10&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -147,7 +147,7 @@
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            )).'?interaction_code1=3&interaction_code2=&ticket_status=&sla_state=&periode=&from_date=&from_date_val=&to_date=&to_date_val=&rpp=10&kwd=',
+                                            ),true).'?interaction_code1=3&interaction_code2=&ticket_status=&sla_state=&periode=&from_date=&from_date_val=&to_date=&to_date_val=&rpp=10&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -160,7 +160,7 @@
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            )).'?interaction_code1=1&interaction_code2=&ticket_status=&sla_state=&periode=&from_date=&from_date_val=&to_date=&to_date_val=&rpp=10&kwd=',
+                                            ),true).'?interaction_code1=1&interaction_code2=&ticket_status=&sla_state=&periode=&from_date=&from_date_val=&to_date=&to_date_val=&rpp=10&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -173,7 +173,7 @@
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            )).'?interaction_code1=&interaction_code2=&ticket_status=&sla_state=EQ_SLA&periode=&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
+                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=&sla_state=EQ_SLA&periode=&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -187,7 +187,7 @@
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            )).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=LT_SLA&periode=D&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
+                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=LT_SLA&periode=D&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -200,7 +200,7 @@
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            )).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=LT_SLA&periode=W&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
+                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=LT_SLA&periode=W&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -213,7 +213,7 @@
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            )).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=LT_SLA&periode=M&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
+                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=LT_SLA&periode=M&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -228,7 +228,7 @@
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            )).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=LT_SLA&periode=D&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
+                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=LT_SLA&periode=D&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -241,7 +241,7 @@
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            )).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=LT_SLA&periode=W&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
+                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=LT_SLA&periode=W&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -254,7 +254,7 @@
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            )).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=LT_SLA&periode=M&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
+                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=LT_SLA&periode=M&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -268,7 +268,7 @@
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            )).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=GT_SLA&periode=D&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
+                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=GT_SLA&periode=D&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -281,7 +281,7 @@
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            )).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=GT_SLA&periode=W&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
+                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=GT_SLA&periode=W&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -294,7 +294,7 @@
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            )).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=GT_SLA&periode=M&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
+                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=GT_SLA&periode=M&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -309,7 +309,7 @@
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            )).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=GT_SLA&periode=D&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
+                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=GT_SLA&periode=D&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -322,7 +322,7 @@
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            )).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=GT_SLA&periode=W&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
+                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=GT_SLA&periode=W&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -335,7 +335,7 @@
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            )).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=GT_SLA&periode=M&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
+                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=GT_SLA&periode=M&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>

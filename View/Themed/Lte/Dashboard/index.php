@@ -1,5 +1,5 @@
 <?php
-$weekly = current_week_date_range(mktime(0, 0, 0, 4, 12, 2016));
+$weekly = current_week_date_range();
 ?>
 
 <div class="box box-mami-green1">
