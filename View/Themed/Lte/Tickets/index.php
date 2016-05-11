@@ -152,7 +152,7 @@
                             Router::url(array(
                                 'controller' => 'tickets',
                                 'action' => 'export_excel'
-                            )).'?'.http_build_query($this->request->query),
+                            ), true).'?'.http_build_query($this->request->query),
                             array(
                                 'class' => 'btn btn-sm btn-mami-green1',
                                 'escape' => false
