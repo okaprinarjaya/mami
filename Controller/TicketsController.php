@@ -354,7 +354,7 @@ class TicketsController extends AppController {
         $num = 1;
         foreach ($tickets as $item) {
             $objPHPExcel->getActiveSheet()->setCellValue('B'.$r1_start_row_td, trim(ucwords($item['Ticket']['ticket_number'])));
-            $objPHPExcel->getActiveSheet()->setCellValue('C'.$r1_start_row_td, trim($item['Ticket']['cif']));
+            $objPHPExcel->getActiveSheet()->setCellValue('C'.$r1_start_row_td, "");
             $objPHPExcel->getActiveSheet()->setCellValue('D'.$r1_start_row_td, trim($item['Ticket']['customer_name']));
             $objPHPExcel->getActiveSheet()->setCellValue('E'.$r1_start_row_td, trim($item['InteractionLevel1']['interaction_title1']));
             $objPHPExcel->getActiveSheet()->setCellValue('F'.$r1_start_row_td, trim($item['InteractionLevel2']['interaction_title2']));

@@ -213,9 +213,7 @@
                     </td>
 
                     <td>
-                        <?php
-                        echo $item['Ticket']['cif'];
-                        ?>
+                        &nbsp;
                     </td>
 
                     <td>
