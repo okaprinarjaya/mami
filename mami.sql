@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50531
 File Encoding         : 65001
 
-Date: 2016-04-01 08:10:40
+Date: 2016-05-21 12:05:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -48,10 +48,16 @@ CREATE TABLE `customers` (
   `BIRTH_PLACE` varchar(16) DEFAULT NULL,
   `PRIM_PHON_NUM` varchar(16) DEFAULT NULL,
   `MOBILE_NUM` varchar(16) DEFAULT NULL,
+  `WEBSITE` varchar(64) DEFAULT NULL,
   `OTHER_PHON_NUM` varchar(16) DEFAULT NULL,
   `FAX_NUM` varchar(16) DEFAULT NULL,
   `OFFICE_PHON_NUM` varchar(16) DEFAULT NULL,
   `EXT` varchar(8) DEFAULT NULL,
+  `CLI_NM_PERSON` varchar(128) DEFAULT NULL,
+  `EXT_PERSON` varchar(32) DEFAULT NULL,
+  `MOBILE_NUM_PERSON` varchar(32) DEFAULT NULL,
+  `EMAIL_ADD_PERSON` varchar(32) DEFAULT NULL,
+  `FAX_NUM_PERSON` varchar(32) DEFAULT NULL,
   `EMAIL_ADD` varchar(32) DEFAULT NULL,
   `RELIGION` tinyint(4) DEFAULT NULL,
   `MARITAL_STATUS` char(1) DEFAULT NULL,
@@ -73,11 +79,18 @@ CREATE TABLE `customers` (
   `ADDR_1` varchar(64) DEFAULT NULL,
   `ADDR_2` varchar(64) DEFAULT NULL,
   `ADDR_3` varchar(64) DEFAULT NULL,
+  `CITY_CODE` varchar(64) DEFAULT NULL,
+  `PROV_CODE` varchar(64) DEFAULT NULL,
   `ZIP_CODE` varchar(8) DEFAULT NULL,
+  `ADDR_CODE` varchar(8) DEFAULT NULL,
   `ADDR_1_DEFAULT` varchar(64) DEFAULT NULL,
   `ADDR_2_DEFAULT` varchar(64) DEFAULT NULL,
   `ADDR_3_DEFAULT` varchar(64) DEFAULT NULL,
+  `CITY_CODE_DEFAULT` varchar(8) DEFAULT NULL,
+  `PROV_CODE_DEFAULT` varchar(8) DEFAULT NULL,
   `ZIP_CODE_DEFAULT` varchar(8) DEFAULT NULL,
+  `ADDR_CODE_DEFAULT` varchar(8) DEFAULT NULL,
+  `COUNTRY_CODE_DEFAULT` varchar(8) DEFAULT NULL,
   `KITAS` varchar(32) DEFAULT NULL,
   `KIMS` varchar(32) DEFAULT NULL,
   `KITAP` varchar(32) DEFAULT NULL,
@@ -100,20 +113,25 @@ CREATE TABLE `customers` (
   `ENTITY_TYP` varchar(4) DEFAULT NULL,
   `CREATED_BY` int(11) DEFAULT NULL,
   `CREATED_BY_AGT` varchar(8) DEFAULT NULL,
-  `CLI_NM_COMPANY` varchar(32) DEFAULT NULL,
+  `CLI_NM_COMPANY` varchar(128) DEFAULT NULL,
+  `CLI_NM_COMPANY_SHORT` varchar(128) DEFAULT NULL,
+  `CORP_BIC_CODE` varchar(32) DEFAULT NULL,
   `ADDR_1_COMPANY` varchar(512) DEFAULT NULL,
   `ADDR_2_COMPANY` varchar(512) DEFAULT NULL,
   `ADDR_3_COMPANY` varchar(512) DEFAULT NULL,
   `ZIP_CODE_COMPANY` varchar(8) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
+  `OFFICE_PHON_NUM_PERSON` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`CUSTOMER_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of customers
 -- ----------------------------
-INSERT INTO `customers` VALUES ('1', '', '', '1', '001', '1', '', '', 'Bung', 'Jonny', 'Lastri', 'M', '', null, '', null, '', null, '', '', '', '', '', '', null, '', '08174128301', '08174128301', '08174128301', '', '08174128301', '112233', 'bungjonny@yahoo.com', null, '', null, '', '', '', '', '', null, null, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '0140001', '111222333', 'Bung Jonny', 'B C A PINTU AIR  I', '', '', '', '', '', '', '', '', '', '', '1', null, '', '', '', '', '', '2016-03-30 03:35:00', '2016-04-01 02:57:33');
+INSERT INTO `customers` VALUES ('1', '', '900001', '1', '001', null, '', '', 'Oka', '', 'Prinarjaya', 'M', '', null, '', null, '', null, '', '', '', '', '', '', '1987-03-20', '', '', '08174128301', '', '', '', '', '', '', '', '', '', '', 'okaprinarjaya@gmail.com', null, '', null, '', '', '', '', '', null, null, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, '', '', '', null, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1', null, '', '', '', '', '', '', '', '2016-04-12 17:29:30', '2016-04-13 17:29:25', '');
+INSERT INTO `customers` VALUES ('2', '', '', '1', '', null, '', '', 'Alexander', '', 'Horison', 'M', '', null, '', null, '', null, '', '', '', '', '', '', null, '', '', '08174128301', null, '', '', '', '', null, null, null, null, null, 'alexanderhorison@gmail.com', null, '', null, '', '', '', '', '', null, null, '', '', '', '', '', '', '', '', '', '', null, null, '', null, '', '', '', null, null, '', null, null, '', '', '', null, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1', null, '', null, null, '', '', '', '', '2016-04-12 18:06:29', '2016-04-12 18:06:29', null);
+INSERT INTO `customers` VALUES ('3', '', '9A0002', '2', '', '1234', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '', 'http://pfs.com', null, '', '', null, 'PERSON NAME', '1111', '08174128301', 'contact.person@gmail.com', '', '', null, null, '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, '', '', '', '', '', '', '', '', '', '', '', '', '', '', null, null, null, null, null, null, null, null, null, null, null, '', '', '', '', '', '', '', '', '', '', '1', null, 'PT. PANDAWA FAQIH SOLUSI', 'PFS', 'BIC CODE', null, null, null, '12345', '2016-04-13 16:37:09', '2016-04-13 17:19:17', '08174128301');
 
 -- ----------------------------
 -- Table structure for `departments`
@@ -129,7 +147,7 @@ CREATE TABLE `departments` (
 -- Records of departments
 -- ----------------------------
 INSERT INTO `departments` VALUES ('1', 'CS MAMI');
-INSERT INTO `departments` VALUES ('2', 'Other Other Department');
+INSERT INTO `departments` VALUES ('2', 'Other Department');
 
 -- ----------------------------
 -- Table structure for `interactions`
@@ -622,13 +640,17 @@ CREATE TABLE `tickets` (
   `modified` datetime DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tickets
 -- ----------------------------
-INSERT INTO `tickets` VALUES ('1', '1', '2', '16', null, 'MAMI0000001', '1', null, 'C', 'Bung Jonny', 'bungjonny@yahoo.com', '08174128301', 'Test subject subject test', 'E', '7', '2016-03-28', '2016-03-28 03:35:39', '2016-03-28 05:10:32', '1');
-INSERT INTO `tickets` VALUES ('3', '1', '1', '5', '31', 'MAMI0000002', null, null, 'C', 'Bung Jonny', 'bungjonny@yahoo.com', '08174128301', 'Subject test test test', 'W', '7', null, '2016-03-30 05:52:36', '2016-03-30 05:52:36', '7');
+INSERT INTO `tickets` VALUES ('1', '3', '2', '16', null, 'MAMI0000001', null, null, 'P', 'My Full Name', 'emailku@yahoo.com', '08174128301', 'Tolooooooonggggg', 'W', '7', null, '2016-04-13 18:28:21', '2016-04-13 18:28:46', '1');
+INSERT INTO `tickets` VALUES ('2', '3', '4', '27', null, 'MAMI0000002', '1', null, 'P', ' Full Name', 'emailku@yahoo.com', '08174128301', 'Lalalalalalalala', 'E', '7', '2016-04-22', '2016-04-13 18:29:46', '2016-04-13 18:31:34', '1');
+INSERT INTO `tickets` VALUES ('5', '3', '4', '27', null, 'MAMI0000003', '1', null, 'P', 'Full Name of Customer', 'okaprinarjaya@gmail.com', '08174128301', 'Subject of the ticket', 'E', '7', '2016-04-25', '2016-04-14 17:27:24', '2016-04-14 17:27:25', '1');
+INSERT INTO `tickets` VALUES ('6', '3', '4', '27', null, 'MAMI0000004', '1', null, 'S', 'The Full Name', 'okaprinarjaya@gmail.com', '08174128301', 'Subject awesome', 'F', '7', '2016-04-25', '2016-04-14 17:30:37', '2016-04-14 17:30:37', '1');
+INSERT INTO `tickets` VALUES ('7', '3', '4', '27', null, 'MAMI0000005', '1', null, 'S', ' Oka Prinarjaya', 'okaprinarjaya@gmail.com', '08174128301', 'Subject that soooo awesome', 'W', '7', '2016-04-25', '2016-04-14 17:34:49', '2016-04-14 17:34:49', '1');
+INSERT INTO `tickets` VALUES ('8', '3', '4', '27', null, 'MAMI0000006', '1', null, 'S', ' Oka Prinarjaya Complaint Lagi', 'okaprinarjaya@gmail.com', '08174128301', 'Ini subject yang informative', 'E', '7', '2016-04-25', '2016-04-14 17:40:25', '2016-04-14 17:40:25', '1');
 
 -- ----------------------------
 -- Table structure for `ticket_messages`
@@ -641,14 +663,19 @@ CREATE TABLE `ticket_messages` (
   `created_by` int(11) NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ticket_messages
 -- ----------------------------
-INSERT INTO `ticket_messages` VALUES ('1', '1', 'Message ini message ini message message ini message', '1', '2016-03-30 03:35:39');
-INSERT INTO `ticket_messages` VALUES ('2', '1', 'Kami sudah melakukan analisa terhadap data yg dikeluhkan oleh bapak oka yg sangat ganteng dan rupawan itu. \r\n\r\nTernyata, hasilnya adalah memang benar bahwa bapak oka itu ganteng dan baik hati.', '7', '2016-03-30 05:05:09');
-INSERT INTO `ticket_messages` VALUES ('3', '3', 'Message message message message message message', '7', '2016-03-30 05:52:36');
+INSERT INTO `ticket_messages` VALUES ('1', '1', 'Tolooongggggggggggggg', '1', '2016-04-13 18:28:21');
+INSERT INTO `ticket_messages` VALUES ('2', '2', 'Halo tolong donk bosssssss', '1', '2016-04-13 18:29:46');
+INSERT INTO `ticket_messages` VALUES ('3', '3', 'This is a message. Full informative message', '1', '2016-04-14 17:23:39');
+INSERT INTO `ticket_messages` VALUES ('4', '4', 'This is a message. Full informative message', '1', '2016-04-14 17:24:58');
+INSERT INTO `ticket_messages` VALUES ('5', '5', 'This is a message. Full informative message', '1', '2016-04-14 17:27:25');
+INSERT INTO `ticket_messages` VALUES ('6', '6', 'Message message message message yay!', '1', '2016-04-14 17:30:37');
+INSERT INTO `ticket_messages` VALUES ('7', '7', 'Message message message', '1', '2016-04-14 17:34:49');
+INSERT INTO `ticket_messages` VALUES ('8', '8', 'Message Message Message Message', '1', '2016-04-14 17:40:25');
 
 -- ----------------------------
 -- Table structure for `ticket_status`
@@ -9876,13 +9903,16 @@ CREATE TABLE `users` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'vads.admin', '$2a$10$VtkvuIXjLJwXr5BNS6q/TOmoOC.n094MXcv26oMzhpYuCbBVjbDAq', 'administrator', '2', 'vads.admin@vads.co.id', 'Vads Administrator', '2016-03-27 12:49:28', '2016-03-27 15:19:09');
+INSERT INTO `users` VALUES ('1', 'vads.admin', '$2a$10$VtkvuIXjLJwXr5BNS6q/TOmoOC.n094MXcv26oMzhpYuCbBVjbDAq', 'administrator', '2', 'gusti.oka@iproperty.com', 'Vads Administrator', '2016-03-27 12:49:28', '2016-04-14 17:21:03');
 INSERT INTO `users` VALUES ('4', 'user.agent', '$2a$10$gkn.Wi0PI8Pq04OOhWXz5er0HPTYN13EA76HV1DhzrQ200uZPgigG', 'agent', '2', 'user.agent@vads.co.id', 'User Agent', '2016-03-27 13:31:47', '2016-03-27 15:19:16');
-INSERT INTO `users` VALUES ('5', 'budiana.astawa', '$2a$10$AspfpAk3JEZNsPP1YZZfC.0yu3o1yrFwutwFeGlwTEtDRT3n0j/xW', 'tl', '1', 'Budiana.Astawa@vads.co.id', 'Budiana Astawa', '2016-03-30 04:26:34', '2016-03-30 04:26:34');
-INSERT INTO `users` VALUES ('6', 'yulia.anggiarini', '$2a$10$Pee6nIQxHpACPNL0/5VV0uQEgoXZt6V/k9AqIF2rYKLjzIFu9uU8m', 'administrator', '1', 'Yulia_Anggiarini@manulife.com', 'Yulia Anggiarini', '2016-03-30 04:28:25', '2016-03-30 04:28:25');
-INSERT INTO `users` VALUES ('7', 'lasmi.ningrum', '$2a$10$L7dnTTMLKw10w69rTQMOnOdQNhF3bOFy4.S.FdGj5VpNX3GpUtPN2', 'administrator', '1', 'Lasmi_Ningrum@manulife.com', 'Lasmi Ningrum', '2016-03-30 04:29:02', '2016-03-30 04:29:02');
+INSERT INTO `users` VALUES ('5', 'budiana.astawa', '$2a$10$AspfpAk3JEZNsPP1YZZfC.0yu3o1yrFwutwFeGlwTEtDRT3n0j/xW', 'tl', '1', 'Budiana.Astawa@vads.co.id', 'Budiana Astawa', '2016-03-30 04:26:34', '2016-04-13 15:09:06');
+INSERT INTO `users` VALUES ('6', 'yulia.anggiarini', '$2a$10$Pee6nIQxHpACPNL0/5VV0uQEgoXZt6V/k9AqIF2rYKLjzIFu9uU8m', '', '1', 'Yulia_Anggiarini@manulife.com', 'Yulia Anggiarini', '2016-03-30 04:28:25', '2016-04-14 17:20:25');
+INSERT INTO `users` VALUES ('7', 'lasmi.ningrum', '$2a$10$L7dnTTMLKw10w69rTQMOnOdQNhF3bOFy4.S.FdGj5VpNX3GpUtPN2', '', '1', 'Lasmi_Ningrum@manulife.com', 'Lasmi Ningrum', '2016-03-30 04:29:02', '2016-04-14 17:20:34');
+INSERT INTO `users` VALUES ('8', 'bangkung', '$2a$10$iRptbZq0QNUFA6pj4kiSueo.ukiEQyOvi7dCagPQFD6uULCgZ09ry', 'agent', '2', 'bangkung@gmail.com', 'Bangkung Tilulit', '2016-04-04 17:24:45', '2016-04-04 17:25:24');
+INSERT INTO `users` VALUES ('9', 'songoku', '$2a$10$OuXUpbIUu6fteaHx7Y0RD.xZZjSvoVKyAYNEel7s1WJxXgimrPU1e', 'tl', '2', 'songoku@yahoo.com', 'Songoku Monyet Sakti', '2016-04-04 17:29:56', '2016-04-04 17:29:56');
+INSERT INTO `users` VALUES ('10', 'nalendra', '$2a$10$5W/qaaIm9xM2bVrTJ6VVw.mYvI7pbni0GWpBtG2oJBM0gA3h9Y3Fy', 'tl', '1', 'lendra_141189@gmail.com', 'nalendra', '2016-04-08 03:07:08', '2016-04-08 03:07:08');
