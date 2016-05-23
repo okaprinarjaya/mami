@@ -94,10 +94,14 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 
-Configure::write('roles', array(
-    'administrator' => 'Administrator',
-    'tl' => 'TL',
-    'agent' => 'Agent'
+Configure::write('user_roles', array(
+    'ADM' => 'Administrator',
+    'TL' => 'Team Leader',
+    'AGT' => 'Agent'
+));
+
+Configure::write('roles_receive_email', array(
+    'ADM'
 ));
 
 function getWDays($startDate, $holidays = array(), $wDays) {

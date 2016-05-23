@@ -108,7 +108,7 @@
 
                     <td><?php echo $item['User']['complete_name']; ?></td>
 
-                    <td><?php echo $item['User']['role']; ?></td>
+                    <td><?php echo $roles[$item['User']['role']]; ?></td>
 
                     <td><?php echo $item['Department']['department_name']; ?></td>
 

@@ -73,38 +73,25 @@
                                 ?>
                             </li>
 
-                            <?php
-                            if (AuthComponent::user('role') == 'administrator'):
-                            ?>
-
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <span class="glyphicon glyphicon-wrench"></span> &nbsp; 
-                                    Settings <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link(
-                                            '<span class="glyphicon glyphicon-user"></span> &nbsp; Users',
-                                            array('controller' => 'users', 'action' => 'index'),
-                                            array('escape' => false)
-                                        );
-                                        ?>
-                                    </li>
-
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link(
-                                            '<span class="glyphicon glyphicon-th-large"></span> &nbsp; Departments',
-                                            array('controller' => 'departments', 'action' => 'index'),
-                                            array('escape' => false)
-                                        );
-                                        ?>
-                                    </li>
-                                </ul>
+                            <li>
+                                <?php
+                                echo $this->Html->link(
+                                    '<i class="fa fa-book"></i> &nbsp; Knowledge Base',
+                                    'http://192.168.198.180:8484/mami-kb',
+                                    array(
+                                        'escape' => false,
+                                        'target' => '_blank'
+                                    )
+                                );
+                                ?>
                             </li>
+
+                            <?php
+                            if (
+                                AuthComponent::user('role') == 'ADM' || 
+                                AuthComponent::user('role') == 'ROOT'
+                            ):
+                            ?>
 
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -343,17 +330,33 @@
                                 </ul>
                             </li>
 
-                            <li>
-                                <?php
-                                echo $this->Html->link(
-                                    '<i class="fa fa-book"></i> &nbsp; Knowledge Base',
-                                    'http://192.168.198.180:8484/mami-kb',
-                                    array(
-                                        'escape' => false,
-                                        'target' => '_blank'
-                                    )
-                                );
-                                ?>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-wrench"></span> &nbsp; 
+                                    Settings <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <?php
+                                        echo $this->Html->link(
+                                            '<span class="glyphicon glyphicon-user"></span> &nbsp; Users',
+                                            array('controller' => 'users', 'action' => 'index'),
+                                            array('escape' => false)
+                                        );
+                                        ?>
+                                    </li>
+
+                                    <li>
+                                        <?php
+                                        echo $this->Html->link(
+                                            '<span class="glyphicon glyphicon-th-large"></span> &nbsp; Departments',
+                                            array('controller' => 'departments', 'action' => 'index'),
+                                            array('escape' => false)
+                                        );
+                                        ?>
+                                    </li>
+                                </ul>
                             </li>
 
                             <?php

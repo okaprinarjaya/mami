@@ -128,7 +128,7 @@ class Ticket extends AppModel {
 
             $bosses = ClassRegistry::init('User')->find('all', array(
                 'fields' => array('User.email', 'User.complete_name'),
-                'conditions' => array('User.role' => 'administrator')
+                'conditions' => array('User.role' => Configure::read('roles_receive_email'))
             ));
 
             $email = new CakeEmail('smtp');

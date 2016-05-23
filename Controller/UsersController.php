@@ -35,7 +35,12 @@ class UsersController extends AppController {
 
 	public function index() {
 		$this->User->recursive = 0;
+        $this->Paginator->settings = array(
+            'conditions' => array('User.role !=' => 'ROOT')
+        );
+
 		$this->set('users', $this->Paginator->paginate());
+        $this->set('roles', Configure::read('user_roles'));
 	}
 
 	public function add() {
@@ -50,7 +55,7 @@ class UsersController extends AppController {
 		}
 
 		$departments = $this->User->Department->find('list');
-        $roles = Configure::read('roles');
+        $roles = Configure::read('user_roles');
 
 		$this->set(compact('departments', 'roles'));
 	}
@@ -80,7 +85,7 @@ class UsersController extends AppController {
 		}
 
 		$departments = $this->User->Department->find('list');
-        $roles = Configure::read('roles');
+        $roles = Configure::read('user_roles');
 
 		$this->set(compact('departments', 'roles'));
 	}
