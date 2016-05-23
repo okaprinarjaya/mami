@@ -28,15 +28,15 @@ class DashboardController extends AppController {
 
             $date_info = array();
             if ($periode == 'monthly') {
-                $date_info['sd'] = date('Y-04-01');
-                $date_info['ed'] = date('Y-04-30');
+                $date_info['sd'] = date('Y-m-01');
+                $date_info['ed'] = date('Y-m-t');
             } else if ($periode == 'weekly') {
-                $week_date_range = current_week_date_range(mktime(0, 0, 0, 4, 12, 2016));
+                $week_date_range = current_week_date_range();
                 $date_info['sd'] = $week_date_range['sd'];
                 $date_info['ed'] = $week_date_range['ed'];
             } else {
-                $date_info['sd'] = date('Y-04-13');
-                $date_info['ed'] = date('Y-04-13');
+                $date_info['sd'] = date('Y-m-d');
+                $date_info['ed'] = date('Y-m-d');
             }
 
             $date_range = date_range($date_info['sd'], $date_info['ed']);
