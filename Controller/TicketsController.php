@@ -59,7 +59,7 @@ class TicketsController extends AppController {
                 $periode_conds['Ticket.created'] = date('Y-m-d');
 
             } else if ($this->request->query['periode'] == 'W') {
-                $week_date_range = current_week_date_range(mktime(0, 0, 0, 4, 12, 2016));
+                $week_date_range = current_week_date_range();
                 $periode_conds['Ticket.created >= ? AND Ticket.created <= ?'] = array(
                     $week_date_range['sd'],
                     $week_date_range['ed']
@@ -262,7 +262,7 @@ class TicketsController extends AppController {
                 $periode_conds['Ticket.created'] = date('Y-m-d');
 
             } else if ($this->request->query['periode'] == 'W') {
-                $week_date_range = current_week_date_range(mktime(0, 0, 0, 4, 12, 2016));
+                $week_date_range = current_week_date_range();
                 $periode_conds['Ticket.created >= ? AND Ticket.created <= ?'] = array(
                     $week_date_range['sd'],
                     $week_date_range['ed']
