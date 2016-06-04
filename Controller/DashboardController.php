@@ -18,7 +18,37 @@ class DashboardController extends AppController {
 
     public function index()
     {
-        //
+        // Submit
+        $conditions = array('Ticket.ticket_status' => 'S');
+        if ($this->Auth->user('role') == 'AGT') {
+            $conditions['Ticket.created_by'] = $this->Auth->user('id');
+        }
+
+        $submit_count = $this->Ticket->find('count', array(
+            'conditions' => $conditions
+        ));
+
+        // In Progress
+        $conditions = array('Ticket.ticket_status' => 'P');
+        if ($this->Auth->user('role') == 'AGT') {
+            $conditions['Ticket.created_by'] = $this->Auth->user('id');
+        }
+
+        $inprogress_count = $this->Ticket->find('count', array(
+            'conditions' => $conditions
+        ));
+
+        // Closed
+        $conditions = array('Ticket.ticket_status' => 'C');
+        if ($this->Auth->user('role') == 'AGT') {
+            $conditions['Ticket.created_by'] = $this->Auth->user('id');
+        }
+
+        $closed_count = $this->Ticket->find('count', array(
+            'conditions' => $conditions
+        ));
+
+        $this->set(compact('submit_count', 'inprogress_count', 'closed_count'));
     }
 
     public function ajax_chart($periode) {
@@ -43,7 +73,7 @@ class DashboardController extends AppController {
             $chart_data = array();
 
             foreach ($date_range as $item) {
-                $chart_data[$item] = array('OPEN' => 0, 'SUBMIT' => 0);
+                $chart_data[$item] = array('OPEN' => 0, 'SUBMIT' => 0, 'CLOSED' => 0);
             }
 
             $this->Ticket->recursive = -1;
@@ -71,12 +101,28 @@ class DashboardController extends AppController {
                 'group' => array('DATE(Ticket.created)')
             ));
 
+            $ticket_closed = $this->Ticket->find('all', array(
+                'fields' => array(
+                    'DATE(Ticket.created) AS ticket_created',
+                    'COUNT(*) AS total_ticket'
+                ),
+                'conditions' => array(
+                    'Ticket.ticket_status' => 'C',
+                    'DATE(Ticket.created) >= ? AND DATE(Ticket.created) <= ?' => array($date_info['sd'], $date_info['ed'])
+                ),
+                'group' => array('DATE(Ticket.created)')
+            ));
+
             foreach ($ticket_open as $item) {
                 $chart_data[$item[0]['ticket_created']]['OPEN'] = $item[0]['total_ticket'];
             }
 
             foreach ($ticket_submit as $item) {
                 $chart_data[$item[0]['ticket_created']]['SUBMIT'] = $item[0]['total_ticket'];
+            }
+
+            foreach ($ticket_closed as $item) {
+                $chart_data[$item[0]['ticket_created']]['CLOSED'] = $item[0]['total_ticket'];
             }
 
             $chart_data_display = array();
@@ -86,7 +132,8 @@ class DashboardController extends AppController {
                 $chart_data_display[] = array(
                     'dt' => $dt_split[2],
                     'vo' => $itemVal['OPEN'],
-                    'vs' => $itemVal['SUBMIT']
+                    'vs' => $itemVal['SUBMIT'],
+                    'vc' => $itemVal['CLOSED']
                 );
             }
 

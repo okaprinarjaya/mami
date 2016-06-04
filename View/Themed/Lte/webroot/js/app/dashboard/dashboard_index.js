@@ -13,11 +13,13 @@ $.ajax({
             element: 'bar-chart-monthly',
             data: data,
             resize: true,
+            barColors: ['#317EDA', '#D69A18', '#0A6A40'],
+            stacked: true,
             hideHover: 'auto',
             xLabelMargin: 2,
             xkey: 'dt',
-            ykeys: ['vo', 'vs'],
-            labels: ['Open', 'Submit'],
+            ykeys: ['vo', 'vs', 'vc'],
+            labels: ['Open', 'Submit', 'Closed'],
             yLabelFormat: function (y) {
                 return y != Math.round(y) ? '' : y;
             }
@@ -44,11 +46,13 @@ $.ajax({
             element: 'bar-chart-weekly',
             data: data,
             resize: true,
+            barColors: ['#317EDA', '#D69A18', '#0A6A40'],
+            stacked: true,
             hideHover: 'auto',
             xLabelMargin: 2,
             xkey: 'dt',
-            ykeys: ['vo', 'vs'],
-            labels: ['Open', 'Submit'],
+            ykeys: ['vo', 'vs', 'vc'],
+            labels: ['Open', 'Submit', 'Closed'],
             yLabelFormat: function (y) {
                 return y != Math.round(y) ? '' : y;
             }
@@ -75,11 +79,13 @@ $.ajax({
             element: 'bar-chart-daily',
             data: data,
             resize: true,
+            barColors: ['#317EDA', '#D69A18', '#0A6A40'],
+            stacked: true,
             hideHover: 'auto',
             xLabelMargin: 2,
             xkey: 'dt',
-            ykeys: ['vo', 'vs'],
-            labels: ['Open', 'Submit'],
+            ykeys: ['vo', 'vs', 'vc'],
+            labels: ['Open', 'Submit', 'Closed'],
             yLabelFormat: function (y) {
                 return y != Math.round(y) ? '' : y;
             }

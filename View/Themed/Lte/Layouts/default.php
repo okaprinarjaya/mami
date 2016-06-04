@@ -104,10 +104,10 @@
                                     <li>
                                         <?php
                                         echo $this->Html->link(
-                                            '<i class="fa fa-dashboard"></i> &nbsp; Dashboard',
+                                            '<i class="fa fa-table"></i> &nbsp; Top Interaction',
                                             array(
-                                                'controller' => 'dashboard',
-                                                'action' => 'index'
+                                                'controller' => 'tickets',
+                                                'action' => 'top_interaction'
                                             ),
                                             array('escape' => false)
                                         );
@@ -117,11 +117,11 @@
                                     <li>
                                         <?php
                                         echo $this->Html->link(
-                                            '<i class="fa fa-table"></i> &nbsp; Top 10 Interaction Complaint',
+                                            '<i class="fa fa-table"></i> &nbsp; Tiket sudah due date',
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            ),true).'?interaction_code1=4&interaction_code2=&ticket_status=&sla_state=&periode=&from_date=&from_date_val=&to_date=&to_date_val=&rpp=10&kwd=',
+                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=&sla_state=EQ_SLA&periode=&from_date=&from_date_val=&to_date=&to_date_val=&rpp=50&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -130,11 +130,11 @@
                                     <li>
                                         <?php
                                         echo $this->Html->link(
-                                            '<i class="fa fa-table"></i> &nbsp; Top 10 Interaction Request',
+                                            '<i class="fa fa-table"></i> &nbsp; Tiket Submit',
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            ),true).'?interaction_code1=3&interaction_code2=&ticket_status=&sla_state=&periode=&from_date=&from_date_val=&to_date=&to_date_val=&rpp=10&kwd=',
+                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=&periode=&from_date=&from_date_val=&to_date=&to_date_val=&rpp=50&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -143,11 +143,11 @@
                                     <li>
                                         <?php
                                         echo $this->Html->link(
-                                            '<i class="fa fa-table"></i> &nbsp; Top 10 Interaction Inquiry',
+                                            '<i class="fa fa-table"></i> &nbsp; Tiket In-progress',
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            ),true).'?interaction_code1=1&interaction_code2=&ticket_status=&sla_state=&periode=&from_date=&from_date_val=&to_date=&to_date_val=&rpp=10&kwd=',
+                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=&periode=&from_date=&from_date_val=&to_date=&to_date_val=&rpp=50&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
@@ -156,177 +156,17 @@
                                     <li>
                                         <?php
                                         echo $this->Html->link(
-                                            '<i class="fa fa-table"></i> &nbsp; Tiket yang sudah due date',
+                                            '<i class="fa fa-table"></i> &nbsp; Tiket Closed',
                                             Router::url(array(
                                                 'controller' => 'tickets',
                                                 'action' => 'index'
-                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=&sla_state=EQ_SLA&periode=&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
+                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=C&sla_state=&periode=&from_date=&from_date_val=&to_date=&to_date_val=&rpp=50&kwd=',
                                             array('escape' => false)
                                         );
                                         ?>
                                     </li>
 
-                                    <!-- OPEN BELUM LEWAT SLA -->
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link(
-                                            '<i class="fa fa-table"></i> &nbsp;  Tiket <strong>open daily</strong> yang belum lewat SLA',
-                                            Router::url(array(
-                                                'controller' => 'tickets',
-                                                'action' => 'index'
-                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=LT_SLA&periode=D&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
-                                            array('escape' => false)
-                                        );
-                                        ?>
-                                    </li>
-
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link(
-                                            '<i class="fa fa-table"></i> &nbsp;  Tiket <strong>open weekly</strong> yang belum lewat SLA',
-                                            Router::url(array(
-                                                'controller' => 'tickets',
-                                                'action' => 'index'
-                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=LT_SLA&periode=W&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
-                                            array('escape' => false)
-                                        );
-                                        ?>
-                                    </li>
-
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link(
-                                            '<i class="fa fa-table"></i> &nbsp;  Tiket <strong>open monthly</strong> yang belum lewat SLA',
-                                            Router::url(array(
-                                                'controller' => 'tickets',
-                                                'action' => 'index'
-                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=LT_SLA&periode=M&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
-                                            array('escape' => false)
-                                        );
-                                        ?>
-                                    </li>
-
-
-                                    <!-- SUBMIT BELUM LEWAT SLA -->
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link(
-                                            '<i class="fa fa-table"></i> &nbsp;  Tiket <strong>submit daily</strong> yang belum lewat SLA',
-                                            Router::url(array(
-                                                'controller' => 'tickets',
-                                                'action' => 'index'
-                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=LT_SLA&periode=D&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
-                                            array('escape' => false)
-                                        );
-                                        ?>
-                                    </li>
-
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link(
-                                            '<i class="fa fa-table"></i> &nbsp;  Tiket <strong>submit weekly</strong> yang belum lewat SLA',
-                                            Router::url(array(
-                                                'controller' => 'tickets',
-                                                'action' => 'index'
-                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=LT_SLA&periode=W&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
-                                            array('escape' => false)
-                                        );
-                                        ?>
-                                    </li>
-
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link(
-                                            '<i class="fa fa-table"></i> &nbsp;  Tiket <strong>submit monthly</strong> yang belum lewat SLA',
-                                            Router::url(array(
-                                                'controller' => 'tickets',
-                                                'action' => 'index'
-                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=LT_SLA&periode=M&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
-                                            array('escape' => false)
-                                        );
-                                        ?>
-                                    </li>
-
-                                    <!-- OPEN SUDAH LEWAT SLA -->
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link(
-                                            '<i class="fa fa-table"></i> &nbsp;  Tiket <strong>open daily</strong> yang <strong>sudah</strong> lewat SLA',
-                                            Router::url(array(
-                                                'controller' => 'tickets',
-                                                'action' => 'index'
-                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=GT_SLA&periode=D&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
-                                            array('escape' => false)
-                                        );
-                                        ?>
-                                    </li>
-
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link(
-                                            '<i class="fa fa-table"></i> &nbsp;  Tiket <strong>open weekly</strong> yang <strong>sudah</strong> lewat SLA',
-                                            Router::url(array(
-                                                'controller' => 'tickets',
-                                                'action' => 'index'
-                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=GT_SLA&periode=W&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
-                                            array('escape' => false)
-                                        );
-                                        ?>
-                                    </li>
-
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link(
-                                            '<i class="fa fa-table"></i> &nbsp;  Tiket <strong>open monthly</strong> yang <strong>sudah</strong> lewat SLA',
-                                            Router::url(array(
-                                                'controller' => 'tickets',
-                                                'action' => 'index'
-                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=P&sla_state=GT_SLA&periode=M&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
-                                            array('escape' => false)
-                                        );
-                                        ?>
-                                    </li>
-
-
-                                    <!-- SUBMIT SUDAH LEWAT SLA -->
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link(
-                                            '<i class="fa fa-table"></i> &nbsp;  Tiket <strong>submit daily</strong> yang <strong>sudah</strong> lewat SLA',
-                                            Router::url(array(
-                                                'controller' => 'tickets',
-                                                'action' => 'index'
-                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=GT_SLA&periode=D&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
-                                            array('escape' => false)
-                                        );
-                                        ?>
-                                    </li>
-
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link(
-                                            '<i class="fa fa-table"></i> &nbsp;  Tiket <strong>submit weekly</strong> yang <strong>sudah</strong> lewat SLA',
-                                            Router::url(array(
-                                                'controller' => 'tickets',
-                                                'action' => 'index'
-                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=GT_SLA&periode=W&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
-                                            array('escape' => false)
-                                        );
-                                        ?>
-                                    </li>
-
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link(
-                                            '<i class="fa fa-table"></i> &nbsp;  Tiket <strong>submit monthly</strong> yang <strong>sudah</strong> lewat SLA',
-                                            Router::url(array(
-                                                'controller' => 'tickets',
-                                                'action' => 'index'
-                                            ),true).'?interaction_code1=&interaction_code2=&ticket_status=S&sla_state=GT_SLA&periode=M&from_date=&from_date_val=&to_date=&to_date_val=&rpp=100&kwd=',
-                                            array('escape' => false)
-                                        );
-                                        ?>
-                                    </li>
+                                    
                                 </ul>
                             </li>
 

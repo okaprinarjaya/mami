@@ -115,7 +115,7 @@
                     <?php
                     echo $this->Form->input('customer_name', array(
                         'type' => 'text',
-                        'default' => $customer['Customer']['CLI_NM'].' '.$customer['Customer']['MID_NM'],
+                        'default' => trim($customer['Customer']['CLI_NM'].' '.$customer['Customer']['MID_NM']),
                         'div' => 'form-group',
                         'label' => array(
                             'class' => 'col-sm-4 control-label',

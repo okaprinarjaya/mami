@@ -20,6 +20,16 @@ echo $this->Form->input('id', array(
     'type' => 'hidden',
     'default' => $ticket['Ticket']['id']
 ));
+
+echo $this->Form->input('due_date', array(
+    'type' => 'hidden',
+    'default' => $ticket['Ticket']['due_date'] == null ? 'null' : $ticket['Ticket']['due_date']
+));
+
+echo $this->Form->input('created', array(
+    'type' => 'hidden',
+    'default' => $ticket['Ticket']['created']
+));
 ?>
 
 <div class="modal-body">
@@ -90,7 +100,7 @@ echo $this->Form->input('id', array(
     <?php
     echo $this->Form->input('customer_name', array(
         'type' => 'text',
-        'default' => $ticket['Ticket']['customer_name'],
+        'default' => trim($ticket['Ticket']['customer_name']),
         'disabled' => 'disabled',
         'div' => 'form-group',
         'label' => array(

@@ -24,6 +24,7 @@ class Ticket extends AppModel {
     public function createTicket(array $data, $user_id)
     {
         $data_save = $data;
+        $data_save['Ticket']['customer_name'] = trim($data_save['Ticket']['customer_name']);
 
         // Generate ticket's number
         App::uses('ConnectionManager', 'Model');
