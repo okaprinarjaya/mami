@@ -7,7 +7,16 @@ Ticket Detail
 
 Ticket Number: <?php echo $ticket_number; ?>
 
-Customer Name: <?php echo $ticket['Ticket']['customer_name']; ?>
+<?php
+$cn = '';
+if (isset($ticket['Ticket'])):
+    if (isset($ticket['Ticket']['customer_name'])):
+        $cn = $ticket['Ticket']['customer_name'];
+    endif;
+endif;
+
+echo "Customer Name: ".$cn;
+?>
 
 Customer Type: <?php echo $ticket['Customer']['CLI_TYP'] == 2 ? 'Corporate' : 'Personal'; ?>
 

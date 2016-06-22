@@ -124,28 +124,30 @@ class Ticket extends AppModel {
                 ),
             ));
 
-            // Send email to bosses
-            App::uses('CakeEmail', 'Network/Email');
+            if ($data['Ticket']['ticket_status'] == 'S') {
+                // Send email to bosses
+                App::uses('CakeEmail', 'Network/Email');
 
-            $bosses = ClassRegistry::init('User')->find('all', array(
-                'fields' => array('User.email', 'User.complete_name'),
-                'conditions' => array('User.role' => Configure::read('roles_receive_email'))
-            ));
-
-            $email = new CakeEmail('smtp');
-            $email->emailFormat('text');
-            $email->template('default', 'default');
-
-            foreach ($bosses as $boss) {
-                $email->viewVars(array(
-                    'ticket_number' => $ticket_number,
-                    'pic_name' => $boss['User']['complete_name'],
-                    'ticket' => $aticket
+                $bosses = ClassRegistry::init('User')->find('all', array(
+                    'fields' => array('User.email', 'User.complete_name'),
+                    'conditions' => array('User.role' => Configure::read('roles_receive_email'))
                 ));
 
-                $email->to($boss['User']['email']);
-                $email->subject("[MAMI CRM System] New ticket created: ".$ticket_number);
-                $email->send();
+                $email = new CakeEmail('smtp');
+                $email->emailFormat('text');
+                $email->template('default', 'default');
+
+                foreach ($bosses as $boss) {
+                    $email->viewVars(array(
+                        'ticket_number' => $ticket_number,
+                        'pic_name' => $boss['User']['complete_name'],
+                        'ticket' => $aticket
+                    ));
+
+                    $email->to($boss['User']['email']);
+                    $email->subject("[MAMI CRM System] New ticket created: ".$ticket_number);
+                    $email->send();
+                }
             }
         }
 
