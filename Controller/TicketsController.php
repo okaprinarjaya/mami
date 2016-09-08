@@ -936,10 +936,20 @@ class TicketsController extends AppController {
                 'C' => 'CLOSED',
                 'P' => 'IN PROGRESS'
             );
+
+            $channel_types = array(
+                'W' => 'Walk In',
+                'P' => 'Phone',
+                'E' => 'Email',
+                'F' => 'Fax',
+                'M' => 'Mail',
+                'S' => 'Social Media'
+            );
             
             $this->set(compact(
                 'ticket',
-                'ticket_statuses'
+                'ticket_statuses',
+                'channel_types'
             ));
 
             $this->response->type('text');

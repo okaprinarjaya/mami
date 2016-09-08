@@ -36,7 +36,6 @@ echo $this->Form->input('created', array(
     <?php
     echo $this->Form->input('Foo.cif', array(
         'type' => 'text',
-        'default' => $ticket['Ticket']['cif'],
         'disabled' => 'disabled',
         'div' => 'form-group',
         'label' => array(
@@ -180,7 +179,7 @@ echo $this->Form->input('created', array(
     <?php
     echo $this->Form->input('channel_type', array(
         'type' => 'text',
-        'default' => $ticket['Ticket']['channel_type'],
+        'default' => isset($channel_types[$ticket['Ticket']['channel_type']]) ? $channel_types[$ticket['Ticket']['channel_type']] : '',
         'disabled' => 'disabled',
         'div' => 'form-group',
         'label' => array(
