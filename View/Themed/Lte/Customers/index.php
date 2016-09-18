@@ -150,7 +150,7 @@
                 <tr>
                     <td style="text-align: center;"><?php echo $rows_num; ?></td>
 
-                    <td>&nbsp;</td>
+                    <td><?php echo $item['Customer']['CIF_NUM'] ? $item['Customer']['CIF_NUM'] : ''; ?></td>
                     
                     <td>
                         <?php
