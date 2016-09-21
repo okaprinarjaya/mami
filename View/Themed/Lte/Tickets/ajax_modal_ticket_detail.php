@@ -36,6 +36,7 @@ echo $this->Form->input('created', array(
     <?php
     echo $this->Form->input('Foo.cif', array(
         'type' => 'text',
+        'default' => $customer_cif['Customer']['CIF_NUM'],
         'disabled' => 'disabled',
         'div' => 'form-group',
         'label' => array(

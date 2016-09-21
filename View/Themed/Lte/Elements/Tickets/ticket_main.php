@@ -36,7 +36,9 @@
             </td>
 
             <td>
-                &nbsp;
+                <?php
+                echo $item['Customer']['CIF_NUM'];
+                ?>
             </td>
 
             <td>

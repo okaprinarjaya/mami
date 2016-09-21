@@ -97,7 +97,8 @@ class TicketsController extends AppController {
                 'InteractionLevel1.interaction_title AS interaction_title1',
                 'InteractionLevel2.interaction_title AS interaction_title2',
                 'InteractionLevel3.interaction_title AS interaction_title3',
-                'Ticket.*'
+                'Ticket.*',
+                'Customer.CIF_NUM'
             ),
             'conditions' => $conditions,
             'joins' => array(
@@ -116,6 +117,12 @@ class TicketsController extends AppController {
                     'alias' => 'InteractionLevel3',
                     'type' => 'LEFT',
                     'conditions' => array('Ticket.interaction_code3 = InteractionLevel3.id')
+                ),
+                array(
+                    'table' => 'customers',
+                    'alias' => 'Customer',
+                    'type' => 'LEFT',
+                    'conditions' => array('Ticket.cif = Customer.CUSTOMER_ID')
                 )
             ),
             'order' => array('Ticket.created' => 'DESC'),
@@ -261,6 +268,7 @@ class TicketsController extends AppController {
         $ticket_statuses = array('C' => 'CLOSED', 'S' => 'SUBMIT');
         $customer = $this->Customer->find('first', array(
             'fields' => array(
+                'Customer.CIF_NUM',
                 'Customer.CLI_NM',
                 'Customer.MID_NM',
                 'Customer.CLI_TYP',
@@ -599,7 +607,8 @@ class TicketsController extends AppController {
                 'InteractionLevel1.interaction_title AS interaction_title1',
                 'InteractionLevel2.interaction_title AS interaction_title2',
                 'InteractionLevel3.interaction_title AS interaction_title3',
-                'Ticket.*'
+                'Ticket.*',
+                'Customer.CIF_NUM'
             ),
             'conditions' => $conditions,
             'joins' => array(
@@ -618,6 +627,12 @@ class TicketsController extends AppController {
                     'alias' => 'InteractionLevel3',
                     'type' => 'LEFT',
                     'conditions' => array('Ticket.interaction_code3 = InteractionLevel3.id')
+                ),
+                array(
+                    'table' => 'customers',
+                    'alias' => 'Customer',
+                    'type' => 'LEFT',
+                    'conditions' => array('Ticket.cif = Customer.CUSTOMER_ID')
                 )
             ),
             'order' => array('Ticket.created' => 'DESC'),
@@ -727,7 +742,7 @@ class TicketsController extends AppController {
         $num = 1;
         foreach ($tickets as $item) {
             $objPHPExcel->getActiveSheet()->setCellValue('B'.$r1_start_row_td, trim(ucwords($item['Ticket']['ticket_number'])));
-            $objPHPExcel->getActiveSheet()->setCellValue('C'.$r1_start_row_td, "");
+            $objPHPExcel->getActiveSheet()->setCellValue('C'.$r1_start_row_td, trim($item['Customer']['CIF_NUM']));
             $objPHPExcel->getActiveSheet()->setCellValue('D'.$r1_start_row_td, trim($item['Ticket']['customer_name']));
             $objPHPExcel->getActiveSheet()->setCellValue('E'.$r1_start_row_td, trim($item['InteractionLevel1']['interaction_title1']));
             $objPHPExcel->getActiveSheet()->setCellValue('F'.$r1_start_row_td, trim($item['InteractionLevel2']['interaction_title2']));
@@ -776,7 +791,7 @@ class TicketsController extends AppController {
         // Styling
         // Set width column report 1
         $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(30);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(10);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
         $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(45);
         $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(21);
         $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(31);
@@ -945,11 +960,17 @@ class TicketsController extends AppController {
                 'M' => 'Mail',
                 'S' => 'Social Media'
             );
+
+            $customer_cif = $this->Customer->find('first', array(
+                'fields' => array('Customer.CIF_NUM'),
+                'conditions' => array('Customer.CUSTOMER_ID' => $ticket['Ticket']['cif'])
+            ));
             
             $this->set(compact(
                 'ticket',
                 'ticket_statuses',
-                'channel_types'
+                'channel_types',
+                'customer_cif'
             ));
 
             $this->response->type('text');

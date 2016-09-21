@@ -24,7 +24,7 @@
 
                 <fieldset>
                     <legend>
-                        Create Ticket for CIF: <?php echo '#'.$customer_id; ?> 
+                        Create Ticket for CIF: <?php echo '#'.$customer['Customer']['CIF_NUM']; ?> 
                         - 
                         Customer: 
 
@@ -48,6 +48,7 @@
                     <?php
                     echo $this->Form->input('Foo.cif', array(
                         'type' => 'text',
+                        'default' => $customer['Customer']['CIF_NUM'],
                         'div' => 'form-group',
                         'label' => array(
                             'class' => 'col-sm-4 control-label',
@@ -55,7 +56,8 @@
                         ),
                         'between' => '<div class="col-sm-3">',
                         'after' => '</div>',
-                        'class' => 'form-control'
+                        'class' => 'form-control',
+                        'readonly' => 'readonly'
                     ));
                     ?>
 
