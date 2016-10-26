@@ -257,6 +257,21 @@ echo $this->Form->input('created', array(
     </div>
 
     <?php
+    echo $this->Form->input('Foo.created_by', array(
+        'type' => 'text',
+        'default' => $ticket['CreatedBy']['complete_name'],
+        'disabled' => 'disabled',
+        'div' => 'form-group',
+        'label' => array(
+            'class' => 'col-sm-4 control-label'
+        ),
+        'between' => '<div class="col-sm-6">',
+        'after' => '</div>',
+        'class' => 'form-control'
+    ));
+    ?>
+
+    <?php
     echo $this->Form->input('ticket_status', array(
         'options' => $ticket_statuses,
         'default' => $ticket['Ticket']['ticket_status'],
@@ -272,7 +287,7 @@ echo $this->Form->input('created', array(
         'disabled' => $ticket['Ticket']['ticket_status'] == 'C' ? 'disabled' : ''
     ));
     ?>
-    
+   
 </div>
 
 <div class="modal-footer">

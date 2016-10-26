@@ -4,6 +4,7 @@
             <th>#</th>
             <th>Ticket No.</th>
             <th>CIF</th>
+            <th>RM</th>
             <th>Customer Name</th>
             <th>Interaction</th>
             <th>Interaction Detail</th>
@@ -38,6 +39,12 @@
             <td>
                 <?php
                 echo $item['Customer']['CIF_NUM'];
+                ?>
+            </td>
+
+            <td>
+                <?php
+                echo $item['Rm']['AGT_NM'];
                 ?>
             </td>
 

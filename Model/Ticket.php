@@ -18,6 +18,11 @@ class Ticket extends AppModel {
         'Department' => array(
             'className' => 'Department',
             'foreignKey' => 'department_id'
+        ),
+        'CreatedBy' => array(
+            'className' => 'User',
+            'foreignKey' => 'created_by',
+            'fields' => array('CreatedBy.complete_name')
         )
     );
 
