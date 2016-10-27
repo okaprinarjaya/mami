@@ -18,7 +18,17 @@ endif;
 echo "Customer Name: ".$cn;
 ?>
 
-Customer Type: <?php echo $ticket['Customer']['CLI_TYP'] == 2 ? 'Corporate' : 'Personal'; ?>
+<?php
+$customer_type_print = 'Customer Type: ';
+if (isset($ticket['Customer'])):
+    $customer_type_print .= $ticket['Customer']['CLI_TYP'] == 2 ? 'Corporate' : 'Personal';
+
+else:
+    $customer_type_print .= '-';
+endif;
+
+echo $customer_type_print;
+?>
 
 Interaction: <?php echo $ticket['InteractionLevel1']['interaction_title1']; ?>
 

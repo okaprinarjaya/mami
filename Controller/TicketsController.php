@@ -255,6 +255,15 @@ class TicketsController extends AppController {
 
     public function add($customer_id)
     {
+        $c_u_exists = $this->Customer->find('count', array(
+            'conditions' => array('Customer.CUSTOMER_ID' => $customer_id)
+        ));
+
+        if ($c_u_exists < 1) {
+            $this->Session->setFlash('Customer doesnt exists', 'Flash/warning');
+            return $this->redirect('/customers');
+        }
+
         if ($this->request->is('post')) {
 
             if ($this->Ticket->createTicket(
