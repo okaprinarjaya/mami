@@ -77,7 +77,7 @@
                                 <?php
                                 echo $this->Html->link(
                                     '<i class="fa fa-book"></i> &nbsp; Knowledge Base',
-                                    'http://192.168.198.180:8484/mami-kb',
+                                    'http://192.168.196.39:8484/mami-kb',
                                     array(
                                         'escape' => false,
                                         'target' => '_blank'
