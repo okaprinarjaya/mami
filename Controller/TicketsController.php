@@ -99,8 +99,8 @@ class TicketsController extends AppController {
                 'InteractionLevel2.interaction_title AS interaction_title2',
                 'InteractionLevel3.interaction_title AS interaction_title3',
                 'Ticket.*',
-                'Customer.CIF_NUM',
-                'Rm.AGT_NM'
+                'Customer.CIF_NUM'
+                // 'Rm.AGT_NM'
             ),
             'conditions' => $conditions,
             'joins' => array(
@@ -125,15 +125,15 @@ class TicketsController extends AppController {
                     'alias' => 'Customer',
                     'type' => 'LEFT',
                     'conditions' => array('Ticket.cif = Customer.CUSTOMER_ID')
-                ),
-                array(
+                )
+                /*array(
                     'table' => 'tams_agents',
                     'alias' => 'Rm',
                     'type' => 'LEFT',
                     'conditions' => array('Customer.AGT_CD = Rm.AGT_CODE')
-                )
+                )*/
             ),
-            'group' => array('Rm.AGT_CODE', 'Ticket.ticket_number'),
+            // 'group' => array('Rm.AGT_CODE', 'Ticket.ticket_number'),
             'order' => array('Ticket.created' => 'DESC'),
             'limit' => isset($this->request->query['rpp']) ? $this->request->query['rpp'] : 50,
         );
@@ -627,8 +627,8 @@ class TicketsController extends AppController {
                 'InteractionLevel2.interaction_title AS interaction_title2',
                 'InteractionLevel3.interaction_title AS interaction_title3',
                 'Ticket.*',
-                'Customer.CIF_NUM',
-                'Rm.AGT_NM'
+                'Customer.CIF_NUM'
+                // 'Rm.AGT_NM'
             ),
             'conditions' => $conditions,
             'joins' => array(
@@ -653,15 +653,15 @@ class TicketsController extends AppController {
                     'alias' => 'Customer',
                     'type' => 'LEFT',
                     'conditions' => array('Ticket.cif = Customer.CUSTOMER_ID')
-                ),
-                array(
+                )
+                /*array(
                     'table' => 'tams_agents',
                     'alias' => 'Rm',
                     'type' => 'LEFT',
                     'conditions' => array('Customer.AGT_CD = Rm.AGT_CODE')
-                )
+                )*/
             ),
-            'group' => array('Rm.AGT_CODE', 'Ticket.ticket_number'),
+            // 'group' => array('Rm.AGT_CODE', 'Ticket.ticket_number'),
             'order' => array('Ticket.created' => 'DESC'),
             'limit' => isset($this->request->query['rpp']) ? $this->request->query['rpp'] : 50,
         );
@@ -763,6 +763,121 @@ class TicketsController extends AppController {
     }
 
     private function setup_main_format($tickets, $ticket_statuses, $objPHPExcel) {
+        $r1_start_row_th = 4;
+        $r1_start_row_td = $r1_start_row_th + 1;
+
+        $num = 1;
+        foreach ($tickets as $item) {
+            $objPHPExcel->getActiveSheet()->setCellValue('B'.$r1_start_row_td, trim(ucwords($item['Ticket']['ticket_number'])));
+            $objPHPExcel->getActiveSheet()->setCellValue('C'.$r1_start_row_td, trim($item['Customer']['CIF_NUM']));
+            $objPHPExcel->getActiveSheet()->setCellValue('D'.$r1_start_row_td, trim($item['Ticket']['customer_name']));
+            $objPHPExcel->getActiveSheet()->setCellValue('E'.$r1_start_row_td, trim($item['InteractionLevel1']['interaction_title1']));
+            $objPHPExcel->getActiveSheet()->setCellValue('F'.$r1_start_row_td, trim($item['InteractionLevel2']['interaction_title2']));
+            $objPHPExcel->getActiveSheet()->setCellValue('G'.$r1_start_row_td, date('d/m/Y', strtotime($item['Ticket']['created'])));
+
+            if ($item['Ticket']['due_date'] != null):
+                $objPHPExcel->getActiveSheet()->setCellValue('H'.$r1_start_row_td, date('d/m/Y', strtotime($item['Ticket']['due_date'])));
+            else:
+                $objPHPExcel->getActiveSheet()->setCellValue('H'.$r1_start_row_td, '-');
+            endif;
+
+            // Ticket Days
+            $ticket_days = $this->ticket_days($item);
+            $objPHPExcel->getActiveSheet()->setCellValue('I'.$r1_start_row_td, $ticket_days);
+            
+            // Ticket Aging
+            $vJ = $this->ticket_aging($item);
+            $objPHPExcel->getActiveSheet()->setCellValue('J'.$r1_start_row_td, $vJ);
+            
+            $objPHPExcel->getActiveSheet()->setCellValue('K'.$r1_start_row_td, $ticket_statuses[$item['Ticket']['ticket_status']]);
+            
+            $objPHPExcel->getActiveSheet()->setCellValue('L'.$r1_start_row_td, isset($item['Department']['department_name']) ? $item['Department']['department_name'] : '-');
+
+            $r1_start_row_td++;
+            $num++;
+        }
+
+        // Set heading title
+        $objPHPExcel->getActiveSheet()->setCellValue('B2', "Report");
+        $objPHPExcel->getActiveSheet()->getStyle('B2')->applyFromArray(array(
+            'font' => array('size' => 20)
+        ));
+
+        $objPHPExcel->getActiveSheet()->setCellValue('B'.$r1_start_row_th, 'Ticket No.');
+        $objPHPExcel->getActiveSheet()->setCellValue('C'.$r1_start_row_th, 'CIF');
+        $objPHPExcel->getActiveSheet()->setCellValue('D'.$r1_start_row_th, 'Customer Name');
+        $objPHPExcel->getActiveSheet()->setCellValue('E'.$r1_start_row_th, 'Interaction');
+        $objPHPExcel->getActiveSheet()->setCellValue('F'.$r1_start_row_th, 'Interaction Detail');
+        $objPHPExcel->getActiveSheet()->setCellValue('G'.$r1_start_row_th, 'Created Date');
+        $objPHPExcel->getActiveSheet()->setCellValue('H'.$r1_start_row_th, 'Due Date');
+        $objPHPExcel->getActiveSheet()->setCellValue('I'.$r1_start_row_th, 'Days');
+        $objPHPExcel->getActiveSheet()->setCellValue('J'.$r1_start_row_th, 'Aging');
+        $objPHPExcel->getActiveSheet()->setCellValue('K'.$r1_start_row_th, 'Status');
+        $objPHPExcel->getActiveSheet()->setCellValue('L'.$r1_start_row_th, 'Dept.');
+
+        // Styling
+        // Set width column report 1
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(45);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(21);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(31);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(19);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(17);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(11);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(9);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('K')->setWidth(9);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('L')->setWidth(23);
+
+        // Set alignment column header (th) report 1
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('B'.$r1_start_row_th.':L'.$r1_start_row_th)
+                    ->getAlignment()
+                    ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('B'.$r1_start_row_th.':L'.$r1_start_row_th)
+                    ->getAlignment()
+                    ->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+        // Set body (td) cells report 1
+        $start_data_cell = $r1_start_row_th + 1;
+        
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('B'.$start_data_cell.':C'.$r1_start_row_td)
+                    ->getAlignment()
+                    ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('B'.$start_data_cell.':C'.$r1_start_row_td)
+                    ->getAlignment()
+                    ->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('E'.$start_data_cell.':E'.$r1_start_row_td)
+                    ->getAlignment()
+                    ->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+        // Set bold col header report 1 
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('B'.$r1_start_row_th.':L'.$r1_start_row_th)
+                    ->getFont()
+                    ->setBold(true);
+
+        $objPHPExcel->getActiveSheet()
+                    ->getRowDimension(4)
+                    ->setRowHeight(23);
+
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('B'.$r1_start_row_th.':L'.$r1_start_row_td)
+                    ->applyFromArray(array(
+                        'borders' => array('allborders' => array('style' => PHPExcel_Style_Border::BORDER_THIN))
+                    ));
+
+        // End styling
+    }
+
+    private function setup_main_format_backup($tickets, $ticket_statuses, $objPHPExcel) {
         $r1_start_row_th = 4;
         $r1_start_row_td = $r1_start_row_th + 1;
 
